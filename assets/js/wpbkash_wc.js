@@ -386,7 +386,6 @@ jQuery(
             },
 
             checkoutUpdate: function(){
-                console.log( 'smoke' );
                 $('body').trigger('update_checkout');
             },
 
@@ -424,7 +423,7 @@ jQuery(
                 $(document.body).on('click', '.wpbkash--modal-btn', wpbkash.modalHandler);
                 $(document.body).on('click', '.wpbkash--modal-wrap', wpbkash.hideModal);
                 $( 'form.checkout, form#order_review' ).on( 'change', 'input[name^="payment_method"]', wpbkash.checkoutUpdate);
-                $('#place_order').on('click', wpbkash.orderReviewSubmit);
+                $('form#order_review').on('submit', wpbkash.orderReviewSubmit);
             },
         }
         wpbkash.init();
