@@ -1,0 +1,95 @@
+#wpbody-content .notice {
+    display: none !important;
+}
+
+body.wpbkash-fullview div#wpcontent {
+    margin-left: 0;
+    padding: 0 !important;
+}
+
+body.wpbkash-fullview div#wpadminbar {
+    display: none;
+}
+
+body.wpbkash-fullview div#adminmenumain {
+    display: none;
+}
+
+body.wpbkash-fullview div#wpfooter {
+    display: none;
+}
+body.wpbkash-fullview #wpbody-content {
+    padding-bottom: 0;
+}
+
+#adminmenu .toplevel_page_wpbkash .wp-menu-image img {
+    padding: 0;
+}
+
+/* html.wp-toolbar {
+    padding-top: 0;
+} */
+
+.wpbkash--doc-area {
+    /* position: fixed;
+    top: 0; */
+    z-index: 99999;
+    background-color: #FFF;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 40px;
+    height: auto;
+    overflow: auto;
+    width: 100%;
+}
+
+.wpbkash--doc-area pre {
+    white-space: pre-wrap;       /* Since CSS 2.1 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+    width: calc(100% - 80px);
+    margin-bottom: 0;
+}
+
+.wpbkash--doc-line h2 {
+    display: inline-block;
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+.wpbkash--doc-line h2.api-url {
+    font-weight: normal;
+}
+
+.wpbkash--doc-inner-line pre {
+    display: inline;
+}
+.wpbkash--doc-inner-line h4 {
+    display: inline;
+}
+
+.wpbkash--single-api-doc {
+    margin-bottom: 30px;
+}
+
+.wpbkash--single-error-info img {
+    display: block;
+    width: auto;
+    max-width: 100%;
+}
+
+.wpbkash--err-implementation > h2 {
+    display: block;
+    text-align: center;
+    font-size: 23px;
+}
+
+.wpbkash--error-line img {
+    display: block;
+    margin-top: 5px;
+    max-width: 100%;
+    margin-bottom: 35px;
+}

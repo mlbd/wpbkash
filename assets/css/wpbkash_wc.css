@@ -1,0 +1,183 @@
+.wpbkash--hidden-btn {
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+}
+.payment_method_wpbkash p:last-of-type {
+    margin-bottom: 0;
+}
+.wc-wpbkash-wrap {
+    margin-bottom: 30px;
+}
+
+.wc-wpbkash-wrap .button {
+    background-color: #333333;
+    border-color: #333333;
+    color: #ffffff;
+}
+
+button.button.wpbkash--simple-btn {
+    padding-left: 40px;
+    padding-right: 40px;
+    -webkit-transition: padding 0.4s;
+    transition: padding 0.4s;
+    border-radius: 4px;
+    outline: none !important;
+}
+
+button.button.wpbkash--simple-btn.wpbkash_processing {
+    min-width: 178px;
+    text-align: center;
+}
+
+button.button.wpbkash--simple-btn.wpbkash_processing .wpbkash--btn-content {
+    display: none;
+}
+
+button.button.wpbkash--simple-btn img {
+    width: 72px;
+    display: inline-block;
+    margin-left: 6px;
+    position: relative;
+}
+
+span.wpbkash--processing-content {
+    display: none;
+}
+
+button.button.wpbkash--simple-btn.wpbkash_processing span.wpbkash--processing-content {
+    display: block;
+    text-align: center;
+}
+
+span.wpbkash--btn-content {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+            align-items: center;
+    width: 100%;
+    font-weight: normal;
+}
+
+button.button.wpbkash--simple-btn span.wpbkash--processing-content img {
+    width: 32px;
+    display: block;
+    margin: 0 auto;
+}
+
+
+.wpbkash--msg-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9991;
+    background-color: rgba(0,0,0,0.1);
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.wpbkash--msg-wrap {
+    width: 320px;
+    background-color: #fff;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.wpbkash--msg-wrap h6 {
+    margin: 0;
+    line-height: 1.2;
+    font-size: 18px;
+    color: #111;
+}
+.wpbkash--msg-wrap h6 span {
+    display: block;
+    text-align: center;
+}
+
+/* body,
+.site-content-contain {
+    background-color: #dac8c8;
+} */
+
+
+.wpbkash--modal-wrap {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    background-color: rgba(0,0,0,0.2);
+}
+.wpbkash--modal-inner {
+    position: absolute;
+    width: 420px;
+    background-color: #FFF;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 4px;
+    padding: 20px 30px;
+    text-align: center;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+}
+.wpbkash--modal-inner img {
+    width: 75px;
+    display: inline-block;
+    margin-top: 10px;
+}
+.wpbkash--modal-content h2 {
+    font-size: 1.5em;
+    font-weight: 700;
+    display: block;
+    margin-top: 9px;
+    margin-bottom: 0;
+    line-height: 1;
+    text-transform: uppercase;
+}
+.wpbkash--modal-content p {
+    font-size: 1em;
+    margin-top: 18px;
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+.wpbkash--modal-inner button {
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+    min-height: 1em;
+    outline: 0;
+    border: none;
+    background-color: #FAFAFA;
+    color: gray;
+    margin: 0;
+    padding: .8em 1.5em;
+    text-transform: uppercase;
+    line-height: 1;
+    font-weight: 700;
+    font-style: normal;
+    text-align: center;
+    text-decoration: none;
+    background-color: #e24c4b!important;
+    color: #FFF;
+    margin-top: 21px;
+}
+.wpbkash--success-modal .wpbkash--modal-inner button.wpbkash--modal-btn {
+    background-color: #00b514 !important;
+}
+.wpbkash--modal-inner button:hover,
+.wpbkash--modal-inner button:focus,
+.wpbkash--modal-inner button:active {
+    background-color: #d1403f;
+    color: #fff;
+}
