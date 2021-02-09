@@ -8,7 +8,7 @@
  *
  */
 
-namespace Themepaw\bKash\Admin\Subpages;
+namespace Themepaw\bKash\Admin;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit();

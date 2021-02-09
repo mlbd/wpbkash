@@ -9,10 +9,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use Themepaw\bKash\Api\Query;
-use Themepaw\bKash\Admin\Subpages\General;
-use Themepaw\bKash\Admin\Subpages\Extra;
-use Themepaw\bKash\Admin\Subpages\Tools;
-use Themepaw\bKash\Admin\Subpages\Coming;
+// use Themepaw\bKash\Admin\Subpages\General;
+// use Themepaw\bKash\Admin\Subpages\Extra;
+// use Themepaw\bKash\Admin\Subpages\Tools;
+// use Themepaw\bKash\Admin\Subpages\Coming;
 
 /**
  * WPbkash Settings class
