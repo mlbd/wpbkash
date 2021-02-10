@@ -8,6 +8,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+use Themepaw\bKash\Invoice;
+
 /**
  * Query class file.
  *
@@ -142,7 +144,7 @@ class Query {
 	public function createPayment( $amount) {
 
 		$token = $this->get_bkash_token();
-		$invoice = wpbkash_get_invoice();
+		$invoice = Invoice::instance()->get_invoice();
 
 		$app_key = $this->app_key;
 		$intent  = 'sale';

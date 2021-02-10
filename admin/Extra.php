@@ -30,6 +30,10 @@ class Extra {
 	 * @since 1.0
 	 */
 	public function init() {
+
+        $this->invoice_settings = new Invoice();
+        $this->invoice_settings->init();
+
         add_action( 'admin_init', array( $this, 'init_settings' ) );
         $this->options = $this->default_settings();
     }
@@ -148,6 +152,65 @@ class Extra {
 	public function add_settings_page() {
 		settings_fields( $this->option_name . '_group' );
         do_settings_sections( $this->option_name . '_settings' );
+	}
+
+    public function show_settings() {
+        $sections           = $this->get_sections();
+        $active_section     = isset( $_GET['section'] ) ? sanitize_text_field( $_GET['section'] )
+            : "fee";
+        $number_of_sections = count( $sections );
+        $number             = 0;
+        ?>
+        <div class="wp-clearfix">
+            <ul class="subsubsub">
+                <?php
+                foreach ( $sections as $section_key => $section_title ) {
+                    $number ++;
+                    $class = '';
+                    if ( $active_section == $section_key ) {
+                        $class = 'current';
+                    }
+                    ?>
+                    <li>
+                        <a class="<?php echo $class; ?>"
+                        href="<?php echo admin_url( 'admin.php?page=wpbkash_settings&tab=extra-settings' ) .
+                                            '&section='
+                                            . $section_key; ?>"><?php echo $section_title; ?></a>
+                        <?php
+                        if ( $number != $number_of_sections ) {
+                            echo ' | ';
+                        }
+                        ?>
+                    </li>
+                    <?php
+                }
+                ?>
+            </ul>
+        </div>
+        <div id="tab_container" class="general-tab">
+            <?php
+            if ( $active_section === "fee" ) {
+                $this->add_settings_page();
+                submit_button(__('Submit', 'wpbkash'));
+            }
+
+            if ( $active_section === "invoice" ) {
+                $this->invoice_settings->add_settings_page();
+                submit_button(__('Submit', 'wpbkash'));
+            }
+
+            ?>
+        </div>
+        <?php
+    }
+
+    public function get_sections() {
+		$sections = array(
+			"fee" => __( "bKash Fee", "content-workflow" ),
+			"invoice" => __( "Invoice Generator", "content-workflow" )
+		);
+
+		return $sections;
 	}
 
 	/**

@@ -9,6 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use Themepaw\bKash\Api\Query;
+use Themepaw\bKash\Invoice;
 
 /**
  * Ajax class file.
@@ -84,7 +85,7 @@ final class Ajax {
 			$total = WC()->cart->total;
 		}
 
-		$invoice = wpbkash_get_invoice();
+		$invoice = Invoice::instance()->get_invoice();
 
 		$data = [
 			'amount' => $total,

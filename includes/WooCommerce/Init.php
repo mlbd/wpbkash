@@ -100,7 +100,7 @@ class Init {
 			<?php
 		}
 		$option = get_option( 'wpbkash_settings_fields' );
-		if ( ( isset( $wcoption['enabled'] ) && 'yes' === $wcoption['enabled'] ) && ( ! isset( $option ) || empty( $option['app_key'] ) || empty( $option['app_secret'] ) || empty( $option['username'] ) || empty( $option['password'] ) ) ) {
+		if ( ! isset( $option ) || empty( $option['app_key'] ) || empty( $option['app_secret'] ) || empty( $option['username'] ) || empty( $option['password'] ) ) {
 			?>
 		<div class="notice notice-warning wpbkash--notice is-dismissible">
 			<p><?php _e( 'WooCommerce bKash Payment is enabled, but Merchant credentials are missing', 'wpbkash' ); ?></p>

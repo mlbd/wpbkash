@@ -44,6 +44,8 @@ class Tools {
 		    add_action( 'wp_ajax_wpbkash_search_transaction', [ $this, 'wpbkash_search_transaction' ] );
 		}
 
+        $this->coming_settings = new Coming();
+        $this->coming_settings->init();
 		
 	}
 
@@ -115,8 +117,60 @@ class Tools {
         </div>
         <?php
     }
+
+    public function show_settings() {
+        $sections           = $this->get_sections();
+        $active_section     = isset( $_GET['section'] ) ? sanitize_text_field( $_GET['section'] )
+            : "search";
+        $number_of_sections = count( $sections );
+        $number             = 0;
+        ?>
+        <div class="wp-clearfix">
+            <ul class="subsubsub">
+                <?php
+                foreach ( $sections as $section_key => $section_title ) {
+                    $number ++;
+                    $class = '';
+                    if ( $active_section == $section_key ) {
+                        $class = 'current';
+                    }
+                    ?>
+                    <li>
+                        <a class="<?php echo $class; ?>"
+                        href="<?php echo admin_url( 'admin.php?page=wpbkash_settings&tab=tools-settings' ) .
+                                            '&section='
+                                            . $section_key; ?>"><?php echo $section_title; ?></a>
+                        <?php
+                        if ( $number != $number_of_sections ) {
+                            echo ' | ';
+                        }
+                        ?>
+                    </li>
+                    <?php
+                }
+                ?>
+            </ul>
+        </div>
+        <div id="tab_container" class="general-tab">
+            <?php
+            if ( $active_section === "search" ) {
+                $this->add_settings_page();
+            }
+
+            if ( $active_section === "refund" ) {
+                $this->coming_settings->add_settings_page();
+            }
+            
+            if ( $active_section === "refund-status" ) {
+                $this->coming_settings->add_settings_page();
+            }
+
+            ?>
+        </div>
+        <?php
+    }
     
-    public function get_tools_section() {
+    public function get_sections() {
 		$sections = array(
 			"search" => __( "Search TrxID", "content-workflow" ),
 			"refund" => __( "Refund", "content-workflow" ),

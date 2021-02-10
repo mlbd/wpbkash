@@ -9,10 +9,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use Themepaw\bKash\Api\Query;
-// use Themepaw\bKash\Admin\Subpages\General;
-// use Themepaw\bKash\Admin\Subpages\Extra;
-// use Themepaw\bKash\Admin\Subpages\Tools;
-// use Themepaw\bKash\Admin\Subpages\Coming;
 
 /**
  * WPbkash Settings class
@@ -83,8 +79,7 @@ class Settings {
         $this->tools_settings = new Tools();
         $this->tools_settings->init();
         
-        $this->coming_settings = new Coming();
-        $this->coming_settings->init();
+        
     }
     
     /**
@@ -535,63 +530,15 @@ class Settings {
                 echo '</h2>';
 
                 if ( $active_tab == 'tools-settings' ) {
-                    $sections           = $this->tools_settings->get_tools_section();
-                    $active_section     = isset( $_GET['section'] ) ? sanitize_text_field( $_GET['section'] )
-                        : "search";
-                    $number_of_sections = count( $sections );
-                    $number             = 0;
-                    ?>
-                    <div class="wp-clearfix">
-                        <ul class="subsubsub">
-                            <?php
-                            foreach ( $sections as $section_key => $section_title ) {
-                                $number ++;
-                                $class = '';
-                                if ( $active_section == $section_key ) {
-                                    $class = 'current';
-                                }
-                                ?>
-                                <li>
-                                    <a class="<?php echo $class; ?>"
-                                    href="<?php echo admin_url( 'admin.php?page=wpbkash_settings&tab=tools-settings' ) .
-                                                        '&section='
-                                                        . $section_key; ?>"><?php echo $section_title; ?></a>
-                                    <?php
-                                    if ( $number != $number_of_sections ) {
-                                        echo ' | ';
-                                    }
-                                    ?>
-                                </li>
-                                <?php
-                            }
-                            ?>
-                        </ul>
-                    </div>
-                    <div id="tab_container" class="general-tab">
-						<?php
-						if ( $active_section === "search" ) {
-                            $this->tools_settings->add_settings_page();
-						}
-
-						if ( $active_section === "refund" ) {
-							$this->coming_settings->add_settings_page();
-						}
-                        
-                        if ( $active_section === "refund-status" ) {
-							$this->coming_settings->add_settings_page();
-						}
-
-						?>
-                    </div>
-                    <?php
+                    $this->tools_settings->show_settings();
+                   
                 }
             ?>
 			 <form method="post" id="wpbkash_settings_form" action="options.php">
 				<?php
 
                if ( $active_tab == 'extra-settings' ) {
-                    $this->extra_settings->add_settings_page();
-                    submit_button(__('Submit', 'wpbkash'));
+                    $this->extra_settings->show_settings();
 				} elseif( $active_tab == 'general-settings' )  {
                     $this->general_settings->add_settings_page();
                     submit_button(__('Submit', 'wpbkash'));
