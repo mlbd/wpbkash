@@ -36,7 +36,7 @@ class Tools {
 	 */
 	function __construct() {
 
-		$option = get_option( 'wpbkash_settings_fields' );
+		$option = get_option( 'wpbkash_general_fields' );
 
 		if ( ! empty( $option['app_key'] ) && ! empty( $option['app_secret'] ) && ! empty( $option['username'] ) && ! empty( $option['password'] ) ) {
 			$this->api = new Query( $option );

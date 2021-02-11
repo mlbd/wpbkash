@@ -29,7 +29,7 @@ final class WPCF7Loader {
 	 */
 	public function enqueue() {
 
-		$options = get_option( 'wpbkash_settings_fields' );
+		$options = get_option( 'wpbkash_general_fields' );
 
 		if ( empty( $options ) || empty( $options['app_key'] ) || empty( $options['app_secret'] ) || empty( $options['username'] ) || empty( $options['password'] ) ) {
 			return;

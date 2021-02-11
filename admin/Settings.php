@@ -395,7 +395,7 @@ class Settings {
         $payment_id = isset( $wpbkash_docs_fields['payment_id'] ) ? $wpbkash_docs_fields['payment_id'] : '';
 
         if( ! empty( $payment_id ) ) {
-            $option = get_option( 'wpbkash_settings_fields' );
+            $option = get_option( 'wpbkash_general_fields' );
             if ( ! empty( $option['app_key'] ) && ! empty( $option['app_secret'] ) && ! empty( $option['username'] ) && ! empty( $option['password'] ) ) {
                 $api = new Query( $option );
 			    $check_payment = $api->queryPayment( $payment_id );

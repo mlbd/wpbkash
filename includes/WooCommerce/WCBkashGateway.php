@@ -33,7 +33,7 @@ class WCBkashGateway extends \WC_Payment_Gateway {
 		$this->payment_notice = $this->get_option( 'payment_notice' );
 		$this->instructions   = $this->get_option( 'instructions', $this->description );
 
-		$option           = get_option( 'wpbkash_settings_fields' );
+		$option           = get_option( 'wpbkash_general_fields' );
 		$this->testmode   = isset( $option['testmode'] ) ? sanitize_key( $option['testmode'] ) : '';
 		$this->app_key    = isset( $option['app_key'] ) ? sanitize_key( $option['app_key'] ) : '';
 		$this->app_secret = isset( $option['app_secret'] ) ? sanitize_key( $option['app_secret'] ) : '';

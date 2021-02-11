@@ -33,7 +33,7 @@ class Init {
 	}
 
     public function get_bkash_token() {
-        $option = get_option( 'wpbkash_settings_fields' );
+        $option = get_option( 'wpbkash_general_fields' );
 
 		if ( ! empty( $option ) && ! empty( $option['app_key'] ) && ! empty( $option['app_secret'] ) && ! empty( $option['username'] ) && ! empty( $option['password'] ) ) {
 			$api = new Query( $option );
@@ -67,7 +67,7 @@ class Init {
 			return;
 		}
 
-		$option = get_option( 'wpbkash_settings_fields' );
+		$option = get_option( 'wpbkash_general_fields' );
 
 		if ( empty( $option['app_key'] ) || empty( $option['app_secret'] ) || empty( $option['username'] ) || empty( $option['password'] ) ) {
 			throw new \Exception( __( 'WooCommerce bKash credentials are incorrect or missing any required field.', 'wpbkash' ) );
@@ -99,7 +99,7 @@ class Init {
 		</div>
 			<?php
 		}
-		$option = get_option( 'wpbkash_settings_fields' );
+		$option = get_option( 'wpbkash_general_fields' );
 		if ( ! isset( $option ) || empty( $option['app_key'] ) || empty( $option['app_secret'] ) || empty( $option['username'] ) || empty( $option['password'] ) ) {
 			?>
 		<div class="notice notice-warning wpbkash--notice is-dismissible">
