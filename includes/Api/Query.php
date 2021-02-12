@@ -69,10 +69,6 @@ class Query extends Base {
 		return false;
 	}
 
-	public function refresh_token() {
-
-	}
-
 	/**
 	 * Token creation for accessing bKash payment APIs.
 	 *
@@ -97,23 +93,47 @@ class Query extends Base {
 			'Content-Type' => 'application/json',
 		);
 
-		$api_response = $this->create_requrest( $this->get_api_url(), $data, $headers );
+        $token_url = $this->get_api_url();
+
+        $old_token = get_option( '_wpbkash_refresh_token' );
+        if( ! empty( $old_token ) ) {
+            $data['refresh_token'] = $old_token;
+            $token_url = $this->get_api_url('refresh');
+        }
+
+		$api_response = $this->create_requrest( $token_url, $data, $headers );
 		if ( empty( $api_response ) ) {
 			return false;
 		}
 
 		$response = json_decode( $api_response, true );
 		$this->api_request_docs( 0, 'Grant Token', $this->get_api_url(), $headers, $data, $response );
-
 		if ( isset( $response['id_token'] ) && isset( $response['token_type'] ) ) {
 			$token = $response['id_token'];
-			set_transient( 'wpbkash_token_key', $token, $response['expires_in'] );
+            $refresh_token = $response['refresh_token'];
+            $this->refresh_token_update( $refresh_token );
+			set_transient( 'wpbkash_token_key', $token, $this->token_expiration() );
 			return $token;
 		}
 
 		return false;
 	}
 
+    /**
+     * Add/Update bKash refresh token.
+     * 
+     * @param string $new_token
+     * 
+     * @return void
+     */
+    public function refresh_token_update( $new_token ) {
+        $old_token = get_option( '_wpbkash_refresh_token' );
+        if( ! empty( $old_token ) && $old_token !== $new_token ) {
+            update_option( '_wpbkash_refresh_token', sanitize_text_field( $new_token ) );
+        } elseif( empty( $old_token ) ) {
+            update_option( '_wpbkash_refresh_token', sanitize_text_field( $new_token ) );
+        }
+    }
 
 	/**
 	 * This API will receive a payment creation request with necessary information.

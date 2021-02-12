@@ -136,5 +136,12 @@ class Base {
 		}
 	}
 
+    /**
+     * Set/Get bkash token expiration to db
+     */
+    public function token_expiration() {
+        return apply_filters( 'wpbkash_token_expiration', 50 * MINUTE_IN_SECONDS );
+    }
+
 
 }
