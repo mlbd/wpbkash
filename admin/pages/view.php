@@ -25,9 +25,9 @@ $entry    = wpbkash_get_entry( $entry_id );
 		$user_id   = $user_info->ID;
 	}
 
-	$created_date = $entry->created_at;
+	$created_date      = $entry->created_at;
 	$created_timestamp = strtotime( $created_date );
-	$updated_date = $entry->updated_at;
+	$updated_date      = $entry->updated_at;
 
 	if ( isset( $created_date ) && ! empty( $created_date ) ) {
 		$created_date = date( 'Y/m/d - g:i A', strtotime( $created_date ) );
@@ -54,7 +54,7 @@ $entry    = wpbkash_get_entry( $entry_id );
 		<tbody>
 			<tr>
 				<th scope="row">
-					<label><?php _e( 'Transaction ID', 'wpbkash' ); ?></label>
+					<label><?php esc_html_e( 'Transaction ID', 'wpbkash' ); ?></label>
 				</th>
 				<td>
 					<?php echo esc_html( strtoupper( $entry->trx_id ) ); ?>
@@ -62,15 +62,15 @@ $entry    = wpbkash_get_entry( $entry_id );
 			</tr>
 			<tr>
 				<th scope="row">
-					<label><?php _e( 'Merchant Invoice Number', 'wpbkash' ); ?></label>
+					<label><?php esc_html_e( 'Merchant Invoice Number', 'wpbkash' ); ?></label>
 				</th>
 				<td>
-					<?php echo ( property_exists($entry, 'invoice') ) ? esc_html( strtoupper( $entry->invoice ) ) : ''; ?>
+					<?php echo ( property_exists( $entry, 'invoice' ) ) ? esc_html( strtoupper( $entry->invoice ) ) : ''; ?>
 				</td>
 			</tr>
 			<tr>
 				<th scope="row">
-					<label><?php _e( 'Amount', 'wpbkash' ); ?></label>
+					<label><?php esc_html_e( 'Amount', 'wpbkash' ); ?></label>
 				</th>
 				<td>
 					<?php echo esc_html( $entry->amount ); ?>
@@ -78,7 +78,7 @@ $entry    = wpbkash_get_entry( $entry_id );
 			</tr>
 			<tr>
 				<th scope="row">
-					<label><?php _e( 'Transaction Status', 'wpbkash' ); ?></label>
+					<label><?php esc_html_e( 'Transaction Status', 'wpbkash' ); ?></label>
 				</th>
 				<td>
 					<?php echo esc_html( $entry->trx_status ); ?>
@@ -86,7 +86,7 @@ $entry    = wpbkash_get_entry( $entry_id );
 			</tr>
 			<tr>
 				<th scope="row">
-					<label><?php _e( 'Entry Status', 'wpbkash' ); ?></label>
+					<label><?php esc_html_e( 'Entry Status', 'wpbkash' ); ?></label>
 				</th>
 				<td>
 					<?php echo esc_html( $entry->status ); ?>
@@ -94,7 +94,7 @@ $entry    = wpbkash_get_entry( $entry_id );
 			</tr>
 			<tr>
 				<th scope="row">
-					<label><?php _e( 'Sender', 'wpbkash' ); ?></label>
+					<label><?php esc_html_e( 'Sender', 'wpbkash' ); ?></label>
 				</th>
 				<td>
 					<?php echo esc_html( $sender ); ?>
@@ -102,7 +102,7 @@ $entry    = wpbkash_get_entry( $entry_id );
 			</tr>
 			<tr>
 				<th scope="row">
-					<label><?php _e( 'Sender User ID', 'wpbkash' ); ?></label>
+					<label><?php esc_html_e( 'Sender User ID', 'wpbkash' ); ?></label>
 				</th>
 				<td>
 					<?php echo esc_html( $user_id ); ?>
@@ -110,7 +110,7 @@ $entry    = wpbkash_get_entry( $entry_id );
 			</tr>
 			<tr>
 				<th scope="row">
-					<label><?php _e( 'Reference/Type', 'wpbkash' ); ?></label>
+					<label><?php esc_html_e( 'Reference/Type', 'wpbkash' ); ?></label>
 				</th>
 				<td>
 					<?php echo esc_html( $entry->ref ); ?>
@@ -118,23 +118,23 @@ $entry    = wpbkash_get_entry( $entry_id );
 			</tr>
 			<tr>
 				<th scope="row">
-					<label><?php _e( 'Reference ID', 'wpbkash' ); ?></label>
+					<label><?php esc_html_e( 'Reference ID', 'wpbkash' ); ?></label>
 				</th>
 				<td>
 					<?php echo esc_html( $entry->ref_id ); ?>
 				</td>
 			</tr>
-            <tr>
+			<tr>
 				<th scope="row">
-					<label><?php _e( 'Payment ID', 'wpbkash' ); ?></label>
+					<label><?php esc_html_e( 'Payment ID', 'wpbkash' ); ?></label>
 				</th>
 				<td>
-                    <?php echo ( property_exists($entry, 'payment_id') ) ? esc_html( strtoupper( $entry->payment_id ) ) : ''; ?>
+					<?php echo ( property_exists( $entry, 'payment_id' ) ) ? esc_html( strtoupper( $entry->payment_id ) ) : ''; ?>
 				</td>
 			</tr>
 			<tr>
 				<th scope="row">
-					<label><?php _e( 'Created Date', 'wpbkash' ); ?></label>
+					<label><?php esc_html_e( 'Created Date', 'wpbkash' ); ?></label>
 				</th>
 				<td>
 					<?php echo esc_html( $created_date ); ?>
@@ -142,7 +142,7 @@ $entry    = wpbkash_get_entry( $entry_id );
 			</tr>
 			<tr>
 				<th scope="row">
-					<label><?php _e( 'Created Timestamp', 'wpbkash' ); ?></label>
+					<label><?php esc_html_e( 'Created Timestamp', 'wpbkash' ); ?></label>
 				</th>
 				<td>
 					<?php echo esc_html( $created_timestamp ); ?>
@@ -150,7 +150,7 @@ $entry    = wpbkash_get_entry( $entry_id );
 			</tr>
 			<tr>
 				<th scope="row">
-					<label><?php _e( 'Updated Date', 'wpbkash' ); ?></label>
+					<label><?php esc_html_e( 'Updated Date', 'wpbkash' ); ?></label>
 				</th>
 				<td>
 					<?php echo esc_html( $updated_date ); ?>

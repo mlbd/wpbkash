@@ -4,37 +4,34 @@
  */
 namespace Themepaw\bKash;
 
-class Activate
-{
-    /**
-     * Activate initialize
-     * 
-     * @return void
-     */
-    public static function activate()
-    {
-        self::create_table();
-        self::install();
-        flush_rewrite_rules();
-    }
+class Activate {
 
-    /**
-     * Create DB Table
-     * 
-     * @return void
-     */
-    public static function create_table()
-    {
+	/**
+	 * Activate initialize
+	 *
+	 * @return void
+	 */
+	public static function activate() {
+		 self::create_table();
+		self::install();
+		flush_rewrite_rules();
+	}
 
-        global $wpdb;
+	/**
+	 * Create DB Table
+	 *
+	 * @return void
+	 */
+	public static function create_table() {
+		global $wpdb;
 
-        $table = $wpdb->prefix . 'wpbkash';
-      
-        $charset_collate = $wpdb->get_charset_collate();
+		$table = $wpdb->prefix . 'wpbkash';
 
-        $prev_version = get_option( 'wpbkash_version' );
+		$charset_collate = $wpdb->get_charset_collate();
 
-        $sql = "CREATE TABLE `{$table}` (
+		$prev_version = get_option( 'wpbkash_version' );
+
+		$sql = "CREATE TABLE `{$table}` (
                 `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
                 `trx_id` varchar(15) DEFAULT NULL,
                 `trx_status` varchar(15) DEFAULT NULL,
@@ -55,12 +52,12 @@ class Activate
                 KEY `trx_id` (`trx_id`)
             ) $charset_collate;";
 
-        require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-        dbDelta( $sql );
+		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+		dbDelta( $sql );
 
-        if ( version_compare( $prev_version, WPBKASH_VERSION, '!=' ) ) {
+		if ( version_compare( $prev_version, WPBKASH_VERSION, '!=' ) ) {
 
-            $sql = "CREATE TABLE `{$table}` (
+			$sql = "CREATE TABLE `{$table}` (
                 `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
                 `trx_id` varchar(15) DEFAULT NULL,
                 `trx_status` varchar(15) DEFAULT NULL,
@@ -81,25 +78,24 @@ class Activate
                 KEY `trx_id` (`trx_id`)
             ) $charset_collate;";
 
-            require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-            dbDelta( $sql );
+			require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+			dbDelta( $sql );
 
-        }
+		}
 
-    }
+	}
 
-    /**
-     * Update and store options when activated
-     * 
-     * @return void
-     */
-    public static function install()
-    {
-        set_transient( 'wpbkash_flush', 1, 60 );
-        update_option( 'wpbkash_version', WPBKASH_VERSION );
-        $installed = get_option('wpbkash_installed');
-        if( ! $installed ) {
-            update_option( 'wpbkash_installed', time() );
-        }
-    }
+	/**
+	 * Update and store options when activated
+	 *
+	 * @return void
+	 */
+	public static function install() {
+		set_transient( 'wpbkash_flush', 1, 60 );
+		update_option( 'wpbkash_version', WPBKASH_VERSION );
+		$installed = get_option( 'wpbkash_installed' );
+		if ( ! $installed ) {
+			update_option( 'wpbkash_installed', time() );
+		}
+	}
 }

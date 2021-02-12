@@ -21,8 +21,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class Coming {
 
-    protected $option_name = 'wpbkash_coming';
-    protected $options;
+	protected $option_name = 'wpbkash_coming';
+	protected $options;
 
 	/**
 	 * Set things up.
@@ -30,8 +30,8 @@ class Coming {
 	 * @since 1.0
 	 */
 	public function init() {
-        add_action( 'admin_init', array( $this, 'init_settings' ) );
-    }
+		add_action( 'admin_init', array( $this, 'init_settings' ) );
+	}
 
 	public function init_settings() {
 		if ( false == get_option( $this->option_name . '_fields' ) ) {
@@ -39,15 +39,15 @@ class Coming {
 		}
 
 		register_setting(
-			$this->option_name .'_group', // Option group
+			$this->option_name . '_group', // Option group
 			$this->option_name . '_fields', // Option name
-			[ $this, 'validate_and_save' ] // Sanitize
+			array( $this, 'validate_and_save' ) // Sanitize
 		);
 
 		add_settings_section(
 			$this->option_name . '_section',
 			__( 'Coming Soon', 'wpbkash' ),
-			[ $this, 'print_section_info' ],
+			array( $this, 'print_section_info' ),
 			$this->option_name . '_settings'
 		);
 	}
@@ -59,14 +59,14 @@ class Coming {
 	 */
 	public function add_settings_page() {
 		settings_fields( $this->option_name . '_group' );
-        do_settings_sections( $this->option_name . '_settings' );
+		do_settings_sections( $this->option_name . '_settings' );
 	}
-    
-    /**
-     * Print the Section text
-     */
-    public function print_section_info() {}
 
-   
+	/**
+	 * Print the Section text
+	 */
+	public function print_section_info() {}
+
+
 
 }

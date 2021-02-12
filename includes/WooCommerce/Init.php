@@ -33,11 +33,9 @@ class Init {
 	}
 
     public function get_bkash_token() {
-        $option = get_option( 'wpbkash_general_fields' );
-
-		if ( ! empty( $option ) && ! empty( $option['app_key'] ) && ! empty( $option['app_secret'] ) && ! empty( $option['username'] ) && ! empty( $option['password'] ) ) {
-			$api = new Query( $option );
-			$token = $api->get_bkash_token();
+        $is_ok = Query::instance()->is_settings_ok();
+		if ( $is_ok ) {
+			Query::instance()->get_bkash_token();
 		}
     }
 
@@ -67,15 +65,11 @@ class Init {
 			return;
 		}
 
-		$option = get_option( 'wpbkash_general_fields' );
-
-		if ( empty( $option['app_key'] ) || empty( $option['app_secret'] ) || empty( $option['username'] ) || empty( $option['password'] ) ) {
+		if ( ! Query::instance()->is_settings_ok() ) {
 			throw new \Exception( __( 'WooCommerce bKash credentials are incorrect or missing any required field.', 'wpbkash' ) );
 		}
 
-		$api = new Query( $option );
-
-		$paymentData = $api->get_bkash_token();
+		$paymentData = Query::instance()->get_bkash_token();
 
 		if ( ! $paymentData ) {
 			throw new \Exception( sprintf( __( "bKash server response is incorrect, please contact with <a href='mailto:%s'>site admin</a> or try later.", 'wpbkash' ), esc_attr( get_option( 'admin_email' ) ) ) );
@@ -95,17 +89,16 @@ class Init {
 		if ( 'BDT' !== get_woocommerce_currency() ) {
 			?>
 		<div class="notice notice-warning wpbkash--notice is-dismissible">
-			<p><?php _e( 'bKash payment supports Bangladeshi taka (&#2547;) currency only. Please select Bangladeshi taka (BDT) from WooCommerce Currency options', 'wpbkash' ); ?></p>
+			<p><?php esc_html_e( 'bKash payment supports Bangladeshi taka (&#2547;) currency only. Please select Bangladeshi taka (BDT) from WooCommerce Currency options', 'wpbkash' ); ?></p>
 		</div>
 			<?php
 		}
-		$option = get_option( 'wpbkash_general_fields' );
-		if ( ! isset( $option ) || empty( $option['app_key'] ) || empty( $option['app_secret'] ) || empty( $option['username'] ) || empty( $option['password'] ) ) {
-			?>
+		if ( ! Query::instance()->is_settings_ok() ) {
+		?>
 		<div class="notice notice-warning wpbkash--notice is-dismissible">
-			<p><?php _e( 'WooCommerce bKash Payment is enabled, but Merchant credentials are missing', 'wpbkash' ); ?></p>
+			<p><?php esc_html_e( 'WooCommerce bKash Payment is enabled, but Merchant credentials are missing', 'wpbkash' ); ?></p>
 		</div>
-			<?php
+		<?php
 		}
 	}
 }

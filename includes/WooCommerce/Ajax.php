@@ -27,15 +27,6 @@ final class Ajax {
 	 * Initialize
 	 */
 	function __construct() {
-
-		$option = get_option( 'wpbkash_general_fields' );
-
-		if ( empty( $option['app_key'] ) || empty( $option['app_secret'] ) || empty( $option['username'] ) || empty( $option['password'] ) ) {
-			return false;
-		}
-
-		$this->api = new Query( $option );
-
 		add_action( 'wp_ajax_wpbkash_createpayment', [ $this, 'wpbkash_createpayment' ] );
 		add_action( 'wp_ajax_nopriv_wpbkash_createpayment', [ $this, 'wpbkash_createpayment' ] );
 		add_action( 'wp_ajax_wpbkash_executepayment', [ $this, 'wpbkash_executepayment' ] );
@@ -61,7 +52,7 @@ final class Ajax {
 			$total = WC()->cart->total;
 		}
 
-		$paymentData = $this->api->createPayment( $total );
+		$paymentData = Query::instance()->createPayment( $total );
 
 		echo $paymentData;
 
@@ -115,7 +106,7 @@ final class Ajax {
 			wp_die();
 		}
 
-		$data = $this->api->executePayment( $paymentid );
+		$data = Query::instance()->executePayment( $paymentid );
         $data = json_decode( $data );
 
 		if ( ! isset( $data ) || empty( $data ) || ! isset( $data->trxID ) || ! isset( $data->paymentID ) || ! isset( $data->transactionStatus ) || "Completed" != $data->transactionStatus ) {

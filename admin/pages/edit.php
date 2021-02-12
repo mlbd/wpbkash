@@ -32,11 +32,15 @@ $entry    = wpbkash_get_entry( $entry_id );
                 <button type="button" class="notice-dismiss"><span class="screen-reader-text">' . __( 'Dismiss this notice.', 'wpbkash' ) . '</span></button>
             </div>';
 		}
-
 	}
 
 	?>
-	<h1 class="wp-heading-inline">#<?php echo esc_attr( $entry_id ); esc_html_e( ' Entry Edit Details', 'wpbkash' ); ?></h1>
+	<h1 class="wp-heading-inline">#
+	<?php
+	echo esc_attr( $entry_id );
+	esc_html_e( ' Entry Edit Details', 'wpbkash' );
+	?>
+	</h1>
 
 	<a href="
 	<?php

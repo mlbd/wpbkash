@@ -29,13 +29,11 @@ final class WPCF7Loader {
 	 */
 	public function enqueue() {
 
-		$options = get_option( 'wpbkash_general_fields' );
-
-		if ( empty( $options ) || empty( $options['app_key'] ) || empty( $options['app_secret'] ) || empty( $options['username'] ) || empty( $options['password'] ) ) {
+		if ( ! Query::instance()->is_settings_ok() ) {
 			return;
 		}
 
-		$mode          = ( isset( $options['testmode'] ) && ! empty( $options['testmode'] ) ) ? 'sandbox' : 'pay';
+		$mode          = Query::instance()->get_mode();
 		$bkash_version = WPBKASH()->bkash_api_version;
 		$filename      = ( 'sandbox' === $mode ) ? 'bKash-checkout-sandbox' : 'bKash-checkout';
 

@@ -27,19 +27,10 @@ final class Ajax {
 	 * Initialize
 	 */
 	public function __construct() {
-
-		$option = get_option( 'wpbkash_general_fields' );
-
-		if ( empty( $option ) || empty( $option['app_key'] ) || empty( $option['app_secret'] ) || empty( $option['username'] ) || empty( $option['password'] ) ) {
-			return false;
-		}
-
-		$this->api = new Query( $option, 'wpcf7' );
-
-		add_action( 'wp_ajax_wpbkash_form_createpayment', [ $this, 'wpbkash_form_createpayment' ] );
-		add_action( 'wp_ajax_nopriv_wpbkash_form_createpayment', [ $this, 'wpbkash_form_createpayment' ] );
-		add_action( 'wp_ajax_wpbkash_form_executepayment', [ $this, 'wpbkash_form_executepayment' ] );
-		add_action( 'wp_ajax_nopriv_wpbkash_form_executepayment', [ $this, 'wpbkash_form_executepayment' ] );
+		add_action( 'wp_ajax_wpbkash_form_createpayment', array( $this, 'wpbkash_form_createpayment' ) );
+		add_action( 'wp_ajax_nopriv_wpbkash_form_createpayment', array( $this, 'wpbkash_form_createpayment' ) );
+		add_action( 'wp_ajax_wpbkash_form_executepayment', array( $this, 'wpbkash_form_executepayment' ) );
+		add_action( 'wp_ajax_nopriv_wpbkash_form_executepayment', array( $this, 'wpbkash_form_executepayment' ) );
 	}
 
 	/**
@@ -58,7 +49,7 @@ final class Ajax {
 			wp_die();
 		}
 
-		$paymentData = $this->api->createPayment( $entry->amount );
+		$paymentData = Query::instance()->createPayment( $entry->amount );
 
 		echo $paymentData;
 
@@ -86,19 +77,19 @@ final class Ajax {
 			wp_die();
 		}
 
-		$data = $this->api->executePayment( $paymentid );
+		$data = Query::instance()->executePayment( $paymentid );
 
 		$entry_redirect_url = apply_filters( 'wpbkash_wc_order_redirect_redirect', '' );
 
 		if ( ! isset( $data ) || empty( $data ) ) {
 			wp_send_json_error(
-				[
+				array(
 					'order_url' => $entry_redirect_url,
 					'message'   => __(
 						'Something wen\'t wrong please try again.',
 						'wpbkash'
-					)
-				]
+					),
+				)
 			);
 			wp_die();
 		}
@@ -107,13 +98,13 @@ final class Ajax {
 
 		if ( ! isset( $data->trxID ) || ! isset( $data->paymentID ) ) {
 			wp_send_json_error(
-				[
+				array(
 					'order_url' => $entry_redirect_url,
 					'message'   => __(
 						'We are currently experiencing problems trying to connect to this payment gateway. Sorry for the inconvenience.',
 						'wpbkash'
-					)
-				]
+					),
+				)
 			);
 			wp_die();
 		}
@@ -127,10 +118,10 @@ final class Ajax {
 		$this->confirmation_mail( $entry_id, $data->trxID, $data->paymentID );
 
 		wp_send_json_success(
-			[
+			array(
 				'transactionStatus' => 'completed',
-				'order_url'         => $entry_redirect_url
-			]
+				'order_url'         => $entry_redirect_url,
+			)
 		);
 
 		wp_die();
@@ -149,24 +140,24 @@ final class Ajax {
 
 		$updated = $wpdb->update(
 			$table,
-			[
+			array(
 				'trx_id'     => sanitize_key( $response->trxID ),
 				'trx_status' => sanitize_key( $response->transactionStatus ),
-				'invoice' => sanitize_key( $response->merchantInvoiceNumber ),
+				'invoice'    => sanitize_key( $response->merchantInvoiceNumber ),
 				'created_at' => current_time( 'mysql' ),
 				'status'     => 'completed',
-				'data'       => maybe_serialize( $response )
-			],
-			[
-				'id' => absint( $response->entry_id )
-			],
-			[
+				'data'       => maybe_serialize( $response ),
+			),
+			array(
+				'id' => absint( $response->entry_id ),
+			),
+			array(
 				'%s',
 				'%s',
 				'%s',
 				'%s',
-				'%s'
-			]
+				'%s',
+			)
 		);
 
 		if ( false !== $updated ) {
@@ -205,7 +196,7 @@ final class Ajax {
 
 		$wpbkash_confirm_use_html = ( ! empty( $wpbkash_confirm_use_html ) ) ? true : false;
 
-		$email_data = [
+		$email_data = array(
 			'privacy_policy_url' => get_privacy_policy_url(),
 			'user_email'         => $entry->sender,
 			'sitename'           => wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES ),
@@ -215,8 +206,8 @@ final class Ajax {
 			'paymentid'          => $paymentid,
 			'entry_id'           => $entry_id,
 			'form_id'            => $entry->ref_id,
-			'admin_email'        => get_option( 'admin_email' )
-		];
+			'admin_email'        => get_option( 'admin_email' ),
+		);
 
 		$email_text = wpbkash_confirmation_default_template();
 
@@ -243,14 +234,14 @@ final class Ajax {
 		 */
 		$content = apply_filters( 'wpbkash_confirmed_email_content', $email_text, $email_data );
 
-		$tag_register = [
+		$tag_register = array(
 			'wpbkash-sitename'  => $email_data['sitename'],
 			'wpbkash-siteurl'   => esc_url_raw( $email_data['siteurl'] ),
 			'wpbkash-admin'     => $email_data['admin_email'],
 			'wpbkash-trx_id'    => $email_data['trx_id'],
 			'wpbkash-paymentid' => $email_data['paymentid'],
-			'wpbkash-amount'    => (int) $email_data['amount']
-		];
+			'wpbkash-amount'    => (int) $email_data['amount'],
+		);
 
 		/**
 		 * Filters for body special tag register.

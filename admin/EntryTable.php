@@ -21,16 +21,16 @@ class EntryTable extends \WP_List_Table {
 
 	function __construct() {
 		parent::__construct(
-			[
+			array(
 				'singular' => 'entry',
 				'plural'   => 'entries',
 				'ajax'     => false,
-			]
+			)
 		);
 	}
 
 	function get_table_classes() {
-		return [ 'widefat', 'fixed', 'striped', $this->_args['plural'] ];
+		return array( 'widefat', 'fixed', 'striped', $this->_args['plural'] );
 	}
 
 	/**
@@ -59,7 +59,7 @@ class EntryTable extends \WP_List_Table {
 				return strtoupper( $item->trx_id );
 
 			case 'invoice':
-				return ( property_exists($item, 'invoice') ) ? strtoupper( $item->invoice ) : '';
+				return ( property_exists( $item, 'invoice' ) ) ? strtoupper( $item->invoice ) : '';
 
 			case 'sender':
 				return $item->sender;
@@ -84,17 +84,17 @@ class EntryTable extends \WP_List_Table {
 	 * @return array
 	 */
 	function get_columns() {
-		$columns = [
-			'cb'     => '<input type="checkbox" />',
-			'id'     => __( 'Entry', 'wpbkash' ),
-			'trx_id' => __( 'Transaction ID', 'wpbkash' ),
+		$columns = array(
+			'cb'      => '<input type="checkbox" />',
+			'id'      => __( 'Entry', 'wpbkash' ),
+			'trx_id'  => __( 'Transaction ID', 'wpbkash' ),
 			'invoice' => __( 'Invoice No', 'wpbkash' ),
-			'sender' => __( 'Sender', 'wpbkash' ),
-			'status' => __( 'Status', 'wpbkash' ),
-			'ref'    => __( 'Type', 'wpbkash' ),
-			'date'   => __( 'Date', 'wpbkash' ),
+			'sender'  => __( 'Sender', 'wpbkash' ),
+			'status'  => __( 'Status', 'wpbkash' ),
+			'ref'     => __( 'Type', 'wpbkash' ),
+			'date'    => __( 'Date', 'wpbkash' ),
 
-		];
+		);
 
 		return $columns;
 	}
@@ -108,14 +108,14 @@ class EntryTable extends \WP_List_Table {
 	 */
 	function column_id( $item ) {
 
-		$actions           = [];
+		$actions           = array();
 		$actions['edit']   = sprintf(
 			'<a href="%s" data-id="%d" title="%s">%s</a>',
 			add_query_arg(
-				[
+				array(
 					'entry'  => absint( $item->id ),
 					'action' => 'edit',
-				]
+				)
 			),
 			$item->id,
 			__( 'Edit this item', 'wpbkash' ),
@@ -124,10 +124,10 @@ class EntryTable extends \WP_List_Table {
 		$actions['view']   = sprintf(
 			'<a href="%s" data-id="%d" title="%s">%s</a>',
 			add_query_arg(
-				[
+				array(
 					'entry'  => absint( $item->id ),
 					'action' => 'view',
-				]
+				)
 			),
 			$item->id,
 			__( 'Edit this item', 'wpbkash' ),
@@ -136,10 +136,10 @@ class EntryTable extends \WP_List_Table {
 		$actions['delete'] = sprintf(
 			'<a href="%s" class="submitdelete" data-id="%d" title="%s">%s</a>',
 			add_query_arg(
-				[
+				array(
 					'entry'  => absint( $item->id ),
 					'action' => 'delete',
-				]
+				)
 			),
 			$item->id,
 			__( 'Delete this item', 'wpbkash' ),
@@ -149,10 +149,10 @@ class EntryTable extends \WP_List_Table {
 		return sprintf(
 			'<a href="%1$s"><strong>#%2$s Entry</strong></a> %3$s',
 			add_query_arg(
-				[
+				array(
 					'entry'  => absint( $item->id ),
 					'action' => 'view',
-				]
+				)
 			),
 			$item->id,
 			$this->row_actions( $actions )
@@ -219,9 +219,9 @@ class EntryTable extends \WP_List_Table {
 	 * @return array
 	 */
 	function get_sortable_columns() {
-		$sortable_columns = [
-			'id' => [ 'id', true ],
-		];
+		$sortable_columns = array(
+			'id' => array( 'id', true ),
+		);
 
 		return $sortable_columns;
 	}
@@ -232,9 +232,9 @@ class EntryTable extends \WP_List_Table {
 	 * @return array
 	 */
 	function get_bulk_actions() {
-		$actions = [
+		$actions = array(
 			'delete' => __( 'Delete', 'wpbkash' ),
-		];
+		);
 		return $actions;
 	}
 
@@ -256,7 +256,7 @@ class EntryTable extends \WP_List_Table {
 
 		$deleted_ids = ( isset( $_REQUEST['entry_id'] ) && ! empty( $_REQUEST['entry_id'] ) ) ? (array) $_REQUEST['entry_id'] : '';
 		$entry_id    = ( isset( $_GET['entry'] ) && ! empty( $_GET['entry'] ) ) ? (int) $_GET['entry'] : '';
-		$delete_id   = [];
+		$delete_id   = array();
 
 		switch ( $action ) {
 
@@ -285,14 +285,14 @@ class EntryTable extends \WP_List_Table {
 	  * @return array
 	  */
 	protected function get_views() {
-		$status_links = [];
+		$status_links = array();
 		$base_link    = admin_url( 'admin.php?page=wpbkash' );
-		$counts       = [
+		$counts       = array(
 			'all'       => __( 'All', 'wpbkash' ),
 			'completed' => __( 'Completed', 'wpbkash' ),
 			'pending'   => __( 'Pending', 'wpbkash' ),
 			'failed'    => __( 'Failed', 'wpbkash' ),
-		];
+		);
 		foreach ( $counts as $key => $value ) {
 			$number               = wpbkash_get_count( $key );
 			$class                = ( $key == $this->page_status ) ? 'current' : 'status-' . $key;
@@ -324,20 +324,20 @@ class EntryTable extends \WP_List_Table {
 	function prepare_items() {
 
 		$columns  = $this->get_columns();
-		$hidden   = [];
+		$hidden   = array();
 		$sortable = $this->get_sortable_columns();
 		$this->process_bulk_action();
-		$this->_column_headers = [ $columns, $hidden, $sortable ];
+		$this->_column_headers = array( $columns, $hidden, $sortable );
 
 		$per_page     = $this->get_items_per_page( 'entry_per_page', 20 );
 		$current_page = $this->get_pagenum();
 		$offset       = ( $current_page - 1 ) * $per_page;
 
 		// only ncessary because we have sample data
-		$args = [
+		$args = array(
 			'offset' => intval( $offset ),
 			'number' => intval( $per_page ),
-		];
+		);
 
 		if ( isset( $_REQUEST['orderby'] ) && isset( $_REQUEST['order'] ) ) {
 			$args['orderby'] = sanitize_key( $_REQUEST['orderby'] );
@@ -356,10 +356,10 @@ class EntryTable extends \WP_List_Table {
 		$this->items = wpbkash_get_all_entry( $args );
 
 		$this->set_pagination_args(
-			[
+			array(
 				'total_items' => wpbkash_get_entry_count(),
 				'per_page'    => $per_page,
-			]
+			)
 		);
 	}
 }

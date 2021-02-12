@@ -107,7 +107,7 @@ class Entry {
 	public function get_trx_id() {
 		return $this->get_meta( 'trx_id' );
 	}
-	
+
 	/**
 	 * Get entry Transection ID
 	 */

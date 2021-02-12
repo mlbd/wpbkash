@@ -139,7 +139,7 @@ function wpbkash_user_exist( $user_id = '' ) {
 function wpbkash_delete_entry( $entry_id ) {
 	global $wpdb;
 
-	return $wpdb->delete( $wpdb->prefix . 'wpbkash', [ 'id' => absint( $entry_id ) ], [ '%d' ] );
+	return $wpdb->delete( $wpdb->prefix . 'wpbkash', array( 'id' => absint( $entry_id ) ), array( '%d' ) );
 }
 
 /**
@@ -163,35 +163,39 @@ function wpbkash_get_id( $order_id, $type = 'wc_order' ) {
 /**
  * Generat uniq key
  */
-function wpbkash_get_payout_key()
-{
-    $str = rand(); 
-    $hashed = md5($str);
-    return $hashed;
+function wpbkash_get_payout_key() {
+	 $str   = rand();
+	$hashed = md5( $str );
+	return $hashed;
 }
 
 /**
  * Generate unique payour url
- * 
+ *
  * @param string $email
  * @param string $key
  * @param int    $id
- * 
+ *
  * @return string
  */
-function wpbkash_get_payout_url($email, $key, $id)
-{
-    $url = add_query_arg(array( 'key' => $key, 'email' => $email ), home_url("wpbkash-api/{$id}/"));
-    return $url;
+function wpbkash_get_payout_url( $email, $key, $id ) {
+	$url = add_query_arg(
+		array(
+			'key'   => $key,
+			'email' => $email,
+		),
+		home_url( "wpbkash-api/{$id}/" )
+	);
+	return $url;
 }
 
 /**
  * Entry Update
  *
- * @param int $entry_id
+ * @param int   $entry_id
  * @param array $fields
  * @param array $escapes
- * 
+ *
  * @return int|false
  */
 function wpbkash_entry_update( $entry_id, $fields, $escapes ) {
@@ -202,7 +206,7 @@ function wpbkash_entry_update( $entry_id, $fields, $escapes ) {
 	$updated = $wpdb->update(
 		$table,
 		$fields,
-		[ 'id' => absint( $entry_id ) ],
+		array( 'id' => absint( $entry_id ) ),
 		$escapes
 	);
 
@@ -213,10 +217,10 @@ function wpbkash_entry_update( $entry_id, $fields, $escapes ) {
 /**
  * Default email text
  */
-function wpbkash_pay_default_template()
-{
-    /* translators: Do not translate Shortcode like [wpbkash-sitename], [wpbkash-paymenturl], [wpbkash-siteurl]; those are placeholders. */
-    $email_text = __('Dear [your-name],
+function wpbkash_pay_default_template() {
+	/* translators: Do not translate Shortcode like [wpbkash-sitename], [wpbkash-paymenturl], [wpbkash-siteurl]; those are placeholders. */
+	$email_text = __(
+		'Dear [your-name],
 
 Please click on the following link to verify your email address and to proceed with the payment. Note that without the email verification and payment – your registration will not be completed for the event. You will need to verify your email address within 10 minutes.
 
@@ -230,21 +234,22 @@ This is an auto generated email and please do not reply to this email. If you ha
 Regards,
 All at [wpbkash-sitename]
 Tel: +880 0000-00000, 
-[wpbkash-siteurl]', 'wpbkash' 
-    );
+[wpbkash-siteurl]',
+		'wpbkash'
+	);
 
-    $email_text = apply_filters('wpbkash_pay_use_html', $email_text);
-    return $email_text;
+	$email_text = apply_filters( 'wpbkash_pay_use_html', $email_text );
+	return $email_text;
 }
 
 
 /**
  * Default email text
  */
-function wpbkash_confirmation_default_template()
-{
-    /* translators: Do not translate Shortcode like [wpbkash-sitename], [wpbkash-paymenturl], [wpbkash-siteurl]; those are placeholders. */
-    $email_text = __( 'Dear [your-name],
+function wpbkash_confirmation_default_template() {
+	/* translators: Do not translate Shortcode like [wpbkash-sitename], [wpbkash-paymenturl], [wpbkash-siteurl]; those are placeholders. */
+	$email_text = __(
+		'Dear [your-name],
 
 Congratulations!
 
@@ -265,11 +270,12 @@ All at [wpbkash-sitename]
 Tel: +880 0000-00000, 
 [wpbkash-siteurl]
 
-This is an auto generated email and please do not reply to this email. If you have any question, please write to contact@example.com', 'wpbkash' 
-    );
+This is an auto generated email and please do not reply to this email. If you have any question, please write to contact@example.com',
+		'wpbkash'
+	);
 
-    $email_text = apply_filters('wpbkash_confirm_use_html', $email_text);
-    return $email_text;
+	$email_text = apply_filters( 'wpbkash_confirm_use_html', $email_text );
+	return $email_text;
 }
 
 /**
@@ -277,44 +283,45 @@ This is an auto generated email and please do not reply to this email. If you ha
  */
 function wpbkash_bkash_fees( $cart_object ) {
 
-    if ( is_admin() && ! defined( 'DOING_AJAX' ) )
-        return;
+	if ( is_admin() && ! defined( 'DOING_AJAX' ) ) {
+		return;
+	}
 
-    $payment_method = WC()->session->get( 'chosen_payment_method' );
+	$payment_method = WC()->session->get( 'chosen_payment_method' );
 
-    $extra_fields = get_option( 'wpbkash_extra_fields' );
-    if ( ! isset( $extra_fields['enable'] ) || '1' != $extra_fields['enable'] || $payment_method !== 'wpbkash' ) {
-        return;
-    }
+	$extra_fields = get_option( 'wpbkash_extra_fields' );
+	if ( ! isset( $extra_fields['enable'] ) || '1' != $extra_fields['enable'] || $payment_method !== 'wpbkash' ) {
+		return;
+	}
 
-    $type   = $extra_fields['type'];
-    $amount = (float) $extra_fields['amount'];
+	$type   = $extra_fields['type'];
+	$amount = (float) $extra_fields['amount'];
 
-    $cart_total = $cart_object->subtotal_ex_tax;
-    if( isset( $extra_fields['shipping'] ) && '1' == $extra_fields['shipping'] ) {
-        $cart_total = $cart_total + $cart_object->shipping_total;
-    }
+	$cart_total = $cart_object->subtotal_ex_tax;
+	if ( isset( $extra_fields['shipping'] ) && '1' == $extra_fields['shipping'] ) {
+		$cart_total = $cart_total + $cart_object->shipping_total;
+	}
 
-    $minimum = $extra_fields['minimum'] ? $extra_fields['minimum'] : '';
-    $maximum = $extra_fields['maximum'] ? $extra_fields['maximum'] : '';
-    $label = $extra_fields['label'] ? $extra_fields['label'] : __( 'bKash fee', 'wpbkash' );
-    $taxable = ( isset( $extra_fields['tax'] ) && '1' == $extra_fields['tax'] ) ? true : false;
-    $tax_class = $extra_fields['tax_class'] ? $extra_fields['tax_class'] : 'standard';
+	$minimum   = $extra_fields['minimum'] ? $extra_fields['minimum'] : '';
+	$maximum   = $extra_fields['maximum'] ? $extra_fields['maximum'] : '';
+	$label     = $extra_fields['label'] ? $extra_fields['label'] : __( 'bKash fee', 'wpbkash' );
+	$taxable   = ( isset( $extra_fields['tax'] ) && '1' == $extra_fields['tax'] ) ? true : false;
+	$tax_class = $extra_fields['tax_class'] ? $extra_fields['tax_class'] : 'standard';
 
-    if( !empty( $minimum ) && $cart_total < $minimum  ) {
-        return;
-    }
+	if ( ! empty( $minimum ) && $cart_total < $minimum ) {
+		return;
+	}
 
-    if( !empty( $maximum ) && $cart_total > $maximum  ) {
-        return;
-    }
+	if ( ! empty( $maximum ) && $cart_total > $maximum ) {
+		return;
+	}
 
-    if ( $type == 'percentage' ) {
-        $amount = number_format(($cart_total / 100) * $amount, 2);
-    } else {
-        $amount = number_format($amount, 2);
-    }
+	if ( $type == 'percentage' ) {
+		$amount = number_format( ( $cart_total / 100 ) * $amount, 2 );
+	} else {
+		$amount = number_format( $amount, 2 );
+	}
 
-    $cart_object->add_fee( $label, $amount, $taxable, $tax_class );
+	$cart_object->add_fee( $label, $amount, $taxable, $tax_class );
 }
 add_action( 'woocommerce_cart_calculate_fees', 'wpbkash_bkash_fees' );
