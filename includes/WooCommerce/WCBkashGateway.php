@@ -263,7 +263,7 @@ class WCBkashGateway extends \WC_Payment_Gateway {
 		?>
 		<?php wp_nonce_field('wpbkash_security_nonce', 'wpbkash_nonce'); ?>
 		<input type="hidden" name="bkash_checkout_valid" id="bkash_checkout_valid" value="1">
-		<span id="bKash_button" disabled="disabled" class="wpbkash--hidden-btn"><?php esc_html_e( 'Pay With bKash', 'wpbkash' ); ?></span>
+		<span id="bKash_button" class="wpbkash--hidden-btn"><?php esc_html_e( 'Pay With bKash', 'wpbkash' ); ?></span>
 		<?php
 	}
 

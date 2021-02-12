@@ -68,7 +68,7 @@ jQuery(
              */
             wcbkashInit: async function (order_id = '', redirect = '') {
                 
-                wpbkash.getTrigger();
+                
 
                 var paymentRequest,
                     paymentID;
@@ -101,6 +101,8 @@ jQuery(
                         }
                     }
                 });
+
+                wpbkash.getTrigger();
             },
 
             /**
@@ -255,12 +257,7 @@ jQuery(
              * Trigger bkash hidden button
              */
             getTrigger: function () {
-                $('#bKash_button').removeAttr('disabled');
-                setTimeout(
-                    function () {
-                        $('#bKash_button').trigger('click');
-                    }, 1000
-                )
+                $('#bKash_button').trigger('click');
             },
 
             /**
@@ -380,7 +377,6 @@ jQuery(
                 if( $(this).closest('.wpbkash--modal-wrap').hasClass('wpbkash--error-modal') ) {
                     window.location.reload();
                 }
-                console.log( $(this).closest('.wpbkash--modal-wrap') );
                 $(this).closest('.wpbkash--modal-wrap').removeClass('open').hide().remove();
                 return false;
             },
