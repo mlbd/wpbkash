@@ -39,7 +39,7 @@ class EntryTable extends \WP_List_Table {
 	 * @return void
 	 */
 	function no_items() {
-		_e( 'No entry found', 'wpbkash' );
+		esc_html_e( 'No entry found', 'wpbkash' );
 	}
 
 	/**
@@ -86,13 +86,13 @@ class EntryTable extends \WP_List_Table {
 	function get_columns() {
 		$columns = array(
 			'cb'      => '<input type="checkbox" />',
-			'id'      => __( 'Entry', 'wpbkash' ),
-			'trx_id'  => __( 'Transaction ID', 'wpbkash' ),
-			'invoice' => __( 'Invoice No', 'wpbkash' ),
-			'sender'  => __( 'Sender', 'wpbkash' ),
-			'status'  => __( 'Status', 'wpbkash' ),
-			'ref'     => __( 'Type', 'wpbkash' ),
-			'date'    => __( 'Date', 'wpbkash' ),
+			'id'      => esc_html__( 'Entry', 'wpbkash' ),
+			'trx_id'  => esc_html__( 'Transaction ID', 'wpbkash' ),
+			'invoice' => esc_html__( 'Invoice No', 'wpbkash' ),
+			'sender'  => esc_html__( 'Sender', 'wpbkash' ),
+			'status'  => esc_html__( 'Status', 'wpbkash' ),
+			'ref'     => esc_html__( 'Type', 'wpbkash' ),
+			'date'    => esc_html__( 'Date', 'wpbkash' ),
 
 		);
 
@@ -118,8 +118,8 @@ class EntryTable extends \WP_List_Table {
 				)
 			),
 			$item->id,
-			__( 'Edit this item', 'wpbkash' ),
-			__( 'Edit', 'wpbkash' )
+			esc_html__( 'Edit this item', 'wpbkash' ),
+			esc_html__( 'Edit', 'wpbkash' )
 		);
 		$actions['view']   = sprintf(
 			'<a href="%s" data-id="%d" title="%s">%s</a>',
@@ -130,8 +130,8 @@ class EntryTable extends \WP_List_Table {
 				)
 			),
 			$item->id,
-			__( 'Edit this item', 'wpbkash' ),
-			__( 'View', 'wpbkash' )
+			esc_html__( 'Edit this item', 'wpbkash' ),
+			esc_html__( 'View', 'wpbkash' )
 		);
 		$actions['delete'] = sprintf(
 			'<a href="%s" class="submitdelete" data-id="%d" title="%s">%s</a>',
@@ -142,8 +142,8 @@ class EntryTable extends \WP_List_Table {
 				)
 			),
 			$item->id,
-			__( 'Delete this item', 'wpbkash' ),
-			__( 'Delete', 'wpbkash' )
+			esc_html__( 'Delete this item', 'wpbkash' ),
+			esc_html__( 'Delete', 'wpbkash' )
 		);
 
 		return sprintf(
@@ -167,7 +167,7 @@ class EntryTable extends \WP_List_Table {
 	 * @return string
 	 */
 	function column_date( $item ) {
-		echo __( 'Created at', 'wpbkash' ) . '<br />';
+		esc_html_e( 'Created at', 'wpbkash' ) . '<br />';
 
 		$t_time    = date( 'Y/m/d g:i:s a', time() );
 		$time      = strtotime( $item->created_at );
@@ -175,7 +175,7 @@ class EntryTable extends \WP_List_Table {
 
 		if ( $time && $time_diff > 0 && $time_diff < DAY_IN_SECONDS ) {
 			/* translators: %s: Human-readable time difference. */
-			$h_time = sprintf( __( '%s ago' ), human_time_diff( $time ) );
+			$h_time = sprintf( esc_html__( '%s ago' ), human_time_diff( $time ) );
 		} else {
 			$h_time = date( 'Y/m/d', strtotime( $item->created_at ) );
 		}
@@ -202,7 +202,7 @@ class EntryTable extends \WP_List_Table {
 					if ( isset( $user_id ) && wpbkash_user_exist( (int) $user_id ) ) {
 						$user_info = get_userdata( (int) $user_id );
 						if ( is_object( $user_info ) ) {
-							$sender .= __( 'Username: ', 'wpbkash' ) . esc_html( $user_info->user_login ) . '<br />';
+							$sender .= esc_html__( 'Username: ', 'wpbkash' ) . esc_html( $user_info->user_login ) . '<br />';
 						}
 					}
 					$userid  = ( isset( $user_id ) && wpbkash_user_exist( (int) $user_id ) ) ? $user_id : '';
@@ -233,7 +233,7 @@ class EntryTable extends \WP_List_Table {
 	 */
 	function get_bulk_actions() {
 		$actions = array(
-			'delete' => __( 'Delete', 'wpbkash' ),
+			'delete' => esc_html__( 'Delete', 'wpbkash' ),
 		);
 		return $actions;
 	}
@@ -247,7 +247,7 @@ class EntryTable extends \WP_List_Table {
 			$action = 'bulk-' . $this->_args['plural'];
 
 			if ( ! wp_verify_nonce( $nonce, $action ) ) {
-				wp_die( 'Nope! Security check failed!' );
+				wp_die( esc_html__('Nope! Security check failed!', 'wpbkash' ) );
 			}
 		}
 
@@ -288,10 +288,10 @@ class EntryTable extends \WP_List_Table {
 		$status_links = array();
 		$base_link    = admin_url( 'admin.php?page=wpbkash' );
 		$counts       = array(
-			'all'       => __( 'All', 'wpbkash' ),
-			'completed' => __( 'Completed', 'wpbkash' ),
-			'pending'   => __( 'Pending', 'wpbkash' ),
-			'failed'    => __( 'Failed', 'wpbkash' ),
+			'all'       => esc_html__( 'All', 'wpbkash' ),
+			'completed' => esc_html__( 'Completed', 'wpbkash' ),
+			'pending'   => esc_html__( 'Pending', 'wpbkash' ),
+			'failed'    => esc_html__( 'Failed', 'wpbkash' ),
 		);
 		foreach ( $counts as $key => $value ) {
 			$number               = wpbkash_get_count( $key );

@@ -277,11 +277,11 @@ final class WPCF7bKash {
 			'wpbkash_wpcfy_script',
 			'wpbkash_wpcf7_params',
 			array(
-				'amount_error'  => __( 'Amount can\'t be empty.', 'wpbkash' ),
-				'email_error'   => __( 'Email tag field can\'t be empty.', 'wpbkash' ),
-				'message_error' => __( 'Message box can\'t be empty.', 'wpbkash' ),
-				'valid_tag'     => __( 'Please input a valid tag.', 'wpbkash' ),
-				'url_error'     => __( 'You need to input [wpbkash-paymenturl] tag in mail box.', 'wpbkash' ),
+				'amount_error'  => esc_html__( 'Amount can\'t be empty.', 'wpbkash' ),
+				'email_error'   => esc_html__( 'Email tag field can\'t be empty.', 'wpbkash' ),
+				'message_error' => esc_html__( 'Message box can\'t be empty.', 'wpbkash' ),
+				'valid_tag'     => esc_html__( 'Please input a valid tag.', 'wpbkash' ),
+				'url_error'     => esc_html__( 'You need to input [wpbkash-paymenturl] tag in mail box.', 'wpbkash' ),
 			)
 		);
 	}
@@ -295,7 +295,7 @@ final class WPCF7bKash {
 
 		$new_page = array(
 			'WPbKash-bKash' => array(
-				'title'    => __( 'bKash', 'wpbkash' ),
+				'title'    => esc_html__( 'bKash', 'wpbkash' ),
 				'callback' => array( $this, 'wpcf7_add_wpbkash_bkash' ),
 			),
 		);

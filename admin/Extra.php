@@ -1,11 +1,6 @@
 <?php
-/*
- * Settings class for Content Types settings
- *
- * @copyright   Copyright (c) 2020, Nugget Solutions, Inc
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since       1.0
- *
+/**
+ * @package WPbKash
  */
 
 namespace Themepaw\bKash\Admin;
@@ -24,7 +19,7 @@ class Extra {
 	protected $option_name = 'wpbkash_extra';
 	protected $options;
 
-    /**
+	/**
 	 * Call this method to get the singleton
 	 *
 	 * @return Extra|null
@@ -46,7 +41,8 @@ class Extra {
 	 */
 	public function init() {
 
-        Invoice::instance()->init();
+		Invoice::instance()->init();
+		Debug::instance()->init();
 
 		add_action( 'admin_init', array( $this, 'init_settings' ) );
 		$this->options = $this->default_settings();
@@ -61,7 +57,7 @@ class Extra {
 			'enable'    => '',
 			'type'      => 'parcentage',
 			'amount'    => 2,
-			'label'     => __( 'bKash Fee', 'wpbkash' ),
+			'label'     => esc_html__( 'bKash Fee', 'wpbkash' ),
 			'shipping'  => '',
 			'minimum'   => '',
 			'maximum'   => '',
@@ -89,69 +85,69 @@ class Extra {
 
 		add_settings_section(
 			$this->option_name . '_section',
-			__( 'Extra Settings', 'wpbkash' ),
+			esc_html__( 'Extra Settings', 'wpbkash' ),
 			array( $this, 'print_section_info' ),
 			$this->option_name . '_settings'
 		);
 		add_settings_field(
 			'enable',
-			__( 'Charge Enable', 'wpbkash' ),
+			esc_html__( 'Charge Enable', 'wpbkash' ),
 			array( $this, 'enable' ),
 			$this->option_name . '_settings',
 			$this->option_name . '_section'
 		);
 		add_settings_field(
 			'label',
-			__( 'Label', 'wpbkash' ),
+			esc_html__( 'Label', 'wpbkash' ),
 			array( $this, 'label' ),
 			$this->option_name . '_settings',
 			$this->option_name . '_section'
 		);
 		add_settings_field(
 			'type',
-			__( 'Charge Type', 'wpbkash' ),
+			esc_html__( 'Charge Type', 'wpbkash' ),
 			array( $this, 'type' ),
 			$this->option_name . '_settings',
 			$this->option_name . '_section'
 		);
 		add_settings_field(
 			'amount',
-			__( 'Charge Amount', 'wpbkash' ),
+			esc_html__( 'Charge Amount', 'wpbkash' ),
 			array( $this, 'amount' ),
 			$this->option_name . '_settings',
 			$this->option_name . '_section'
 		);
 		add_settings_field(
 			'shipping',
-			__( 'Include shipping costs', 'wpbkash' ),
+			esc_html__( 'Include shipping costs', 'wpbkash' ),
 			array( $this, 'shipping' ),
 			$this->option_name . '_settings',
 			$this->option_name . '_section'
 		);
 		add_settings_field(
 			'minimum',
-			__( 'Minimum cart amount', 'wpbkash' ),
+			esc_html__( 'Minimum cart amount', 'wpbkash' ),
 			array( $this, 'minimum' ),
 			$this->option_name . '_settings',
 			$this->option_name . '_section'
 		);
 		add_settings_field(
 			'maximum',
-			__( 'Maximum cart amount', 'wpbkash' ),
+			esc_html__( 'Maximum cart amount', 'wpbkash' ),
 			array( $this, 'maximum' ),
 			$this->option_name . '_settings',
 			$this->option_name . '_section'
 		);
 		add_settings_field(
 			'tax',
-			__( 'Apply Tax', 'wpbkash' ),
+			esc_html__( 'Apply Tax', 'wpbkash' ),
 			array( $this, 'tax' ),
 			$this->option_name . '_settings',
 			$this->option_name . '_section'
 		);
 		add_settings_field(
 			'tax_class',
-			__( 'Tax Class', 'wpbkash' ),
+			esc_html__( 'Tax Class', 'wpbkash' ),
 			array( $this, 'tax_class' ),
 			$this->option_name . '_settings',
 			$this->option_name . '_section'
@@ -217,6 +213,11 @@ class Extra {
 				submit_button( __( 'Submit', 'wpbkash' ) );
 			}
 
+			if ( $active_section === 'debug' ) {
+				Debug::instance()->add_settings_page();
+				submit_button( __( 'Submit', 'wpbkash' ) );
+			}
+
 			?>
 		</div>
 		<?php
@@ -224,8 +225,9 @@ class Extra {
 
 	public function get_sections() {
 		$sections = array(
-			'fee'     => __( 'bKash Fee', 'content-workflow' ),
-			'invoice' => __( 'Invoice Generator', 'content-workflow' ),
+			'fee'     => esc_html__( 'bKash Fee', 'content-workflow' ),
+			'invoice' => esc_html__( 'Invoice Generator', 'content-workflow' ),
+			'debug'   => esc_html__( 'Debug', 'content-workflow' ),
 		);
 
 		return $sections;
@@ -266,7 +268,7 @@ class Extra {
 	 * Print the Section text
 	 */
 	public function print_section_info() {
-		print __( 'bKash Fee settings for bKash Payment.', 'wpbkash' );
+		esc_html_e( 'bKash Fee settings for bKash Payment.', 'wpbkash' );
 	}
 
 	/**

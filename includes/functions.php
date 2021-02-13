@@ -219,7 +219,7 @@ function wpbkash_entry_update( $entry_id, $fields, $escapes ) {
  */
 function wpbkash_pay_default_template() {
 	/* translators: Do not translate Shortcode like [wpbkash-sitename], [wpbkash-paymenturl], [wpbkash-siteurl]; those are placeholders. */
-	$email_text = __(
+	$email_text = esc_html__(
 		'Dear [your-name],
 
 Please click on the following link to verify your email address and to proceed with the payment. Note that without the email verification and payment – your registration will not be completed for the event. You will need to verify your email address within 10 minutes.
@@ -248,7 +248,7 @@ Tel: +880 0000-00000,
  */
 function wpbkash_confirmation_default_template() {
 	/* translators: Do not translate Shortcode like [wpbkash-sitename], [wpbkash-paymenturl], [wpbkash-siteurl]; those are placeholders. */
-	$email_text = __(
+	$email_text = esc_html__(
 		'Dear [your-name],
 
 Congratulations!

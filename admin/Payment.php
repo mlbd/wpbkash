@@ -1,11 +1,6 @@
 <?php
-/*
- * Settings class for Content Types settings
- *
- * @copyright   Copyright (c) 2020, Nugget Solutions, Inc
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since       1.0
- *
+/**
+ * @package WPbKash
  */
 
 namespace Themepaw\bKash\Admin;
@@ -72,7 +67,7 @@ class Payment {
 		?>
 		<div class="wpbkash--search-wrapper">
 			<form id="wpbkash__search_form" action="wpbkash_search_paystatus">
-				<input type="text" name="wpbkash_payment_id" autocomplete="off" placeholder="<?php esc_html_e( 'bKash Payment ID', 'wpbkash' ); ?>">
+				<input type="text" name="wpbkash_payment_id" autocomplete="off" placeholder="<?php esc_attr_e( 'bKash Payment ID', 'wpbkash' ); ?>">
 				<button type="submit" class="wpbkash__submit_btn"><?php esc_html_e( 'Submit', 'wpbkash' ); ?></button>
 				<?php wp_nonce_field( 'wpbkash_nonce', '_trx_wpnonce' ); ?>
 			</form>

@@ -1,11 +1,6 @@
 <?php
-/*
- * Settings class for Content Types settings
- *
- * @copyright   Copyright (c) 2020, Nugget Solutions, Inc
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since       1.0
- *
+/**
+ * @package WPbKash
  */
 
 namespace Themepaw\bKash\Admin;
@@ -282,7 +277,7 @@ class Tools {
 		?>
 		<div class="wpbkash--search-wrapper">
 			<form id="wpbkash__search_form" action="wpbkash_search_transaction">
-				<input type="text" name="wpbkash_trx" autocomplete="off" placeholder="<?php esc_html_e( 'bKash Transaction Number', 'wpbkash' ); ?>">
+				<input type="text" name="wpbkash_trx" autocomplete="off" placeholder="<?php esc_attr_e( 'bKash Transaction Number', 'wpbkash' ); ?>">
 				<button type="submit" class="wpbkash__submit_btn"><?php esc_html_e( 'Submit', 'wpbkash' ); ?></button>
 				<?php wp_nonce_field( 'wpbkash_nonce', '_trx_wpnonce' ); ?>
 			</form>

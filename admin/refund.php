@@ -1,11 +1,6 @@
 <?php
-/*
- * Settings class for Content Types settings
- *
- * @copyright   Copyright (c) 2020, Nugget Solutions, Inc
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since       1.0
- *
+/**
+ * @package WPbKash
  */
 
 namespace Themepaw\bKash\Admin;
@@ -87,7 +82,7 @@ class Refund {
                     </div>
                     <div class="wpbkash--form-column">
                         <label for="skuForRefund"><?php esc_html_e( 'SKU (Name of items for refund)', 'wpbkash' ); ?></label>
-                        <textarea name="skuForRefund" id="skuForRefund" placeholder="<?php esc_html_e( 'Sku', 'wpbkash' ); ?>"></textarea>
+                        <textarea name="skuForRefund" id="skuForRefund" placeholder="<?php esc_attr_e( 'Sku', 'wpbkash' ); ?>"></textarea>
                     </div>
                     <div class="wpbkash--form-column">
                         <label for="reasonForRefund"><?php esc_html_e( 'Reason For Refund', 'wpbkash' ); ?></label>

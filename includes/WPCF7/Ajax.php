@@ -45,7 +45,7 @@ final class Ajax {
 		$entry = wpbkash_get_entry( $entry_id );
 
 		if ( ! is_object( $entry ) || ! isset( $entry ) || empty( $entry ) || ! isset( $entry->amount ) ) {
-			wp_send_json_error( __( 'Wrong or invalid entry ID', 'wpbkash' ) );
+			wp_send_json_error( esc_html__( 'Wrong or invalid entry ID', 'wpbkash' ) );
 			wp_die();
 		}
 
@@ -66,14 +66,14 @@ final class Ajax {
 		$entry_id  = ( isset( $_POST['entry_id'] ) && ! empty( $_POST['entry_id'] ) ) ? absint( $_POST['entry_id'] ) : '';
 
 		if ( empty( $paymentid ) ) {
-			wp_send_json_error( __( 'Invalid token or expired', 'wpbkash' ) );
+			wp_send_json_error( esc_html__( 'Invalid token or expired', 'wpbkash' ) );
 			wp_die();
 		}
 
 		$entry = wpbkash_get_entry( $entry_id );
 
 		if ( ! is_object( $entry ) || ! isset( $entry ) || empty( $entry ) ) {
-			wp_send_json_error( __( 'Wrong or invalid entry ID', 'wpbkash' ) );
+			wp_send_json_error( esc_html__( 'Wrong or invalid entry ID', 'wpbkash' ) );
 			wp_die();
 		}
 
@@ -85,7 +85,7 @@ final class Ajax {
 			wp_send_json_error(
 				array(
 					'order_url' => $entry_redirect_url,
-					'message'   => __(
+					'message'   => esc_html__(
 						'Something wen\'t wrong please try again.',
 						'wpbkash'
 					),
@@ -100,7 +100,7 @@ final class Ajax {
 			wp_send_json_error(
 				array(
 					'order_url' => $entry_redirect_url,
-					'message'   => __(
+					'message'   => esc_html__(
 						'We are currently experiencing problems trying to connect to this payment gateway. Sorry for the inconvenience.',
 						'wpbkash'
 					),

@@ -14,21 +14,21 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @since 1.0
  */
 
-class Invoice {
+class Debug {
 
-	protected $option_name = 'wpbkash_invoice';
+	protected $option_name = 'wpbkash_debug';
 	protected $options;
 
     /**
 	 * Call this method to get the singleton
 	 *
-	 * @return Invoice|null
+	 * @return Debug|null
 	 */
 	public static function instance() {
 
 		static $instance = null;
 		if ( is_null( $instance ) ) {
-			$instance = new Invoice();
+			$instance = new Debug();
 		}
 
 		return $instance;
@@ -50,8 +50,7 @@ class Invoice {
 	function default_settings() {
 		$saved    = (array) get_option( $this->option_name . '_fields' );
 		$defaults = array(
-			'namespace' => '',
-			'type'      => 'random',
+			'enable' => '',
 		);
 
 		$defaults = apply_filters( "{$this->option_name}_default_settings", $defaults );
@@ -74,25 +73,19 @@ class Invoice {
 
 		add_settings_section(
 			$this->option_name . '_section',
-			esc_html__( 'Invoice Settings', 'wpbkash' ),
+			esc_html__( 'Debug Settings', 'wpbkash' ),
 			array( $this, 'print_section_info' ),
 			$this->option_name . '_settings'
 		);
 
 		add_settings_field(
-			'namespace',
-			esc_html__( 'Invoice Namespace', 'wpbkash' ),
-			array( $this, 'namespace' ),
+			'enable',
+			esc_html__( 'Enable', 'wpbkash' ),
+			array( $this, 'enable' ),
 			$this->option_name . '_settings',
 			$this->option_name . '_section'
 		);
-		add_settings_field(
-			'type',
-			esc_html__( 'Invoice Type', 'wpbkash' ),
-			array( $this, 'type' ),
-			$this->option_name . '_settings',
-			$this->option_name . '_section'
-		);
+
 	}
 
 	/**
@@ -137,48 +130,36 @@ class Invoice {
 	}
 
 	/**
-	 * Get the bKash charge amount
+	 * Get the settings option array and print one of its values
 	 */
-	public function namespace() {
-		printf(
-			'<input type="text" size="50" id="namespace" name="wpbkash_invoice_fields[namespace]" value="%s" />',
-			isset( $this->options['namespace'] ) ? esc_attr( $this->options['namespace'] ) : ''
-		);
-	}
-
-	 /**
-	  * Get the bKash charge
-	  */
-	public function type() {
+	public function enable() {
 		?>
-		<select name="wpbkash_invoice_fields[type]" id="type">
-			<option value="random" 
+		<label for="enable">
+			<input type="checkbox" id="enable" name="wpbkash_debug_fields[enable]" value="1" 
 			<?php
-			if ( isset( $this->options['type'] ) && $this->options['type'] == 'random' ) {
-				echo 'selected="selected"';}
+			if ( isset( $this->options['enable'] ) && 1 == $this->options['enable'] ) {
+				echo 'checked="checked"';
+			}
 			?>
-			><?php esc_html_e( 'Random', 'wpbkash' ); ?></option>
-			<option value="post_id" 
-			<?php
-			if ( isset( $this->options['type'] ) && $this->options['type'] == 'post_id' ) {
-				echo 'selected="selected"';}
-			?>
-			><?php esc_html_e( 'Post ID', 'wpbkash' ); ?></option>
-			<option value="number" 
-			<?php
-			if ( isset( $this->options['type'] ) && $this->options['type'] == 'number' ) {
-				echo 'selected="selected"';}
-			?>
-			><?php esc_html_e( 'Custom ID Number', 'wpbkash' ); ?></option>
-		</select>
+			 />
+			<?php esc_html_e( 'Enable WPbkash Debugging', 'wpbkash' ); ?>
+		</label>
 		<?php
 	}
 
 	/**
 	 * Print the Section text
 	 */
-	public function print_section_info() {}
-
-
+	public function print_section_info() {
+        printf(
+            esc_html__( '%1$s %2$s', 'text-domain' ),
+            esc_html__( 'Before enable WPBkash debug. Enable', 'wpbkash' ),
+            sprintf(
+                '<a href="%s" target="_blank">%s</a>',
+                esc_url( 'https://wordpress.org/support/article/debugging-in-wordpress/' ),
+                esc_html__( 'WordPress Debug', 'text-domain' )
+            )
+        );
+    }
 
 }

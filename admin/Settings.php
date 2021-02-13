@@ -65,10 +65,10 @@ class Settings {
 
 		add_action( 'update_option_wpbkash_general_fields', array( $this, 'trigger_on_update' ), 10, 2 );
 
-		$this->tabs['general-settings'] = __( 'General', 'wpbkash' );
-		$this->tabs['extra-settings']   = __( 'Extra', 'wpbkash' );
-		$this->tabs['tools-settings']   = __( 'Tools', 'wpbkash' );
-		$this->tabs['docs-settings']    = __( 'Docs Generator', 'wpbkash' );
+		$this->tabs['general-settings'] = esc_html__( 'General', 'wpbkash' );
+		$this->tabs['extra-settings']   = esc_html__( 'Extra', 'wpbkash' );
+		$this->tabs['tools-settings']   = esc_html__( 'Tools', 'wpbkash' );
+		$this->tabs['docs-settings']    = esc_html__( 'Docs Generator', 'wpbkash' );
 
         General::instance()->init();
         Extra::instance()->init();
@@ -122,8 +122,8 @@ class Settings {
 	public function add_menu_item() {
 
 		$hook = add_menu_page(
-			__( 'WPbKash', 'wpbkash' ),
-			__( 'WPbKash', 'wpbkash' ),
+			esc_html__( 'WPbKash', 'wpbkash' ),
+			esc_html__( 'WPbKash', 'wpbkash' ),
 			'administrator',
 			'wpbkash',
 			array( $this, 'wpbkash_all_orders' ),
@@ -134,8 +134,8 @@ class Settings {
 
 		add_submenu_page(
 			'wpbkash',
-			__( 'All Entries', 'wpbkash' ),
-			__( 'All Entries', 'wpbkash' ),
+			esc_html__( 'All Entries', 'wpbkash' ),
+			esc_html__( 'All Entries', 'wpbkash' ),
 			'administrator',
 			'wpbkash'
 		);
@@ -148,8 +148,8 @@ class Settings {
          */
         // $refund = add_submenu_page(
         //     'wpbkash',
-		// 	__( 'Refund', 'wpbkash' ),
-		// 	__( 'Refund', 'wpbkash' ),
+		// 	esc_html__( 'Refund', 'wpbkash' ),
+		// 	esc_html__( 'Refund', 'wpbkash' ),
 		// 	'administrator',
 		// 	'wpbkash_refunds',
 		// 	array( $this, 'wpbkash_all_refunds' )
@@ -159,8 +159,8 @@ class Settings {
 
 		add_submenu_page(
 			'wpbkash',
-			__( 'WPbKash Settings', 'wpbkash' ),
-			__( 'Settings', 'wpbkash' ),
+			esc_html__( 'WPbKash Settings', 'wpbkash' ),
+			esc_html__( 'Settings', 'wpbkash' ),
 			'administrator',
 			'wpbkash_settings',
 			array( $this, 'settings_page' )
@@ -168,8 +168,8 @@ class Settings {
 
 		add_submenu_page(
 			'wpbkash',
-			__( 'API Reuqest Docs', 'wpbkash' ),
-			__( 'API Reuqest Docs', 'wpbkash' ),
+			esc_html__( 'API Reuqest Docs', 'wpbkash' ),
+			esc_html__( 'API Reuqest Docs', 'wpbkash' ),
 			'administrator',
 			'api-docs',
 			array( $this, 'doc_build' )
@@ -321,14 +321,14 @@ class Settings {
 
 		add_settings_section(
 			'docs_section_id',
-			__( 'WPbKash Docs', 'wpbkash' ),
+			esc_html__( 'WPbKash Docs', 'wpbkash' ),
 			array( $this, 'print_doc_info' ),
 			'wpbkash_docs'
 		);
 
 		add_settings_field(
 			'payment_id',
-			__( 'Payment ID', 'wpbkash' ),
+			esc_html__( 'Payment ID', 'wpbkash' ),
 			array( $this, 'payment_id' ),
 			'wpbkash_docs',
 			'docs_section_id'
@@ -336,7 +336,7 @@ class Settings {
 
 		add_settings_field(
 			'first_error_invoice',
-			__( 'First error invoice number', 'wpbkash' ),
+			esc_html__( 'First error invoice number', 'wpbkash' ),
 			array( $this, 'first_error_invoice' ),
 			'wpbkash_docs',
 			'docs_section_id'
@@ -344,7 +344,7 @@ class Settings {
 
 		add_settings_field(
 			'first_error_timestamp',
-			__( 'First error timestamp', 'wpbkash' ),
+			esc_html__( 'First error timestamp', 'wpbkash' ),
 			array( $this, 'first_error_timestamp' ),
 			'wpbkash_docs',
 			'docs_section_id'
@@ -352,7 +352,7 @@ class Settings {
 
 		add_settings_field(
 			'first_error_screenshot',
-			__( 'First error screenshot url', 'wpbkash' ),
+			esc_html__( 'First error screenshot url', 'wpbkash' ),
 			array( $this, 'first_error_screenshot' ),
 			'wpbkash_docs',
 			'docs_section_id'
@@ -360,7 +360,7 @@ class Settings {
 
 		add_settings_field(
 			'second_error_invoice',
-			__( 'Second error invoice number', 'wpbkash' ),
+			esc_html__( 'Second error invoice number', 'wpbkash' ),
 			array( $this, 'second_error_invoice' ),
 			'wpbkash_docs',
 			'docs_section_id'
@@ -368,7 +368,7 @@ class Settings {
 
 		add_settings_field(
 			'second_error_timestamp',
-			__( 'Second error timestamp', 'wpbkash' ),
+			esc_html__( 'Second error timestamp', 'wpbkash' ),
 			array( $this, 'second_error_timestamp' ),
 			'wpbkash_docs',
 			'docs_section_id'
@@ -376,7 +376,7 @@ class Settings {
 
 		add_settings_field(
 			'second_error_screenshot',
-			__( 'Second error screenshot url', 'wpbkash' ),
+			esc_html__( 'Second error screenshot url', 'wpbkash' ),
 			array( $this, 'second_error_screenshot' ),
 			'wpbkash_docs',
 			'docs_section_id'
@@ -456,26 +456,26 @@ class Settings {
 				?>
 			<div class="wpbkash--single-api-doc">
 				<div class="wpbkash--doc-line">
-					<h2><?php _e( 'API Ttitle', 'wpbkash' ); ?> :</h2>
+					<h2><?php esc_html_e( 'API Ttitle', 'wpbkash' ); ?> :</h2>
 					<h2><?php echo esc_html( $data['title'] ); ?></h2>
 				</div>
 				<div class="wpbkash--doc-line">
-					<h2><?php _e( 'API URL', 'wpbkash' ); ?> :</h2>
+					<h2><?php esc_html_e( 'API URL', 'wpbkash' ); ?> :</h2>
 					<h2 class="api-url"><?php echo esc_url( $data['url'] ); ?></h2>
 				</div>
 				<div class="wpbkash--doc-line">
-					<h2><?php _e( 'Request Body', 'wpbkash' ); ?> :</h2>
+					<h2><?php esc_html_e( 'Request Body', 'wpbkash' ); ?> :</h2>
 					<div class="wpbkash--doc-inner-line">
-						<h4><?php _e( 'Headers', 'wpbkash' ); ?> :</h4>
+						<h4><?php esc_html_e( 'Headers', 'wpbkash' ); ?> :</h4>
 						<pre><?php print_r( $this->pretty_print( $data['headers'] ) ); ?></pre>
 					</div>
 					<div class="wpbkash--doc-inner-line">
-						<h4><?php _e( 'Body params', 'wpbkash' ); ?> :</h4>
+						<h4><?php esc_html_e( 'Body params', 'wpbkash' ); ?> :</h4>
 						<pre><?php print_r( $this->pretty_print( $data['body'] ) ); ?></pre>
 					</div>
 				</div>
 				<div class="wpbkash--doc-line">
-					<h2><?php _e( 'API Response', 'wpbkash' ); ?> :</h2>
+					<h2><?php esc_html_e( 'API Response', 'wpbkash' ); ?> :</h2>
 					<pre><?php print_r( $this->pretty_print( $data['response'] ) ); ?></pre>
 				</div>
 			</div>
@@ -487,20 +487,20 @@ class Settings {
 			<h2><?php _e( 'Error Message Implementation', 'wpbkash' ); ?></h2>
 			<?php if ( ! empty( $first_invoice ) ) : ?>
 			<div class="wpbkash--single-error-info">
-				<div class="wpbkash--error-line"><strong><?php _e( 'Case#1', 'wpbkash' ); ?></strong></div>
-				<div class="wpbkash--error-line"><strong><?php _e( 'Invoice number:', 'wpbkash' ); ?></strong> <?php echo esc_html( $first_invoice ); ?></div>
-				<div class="wpbkash--error-line"><strong><?php _e( 'Time of Transaction:', 'wpbkash' ); ?></strong> <?php echo esc_html( $first_timestamp ); ?></div>
-				<div class="wpbkash--error-line"><strong><?php _e( 'Screenshot:', 'wpbkash' ); ?></strong> <img src="<?php echo esc_url( $first_screenshot ); ?>" alt=""></div>
+				<div class="wpbkash--error-line"><strong><?php esc_html_e( 'Case#1', 'wpbkash' ); ?></strong></div>
+				<div class="wpbkash--error-line"><strong><?php esc_html_e( 'Invoice number:', 'wpbkash' ); ?></strong> <?php echo esc_html( $first_invoice ); ?></div>
+				<div class="wpbkash--error-line"><strong><?php esc_html_e( 'Time of Transaction:', 'wpbkash' ); ?></strong> <?php echo esc_html( $first_timestamp ); ?></div>
+				<div class="wpbkash--error-line"><strong><?php esc_html_e( 'Screenshot:', 'wpbkash' ); ?></strong> <img src="<?php echo esc_url( $first_screenshot ); ?>" alt=""></div>
 			</div>
 				<?php
 			endif;
 			if ( ! empty( $second_invoice ) ) :
 				?>
 			<div class="wpbkash--single-error-info">
-				<div class="wpbkash--error-line"><strong><?php _e( 'Case#2', 'wpbkash' ); ?></strong></div>
-				<div class="wpbkash--error-line"><strong><?php _e( 'Invoice number:', 'wpbkash' ); ?></strong> <?php echo esc_html( $second_invoice ); ?></div>
-				<div class="wpbkash--error-line"><strong><?php _e( 'Time of Transaction:', 'wpbkash' ); ?></strong> <?php echo esc_html( $second_timestamp ); ?></div>
-				<div class="wpbkash--error-line"><strong><?php _e( 'Screenshot:', 'wpbkash' ); ?></strong> <img src="<?php echo esc_url( $second_screenshot ); ?>" alt=""></div>
+				<div class="wpbkash--error-line"><strong><?php esc_html_e( 'Case#2', 'wpbkash' ); ?></strong></div>
+				<div class="wpbkash--error-line"><strong><?php esc_html_e( 'Invoice number:', 'wpbkash' ); ?></strong> <?php echo esc_html( $second_invoice ); ?></div>
+				<div class="wpbkash--error-line"><strong><?php esc_html_e( 'Time of Transaction:', 'wpbkash' ); ?></strong> <?php echo esc_html( $second_timestamp ); ?></div>
+				<div class="wpbkash--error-line"><strong><?php esc_html_e( 'Screenshot:', 'wpbkash' ); ?></strong> <img src="<?php echo esc_url( $second_screenshot ); ?>" alt=""></div>
 			</div>
 			<?php endif; ?>
 		</div>
@@ -523,7 +523,7 @@ class Settings {
 				<?php
 				do_settings_sections( 'wpbkash_docs' );
 				wp_nonce_field( 'wpbkash_docs_nonce', 'wpbkash_security' );
-				submit_button( __( 'Submit', 'wpbkash' ), 'primary' );
+				submit_button( esc_html__( 'Submit', 'wpbkash' ), 'primary' );
 				?>
 			 </form>
 			 <form method="post">
@@ -531,7 +531,7 @@ class Settings {
 					$token = get_transient( 'wpbkash_token_key' );
 					wp_nonce_field( 'wpbkash_clear_token', 'wpbkash_grant' );
 					?>
-				 <p class="submit"><input type="submit" name="submit" id="submit" <?php echo ( empty( $token ) ) ? 'disabled="disabled"' : ''; ?> class="button button-primary" value="<?php _e( 'Clear Token Cache', 'wpbkash' ); ?>"></p>
+				 <p class="submit"><input type="submit" name="submit" id="submit" <?php echo ( empty( $token ) ) ? 'disabled="disabled"' : ''; ?> class="button button-primary" value="<?php esc_html_e( 'Clear Token Cache', 'wpbkash' ); ?>"></p>
 			 </form>
 		 </div>
 		<?php
@@ -583,7 +583,7 @@ class Settings {
 					Extra::instance()->show_settings();
 				} elseif ( $active_tab == 'general-settings' ) {
 					General::instance()->add_settings_page();
-					submit_button( __( 'Submit', 'wpbkash' ) );
+					submit_button( esc_html__( 'Submit', 'wpbkash' ) );
 				}
 
 				?>

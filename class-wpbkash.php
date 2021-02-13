@@ -81,7 +81,7 @@ final class WPbKash {
 	 * @return void
 	 */
 	private function __clone() {
-		wc_doing_it_wrong( __FUNCTION__, __( 'Nope' ), '1.0' );
+		wc_doing_it_wrong( __FUNCTION__, esc_html__( 'Nope', 'wpbkash' ), '1.0' );
 	}
 	/**
 	 * Private unserialize method to prevent unserializing of the *Singleton*
@@ -90,7 +90,7 @@ final class WPbKash {
 	 * @return void
 	 */
 	private function __wakeup() {
-		wc_doing_it_wrong( __FUNCTION__, __( 'Nope' ), '1.0' );
+		wc_doing_it_wrong( __FUNCTION__, esc_html__( 'Nope', 'wpbkash' ), '1.0' );
 	}
 
 	/**

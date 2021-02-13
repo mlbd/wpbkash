@@ -23,13 +23,13 @@ $entry    = wpbkash_get_entry( $entry_id );
 
 		if ( $updated == 'true' ) {
 			echo '<div id="message" class="notice notice-success is-dismissible">
-                <p><strong>' . __( 'Entry updated.', 'wpbkash' ) . '</strong></p>
-                <button type="button" class="notice-dismiss"><span class="screen-reader-text">' . __( 'Dismiss this notice.', 'wpbkash' ) . '</span></button>
+                <p><strong>' . esc_html__( 'Entry updated.', 'wpbkash' ) . '</strong></p>
+                <button type="button" class="notice-dismiss"><span class="screen-reader-text">' . esc_html__( 'Dismiss this notice.', 'wpbkash' ) . '</span></button>
             </div>';
 		} else {
 			echo '<div id="message" class="notice notice-error is-dismissible">
-                <p><strong>' . __( 'ERROR: Something went wrong try again later.', 'wpbkash' ) . '</strong></p>
-                <button type="button" class="notice-dismiss"><span class="screen-reader-text">' . __( 'Dismiss this notice.', 'wpbkash' ) . '</span></button>
+                <p><strong>' . esc_html__( 'ERROR: Something went wrong try again later.', 'wpbkash' ) . '</strong></p>
+                <button type="button" class="notice-dismiss"><span class="screen-reader-text">' . esc_html__( 'Dismiss this notice.', 'wpbkash' ) . '</span></button>
             </div>';
 		}
 	}
@@ -103,7 +103,7 @@ $entry    = wpbkash_get_entry( $entry_id );
 		<?php wp_nonce_field( 'wpbkash_entry_edit', 'wpbkash_edit_nonce' ); ?>
 		<input type="hidden" name="action" value="update_entry">
 		<input type="hidden" name="entry_id" value="<?php echo esc_attr( $entry_id ); ?>">
-		<?php submit_button( __( 'Update Entry', 'wpbkash' ), 'primary', 'update_entry' ); ?>
+		<?php submit_button( esc_html__( 'Update Entry', 'wpbkash' ), 'primary', 'update_entry' ); ?>
 	</form>
 
 

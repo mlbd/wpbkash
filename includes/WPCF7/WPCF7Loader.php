@@ -47,7 +47,7 @@ final class WPCF7Loader {
 				'home_url'  => esc_url( home_url() ),
 				'ajax_url'  => admin_url( 'admin-ajax.php' ),
 				'nonce'     => wp_create_nonce( 'wpbkash_nonce' ),
-				'i18n_error' => sprintf( __( 'Something wen\'t wrong, please try again or contact with <a href="%s">site admin</a>.', 'wpbkash' ), get_bloginfo('admin_email') ),
+				'i18n_error' => sprintf( esc_html__( 'Something wen\'t wrong, please try again or contact with <a href="%s">site admin</a>.', 'wpbkash' ), get_bloginfo('admin_email') ),
 				'scriptUrl' => "https://scripts.{$mode}.bka.sh/versions/{$bkash_version}/checkout/{$filename}.js",
 			]
 		);
@@ -78,23 +78,23 @@ final class WPCF7Loader {
 		$error = [];
 
 		if ( ! isset( $_GET['key'] ) || empty( $_GET['key'] ) ) {
-			$error['invalid_key'] = __( 'Key is invalid or expired', 'wpbkash' );
+			$error['invalid_key'] = esc_html__( 'Key is invalid or expired', 'wpbkash' );
 			return $error;
 		}
 
 		$token = $_GET['key'];
 		if ( $token !== $entry->key_token ) {
-			$error['invalid_key'] = __( 'Key is invalid or expired', 'wpbkash' );
+			$error['invalid_key'] = esc_html__( 'Key is invalid or expired', 'wpbkash' );
 			return $error;
 		}
 
 		if ( 'completed' === $entry->status ) {
-			$error['status_completed'] = __( 'Key is already used', 'wpbkash' );
+			$error['status_completed'] = esc_html__( 'Key is already used', 'wpbkash' );
 			return $error;
 		}
 
 		if ( ! empty( $entry->key_created ) && $this->is_expired( $entry->key_created ) ) {
-			$error['invalid_key'] = __( 'Key is invalid or expired', 'wpbkash' );
+			$error['invalid_key'] = esc_html__( 'Key is invalid or expired', 'wpbkash' );
 			return $error;
 		}
 
@@ -144,7 +144,7 @@ final class WPCF7Loader {
 					<div class="wpbkash--single-message wpbkash--message-<?php echo $key; ?>">
 						<h3>
 						<?php
-						printf( __('%1$s Please go back to the form and try again. <a href="%2$s">Back to Home</a>', 'wpbkash'),
+						printf( esc_html__('%1$s Please go back to the form and try again. <a href="%2$s">Back to Home</a>', 'wpbkash'),
 							esc_html( $msg ),
 							esc_url( home_url() )
 						);?>
@@ -160,7 +160,7 @@ final class WPCF7Loader {
 		<div id="wpbkash--frontend-form" class="wpbkash--frontend-main-contant" style="opacity: 0">
 			<div class="wpbkash--frontend-inner">
 				<div class="wpbkash--author-thumb">
-					<h2><?php echo ( isset( $entry->sender ) && isset($entry->sender[0]) ) ? esc_html( $entry->sender[0] ) : __('hi', 'wpbkash'); ?></h2>
+					<h2><?php echo ( isset( $entry->sender ) && isset($entry->sender[0]) ) ? esc_html( $entry->sender[0] ) : esc_html__('hi', 'wpbkash'); ?></h2>
 				</div>
 				<h4><?php echo esc_html( $entry->sender ); ?></h4>
 				<div class="wpbkash--frontend-price">

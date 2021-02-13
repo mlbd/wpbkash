@@ -100,7 +100,7 @@ final class Ajax {
 		if ( empty( $paymentid ) ) {
 			wp_send_json_error(
 				[
-					'message'  => __( 'Invalid token or expired', 'wpbkash' )
+					'message'  => esc_html__( 'Invalid token or expired', 'wpbkash' )
 				]
 			);
 			wp_die();
@@ -110,7 +110,7 @@ final class Ajax {
         $data = json_decode( $data );
 
 		if ( ! isset( $data ) || empty( $data ) || ! isset( $data->trxID ) || ! isset( $data->paymentID ) || ! isset( $data->transactionStatus ) || "Completed" != $data->transactionStatus ) {
-			$msg = isset( $data->errorMessage ) ? $data->errorMessage : __('Looks like the server is taking to long to respond, this can be caused by either poor connectivity or an error with our servers. Please try again in a while', 'wpbkash');
+			$msg = isset( $data->errorMessage ) ? $data->errorMessage : esc_html__('Looks like the server is taking to long to respond, this can be caused by either poor connectivity or an error with our servers. Please try again in a while', 'wpbkash');
 			wp_send_json_error(
 				[
 					'message'   => apply_filters('wpbkash_execute_err_msg', $msg)
@@ -125,7 +125,7 @@ final class Ajax {
 				$customer_id    = $order->get_user_id();
 				$data->user_id  = ( ! empty( $customer_id ) ) ? $customer_id : $order->get_billing_email();
 			} else {
-				wp_send_json_error( __( 'Wrong or invalid order ID', 'wpbkash' ) );
+				wp_send_json_error( esc_html__( 'Wrong or invalid order ID', 'wpbkash' ) );
 				wp_die();
 			}
 		} else {
@@ -134,7 +134,7 @@ final class Ajax {
 			if( empty( $customer_data ) ) {
 				wp_send_json_error(
 					[
-						'message'  => __( 'Something wen\'t wrong, please try again', 'wpbkash' )
+						'message'  => esc_html__( 'Something wen\'t wrong, please try again', 'wpbkash' )
 					]
 				);
 				wp_die();
@@ -160,7 +160,7 @@ final class Ajax {
 		
 		wp_send_json_error(
 			[
-				'message'  => __( 'Something wen\'t wrong, please try again', 'wpbkash' )
+				'message'  => esc_html__( 'Something wen\'t wrong, please try again', 'wpbkash' )
 			]
 		);
 		wp_die();

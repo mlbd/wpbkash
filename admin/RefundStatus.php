@@ -1,11 +1,6 @@
 <?php
-/*
- * Settings class for Content Types settings
- *
- * @copyright   Copyright (c) 2020, Nugget Solutions, Inc
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since       1.0
- *
+/**
+ * @package WPbKash
  */
 
 namespace Themepaw\bKash\Admin;

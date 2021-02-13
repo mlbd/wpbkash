@@ -121,16 +121,16 @@ class WCBkashGateway extends \WC_Payment_Gateway {
 				'home_url'  => esc_url( home_url() ),
 				'ajax_url'  => admin_url( 'admin-ajax.php' ),
                 'assets'    => WPBKASH_URL . 'assets/images/',
-                'btn_title'    => __( 'Ok', 'wpbkash' ),
+                'btn_title'    => esc_html__( 'Ok', 'wpbkash' ),
                 'modal_title'    => [
-                    'error' => __( 'Payment Failed!', 'wpbkash' ),
-                    'success' => __( 'Payment Successful!', 'wpbkash' ),
+                    'error' => esc_html__( 'Payment Failed!', 'wpbkash' ),
+                    'success' => esc_html__( 'Payment Successful!', 'wpbkash' ),
                 ],
-                'common_error' => __('Payment failed due to technical reasons', 'wpbkash'),
-                'success_msg' => __('Successfully payment completed. Wait your order is being processing..', 'wpbkash'),
-                'process_msg' => __('bKash Payment processing...', 'wpbkash'),
+                'common_error' => esc_html__('Payment failed due to technical reasons', 'wpbkash'),
+                'success_msg' => esc_html__('Successfully payment completed. Wait your order is being processing..', 'wpbkash'),
+                'process_msg' => esc_html__('bKash Payment processing...', 'wpbkash'),
 				'nonce'     => wp_create_nonce( 'wpbkash_nonce' ),
-				'bkash_error'     => __( 'WooCommerce bKash credentials are incorrect or missing any required field.', 'wpbkash' ),
+				'bkash_error'     => esc_html__( 'WooCommerce bKash credentials are incorrect or missing any required field.', 'wpbkash' ),
 				'scriptUrl' => "https://scripts.{$mode}.bka.sh/versions/{$bkash_version}/checkout/{$filename}.js"
 			]
 		);
@@ -171,37 +171,37 @@ class WCBkashGateway extends \WC_Payment_Gateway {
 	public function init_form_fields() {
 		$this->form_fields = [
 			'enabled'        => [
-				'title' => __( 'Enable/Disable', 'wpbkash' ),
+				'title' => esc_html__( 'Enable/Disable', 'wpbkash' ),
 				'type'  => 'checkbox',
-				'label' => __( 'Enable bKash Payment', 'wpbkash' ),
+				'label' => esc_html__( 'Enable bKash Payment', 'wpbkash' ),
 			],
 			'title'          => [
-				'title'   => __( 'Title', 'wpbkash' ),
+				'title'   => esc_html__( 'Title', 'wpbkash' ),
 				'type'    => 'text',
-				'default' => __( 'bKash Payment', 'wpbkash' ),
+				'default' => esc_html__( 'bKash Payment', 'wpbkash' ),
 			],
 			'description'    => [
-				'title'       => __( 'Description', 'wpbkash' ),
+				'title'       => esc_html__( 'Description', 'wpbkash' ),
 				'type'        => 'textarea',
-				'description' => __( 'Payment method description that the customer will see on your checkout.', 'wpbkash' ),
-				'default'     => __( 'Pay via bKash: you can pay with your personal bKash account. ', 'wpbkash' ),
+				'description' => esc_html__( 'Payment method description that the customer will see on your checkout.', 'wpbkash' ),
+				'default'     => esc_html__( 'Pay via bKash: you can pay with your personal bKash account. ', 'wpbkash' ),
 				'desc_tip'    => true,
 			],
 			'instructions'   => [
-				'title'       => __( 'Instructions', 'wpbkash' ),
+				'title'       => esc_html__( 'Instructions', 'wpbkash' ),
 				'type'        => 'textarea',
-				'description' => __( 'Instruction that will be added to the order email sent to customer if the payment was not completed.', 'wpbkash' ),
+				'description' => esc_html__( 'Instruction that will be added to the order email sent to customer if the payment was not completed.', 'wpbkash' ),
 				'desc_tip'    => true,
 			],
 			'payment_notice' => [
-				'title'       => __( 'Payment status notice', 'wpbkash' ),
+				'title'       => esc_html__( 'Payment status notice', 'wpbkash' ),
 				'type'        => 'textarea',
-				'description' => __( 'Thankyou page order payment notice if customer not yet paid.', 'wpbkash' ),
-				'default'     => __( 'Payment was not completed. You can still complete your order by paying from here: ', 'wpbkash' ),
+				'description' => esc_html__( 'Thankyou page order payment notice if customer not yet paid.', 'wpbkash' ),
+				'default'     => esc_html__( 'Payment was not completed. You can still complete your order by paying from here: ', 'wpbkash' ),
 				'desc_tip'    => true,
 			],
 			'settings'       => [
-				'title' => sprintf( __( 'Setup your bKash merchant credentials <a href="%s">here</a>', 'wpbkash' ), esc_url( admin_url( 'admin.php?page=wpbkash_settings' ) ) ),
+				'title' => sprintf( esc_html__( 'Setup your bKash merchant credentials <a href="%s">here</a>', 'wpbkash' ), esc_url( admin_url( 'admin.php?page=wpbkash_settings' ) ) ),
 				'type'  => 'title',
 			]
 		];
@@ -315,9 +315,9 @@ class WCBkashGateway extends \WC_Payment_Gateway {
 			wpbkash_entry_update( $entry_id, $fields, $escapes );
 
 			// some notes to customer (replace true with false to make it private)
-			$order->add_order_note( __('Hey, your order is paid via bKash!'), true );
+			$order->add_order_note( esc_html__('Hey, your order is paid via bKash!'), true );
 
-			$order->add_order_note( sprintf( __( 'bKash payment completed with TrxID#%1$s, amount: %2$s, merchant invoiceID:%2$s', 'wpbkash' ), $entry->trx_id, $order->get_total(), $invoice ) );
+			$order->add_order_note( sprintf( esc_html__( 'bKash payment completed with TrxID#%1$s, amount: %2$s, merchant invoiceID:%2$s', 'wpbkash' ), $entry->trx_id, $order->get_total(), $invoice ) );
 
 			// Empty cart
 			$woocommerce->cart->empty_cart();
@@ -329,7 +329,7 @@ class WCBkashGateway extends \WC_Payment_Gateway {
 			);
 
 		} else {
-			wc_add_notice( __('Something wen\'t wrong, Please try again.', 'wpbkash'), 'error' );
+			wc_add_notice( esc_html__('Something wen\'t wrong, Please try again.', 'wpbkash'), 'error' );
 			return;
 		}
 

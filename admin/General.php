@@ -1,11 +1,6 @@
 <?php
-/*
- * Settings class for Content Types settings
- *
- * @copyright   Copyright (c) 2020, Nugget Solutions, Inc
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since       1.0
- *
+/**
+ * @package WPbKash
  */
 
 namespace Themepaw\bKash\Admin;
@@ -82,14 +77,14 @@ class General {
 
 		add_settings_section(
 			$this->option_name . '_section',
-			__( 'General Settings', 'wpbkash' ),
+			esc_html__( 'General Settings', 'wpbkash' ),
 			array( $this, 'print_section_info' ),
 			$this->option_name . '_settings'
 		);
 
 		add_settings_field(
 			'testmode',
-			__( 'Test Mode', 'wpbkash' ),
+			esc_html__( 'Test Mode', 'wpbkash' ),
 			array( $this, 'testmode' ),
 			$this->option_name . '_settings',
 			$this->option_name . '_section'
@@ -97,28 +92,28 @@ class General {
 
 		add_settings_field(
 			'app_key',
-			__( 'App Key', 'wpbkash' ),
+			esc_html__( 'App Key', 'wpbkash' ),
 			array( $this, 'app_key' ),
 			$this->option_name . '_settings',
 			$this->option_name . '_section'
 		);
 		add_settings_field(
 			'app_secret',
-			__( 'App Secret', 'wpbkash' ),
+			esc_html__( 'App Secret', 'wpbkash' ),
 			array( $this, 'app_secret' ),
 			$this->option_name . '_settings',
 			$this->option_name . '_section'
 		);
 		add_settings_field(
 			'username',
-			__( 'Username', 'wpbkash' ),
+			esc_html__( 'Username', 'wpbkash' ),
 			array( $this, 'username' ),
 			$this->option_name . '_settings',
 			$this->option_name . '_section'
 		);
 		add_settings_field(
 			'password',
-			__( 'Password', 'wpbkash' ),
+			esc_html__( 'Password', 'wpbkash' ),
 			array( $this, 'password' ),
 			$this->option_name . '_settings',
 			$this->option_name . '_section'
@@ -178,13 +173,13 @@ class General {
 
 			echo '<div class="wpbkash--mode">';
 		if ( isset( $this->options['testmode'] ) && 1 == $this->options['testmode'] ) {
-			echo '<h4>' . __( 'Testmode is enabled', 'wpbkash' ) . '</h4>';
+			echo '<h4>' . esc_html__( 'Testmode is enabled', 'wpbkash' ) . '</h4>';
 		}
 		if ( isset( $this->options['app_key'] ) && isset( $this->options['app_secret'] ) ) {
 			if ( isset( $connection ) && ! empty( $connection ) && 'ok' === $connection ) {
-				echo '<div class="wpbkash--connection-signal">' . __( 'Connection Ok', 'wpbkash' ) . ' <span class="dashicons dashicons-yes-alt"></span></div>';
+				echo '<div class="wpbkash--connection-signal">' . esc_html__( 'Connection Ok', 'wpbkash' ) . ' <span class="dashicons dashicons-yes-alt"></span></div>';
 			} else {
-				echo '<div class="wpbkash--connection-signal connection-failed">' . __( 'Connection Failed', 'wpbkash' ) . ' <span class="dashicons dashicons-dismiss"></span></div>';
+				echo '<div class="wpbkash--connection-signal connection-failed">' . esc_html__( 'Connection Failed', 'wpbkash' ) . ' <span class="dashicons dashicons-dismiss"></span></div>';
 			}
 		}
 			echo '</div>';

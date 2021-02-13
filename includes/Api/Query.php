@@ -9,6 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use Themepaw\bKash\Invoice;
+use Themepaw\bKash\Utility;
 
 /**
  * Query class file.
@@ -100,6 +101,8 @@ class Query extends Base {
             $data['refresh_token'] = $old_token;
             $token_url = $this->get_api_url('refresh');
         }
+
+        Utility::instance()->logger( $data );
 
 		$api_response = $this->create_requrest( $token_url, $data, $headers );
 		if ( empty( $api_response ) ) {
@@ -233,6 +236,7 @@ class Query extends Base {
 		);
 
 		$api_response = wp_remote_retrieve_body( $response );
+        Utility::instance()->logger( $api_response );
 		$response     = json_decode( $api_response, true );
         if( 'ajax' !== $type ) {
             $this->api_request_docs( 3, 'Query Payment', $queryURL, $headers, array(), $response );
@@ -270,6 +274,7 @@ class Query extends Base {
 		);
 
 		$api_response = wp_remote_retrieve_body( $response );
+        Utility::instance()->logger( $api_response );
 		$response     = json_decode( $api_response, true );
 		$this->api_request_docs( 4, 'Search Transaction', $searchURL, $headers, array(), $response );
 		return $api_response;
@@ -326,6 +331,7 @@ class Query extends Base {
 			 Will result in $api_response being an array of data,
 			parsed from the JSON response of the API listed above */
 			$api_response = wp_remote_retrieve_body( $response );
+            Utility::instance()->logger( $api_response );
 			return $api_response;
 		}
 

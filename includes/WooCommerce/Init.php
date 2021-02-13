@@ -66,13 +66,13 @@ class Init {
 		}
 
 		if ( ! Query::instance()->is_settings_ok() ) {
-			throw new \Exception( __( 'WooCommerce bKash credentials are incorrect or missing any required field.', 'wpbkash' ) );
+			throw new \Exception( esc_html__( 'WooCommerce bKash credentials are incorrect or missing any required field.', 'wpbkash' ) );
 		}
 
 		$paymentData = Query::instance()->get_bkash_token();
 
 		if ( ! $paymentData ) {
-			throw new \Exception( sprintf( __( "bKash server response is incorrect, please contact with <a href='mailto:%s'>site admin</a> or try later.", 'wpbkash' ), esc_attr( get_option( 'admin_email' ) ) ) );
+			throw new \Exception( sprintf( esc_html__( "bKash server response is incorrect, please contact with <a href='mailto:%s'>site admin</a> or try later.", 'wpbkash' ), esc_attr( get_option( 'admin_email' ) ) ) );
 		}
 	}
 
