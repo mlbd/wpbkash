@@ -54,6 +54,9 @@ class Base {
 			case 'search':
 				$this->api_url = 'https://checkout.' . $this->get_mode() . '.bka.sh/v' . WPBKASH()->bkash_api_version . '/checkout/payment/search/';
 				break;
+			case 'refund':
+				$this->api_url = 'https://checkout.' . $this->get_mode() . '.bka.sh/v' . WPBKASH()->bkash_api_version . '/checkout/payment/refund';
+				break;
 			case 'refresh':
 				$this->api_url = 'https://checkout.' . $this->get_mode() . '.bka.sh/v' . WPBKASH()->bkash_api_version . '/checkout/token/refresh';
 				break;

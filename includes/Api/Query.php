@@ -209,7 +209,7 @@ class Query extends Base {
 	 *
 	 * @return mixed|string
 	 */
-	public function queryPayment( $paymentid ) {
+	public function queryPayment( $paymentid, $type = '' ) {
 
 		$paymentID = $paymentid;
 		$token     = $this->get_bkash_token();
@@ -234,7 +234,9 @@ class Query extends Base {
 
 		$api_response = wp_remote_retrieve_body( $response );
 		$response     = json_decode( $api_response, true );
-		$this->api_request_docs( 3, 'Query Payment', $queryURL, $headers, array(), $response );
+        if( 'ajax' !== $type ) {
+            $this->api_request_docs( 3, 'Query Payment', $queryURL, $headers, array(), $response );
+        }
 		return $api_response;
 	}
 
@@ -270,6 +272,28 @@ class Query extends Base {
 		$api_response = wp_remote_retrieve_body( $response );
 		$response     = json_decode( $api_response, true );
 		$this->api_request_docs( 4, 'Search Transaction', $searchURL, $headers, array(), $response );
+		return $api_response;
+	}
+	 
+    /**
+	  * Refund transaction
+	  *
+	  * @param array $data
+	  *
+	  * @return mixed|string
+	  */
+	public function refundTransaction( $data ) {
+
+		$token     = $this->get_bkash_token();
+		$app_key   = $this->get_option( 'app_key' );
+
+		$headers = array(
+			'Content-Type'  => 'application/json',
+			'authorization' => $token,
+			'x-app-key'     => $app_key,
+		);
+
+		$api_response = $this->create_requrest( $this->get_api_url( 'refund' ), $data, $headers );
 		return $api_response;
 	}
 

@@ -24,6 +24,21 @@ class Invoice {
 	protected $option_name = 'wpbkash_invoice';
 	protected $options;
 
+    /**
+	 * Call this method to get the singleton
+	 *
+	 * @return Invoice|null
+	 */
+	public static function instance() {
+
+		static $instance = null;
+		if ( is_null( $instance ) ) {
+			$instance = new Invoice();
+		}
+
+		return $instance;
+	}
+
 	/**
 	 * Set things up.
 	 *

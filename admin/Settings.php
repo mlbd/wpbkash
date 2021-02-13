@@ -70,14 +70,9 @@ class Settings {
 		$this->tabs['tools-settings']   = __( 'Tools', 'wpbkash' );
 		$this->tabs['docs-settings']    = __( 'Docs Generator', 'wpbkash' );
 
-		$this->general_settings = new General();
-		$this->general_settings->init();
-
-		$this->extra_settings = new Extra();
-		$this->extra_settings->init();
-
-		$this->tools_settings = new Tools();
-		$this->tools_settings->init();
+        General::instance()->init();
+        Extra::instance()->init();
+        Tools::instance()->init();
 
 	}
 
@@ -145,6 +140,23 @@ class Settings {
 			'wpbkash'
 		);
 
+        /**
+         * Not complete yet
+         * 
+         * Need to work with db base file
+         * So, can call entry, refund function seperatly.
+         */
+        // $refund = add_submenu_page(
+        //     'wpbkash',
+		// 	__( 'Refund', 'wpbkash' ),
+		// 	__( 'Refund', 'wpbkash' ),
+		// 	'administrator',
+		// 	'wpbkash_refunds',
+		// 	array( $this, 'wpbkash_all_refunds' )
+		// );
+
+		// add_action( "load-$refund", array( $this, 'refund_page' ) );
+
 		add_submenu_page(
 			'wpbkash',
 			__( 'WPbKash Settings', 'wpbkash' ),
@@ -181,6 +193,18 @@ class Settings {
 		$this->tabe_obj = new EntryTable();
 	}
 
+    function refund_page() {
+        $option = 'per_page';
+		$args   = array(
+			'label'   => 'Refund',
+			'default' => 10,
+			'option'  => 'refund_per_page',
+		);
+		add_screen_option( $option, $args );
+
+		$this->tabe_obj = new RefundTable();
+    }
+
 	/**
 	 * Display a custom menu page
 	 */
@@ -189,15 +213,15 @@ class Settings {
 
 		switch ( $entry ) {
 			case 'view':
-				$template = dirname( __FILE__ ) . '/pages/view.php';
+				$template = dirname( __FILE__ ) . '/pages/entry/view.php';
 				break;
 
 			case 'edit':
-				$template = dirname( __FILE__ ) . '/pages/edit.php';
+				$template = dirname( __FILE__ ) . '/pages/entry/edit.php';
 				break;
 
 			default:
-				$template = dirname( __FILE__ ) . '/pages/list.php';
+				$template = dirname( __FILE__ ) . '/pages/entry/list.php';
 				break;
 		}
 
@@ -205,6 +229,28 @@ class Settings {
 			include $template;
 		}
 	}
+
+    public function wpbkash_all_refunds() {
+        $refund = ( isset( $_GET['action'] ) && ! empty( $_GET['action'] ) ) ? sanitize_key( $_GET['action'] ) : '';
+
+		switch ( $refund ) {
+			case 'view':
+				$template = dirname( __FILE__ ) . '/pages/refund/view.php';
+				break;
+
+			case 'edit':
+				$template = dirname( __FILE__ ) . '/pages/refund/edit.php';
+				break;
+
+			default:
+				$template = dirname( __FILE__ ) . '/pages/refund/list.php';
+				break;
+		}
+
+		if ( file_exists( $template ) ) {
+			include $template;
+		}
+    }
 
 	public function form_handler() {
 
@@ -526,7 +572,7 @@ class Settings {
 				echo '</h2>';
 
 			if ( $active_tab == 'tools-settings' ) {
-				$this->tools_settings->show_settings();
+				Tools::instance()->show_settings();
 
 			}
 			?>
@@ -534,9 +580,9 @@ class Settings {
 				<?php
 
 				if ( $active_tab == 'extra-settings' ) {
-					$this->extra_settings->show_settings();
+					Extra::instance()->show_settings();
 				} elseif ( $active_tab == 'general-settings' ) {
-					$this->general_settings->add_settings_page();
+					General::instance()->add_settings_page();
 					submit_button( __( 'Submit', 'wpbkash' ) );
 				}
 

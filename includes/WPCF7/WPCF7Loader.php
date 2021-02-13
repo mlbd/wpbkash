@@ -33,7 +33,7 @@ final class WPCF7Loader {
 			return;
 		}
 
-		$mode          = Query::instance()->get_mode();
+		$mode          = Query::instance()->get_mode;
 		$bkash_version = WPBKASH()->bkash_api_version;
 		$filename      = ( 'sandbox' === $mode ) ? 'bKash-checkout-sandbox' : 'bKash-checkout';
 

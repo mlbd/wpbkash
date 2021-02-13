@@ -24,6 +24,21 @@ class General {
 	protected $option_name = 'wpbkash_general';
 	protected $options;
 
+    /**
+	 * Call this method to get the singleton
+	 *
+	 * @return General|null
+	 */
+	public static function instance() {
+
+		static $instance = null;
+		if ( is_null( $instance ) ) {
+			$instance = new General();
+		}
+
+		return $instance;
+	}
+
 	/**
 	 * Set things up.
 	 *

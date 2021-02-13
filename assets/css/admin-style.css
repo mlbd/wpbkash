@@ -87,11 +87,12 @@ table.view-entry-table>tbody>:nth-child(odd) {
     text-shadow: 0 0 4px rgba(0,0,0,0.5) !important;
 } */
 
-form#wpbkash__search_trx {
+form#wpbkash__search_form {
     width: 400px;
     position: relative;
 }
-form#wpbkash__search_trx input {
+form#wpbkash__search_form input,
+form#wpbkash__search_form textarea {
     width: 100%;
     padding: 5px 15px;
 }
@@ -108,7 +109,7 @@ button.wpbkash__submit_btn {
     min-height: 1em;
     cursor: pointer;
 }
-form#wpbkash__search_trx {
+form#wpbkash__search_form {
     width: 400px;
     position: relative;
     margin-top: 20px;
@@ -156,7 +157,11 @@ button.wpbkash__submit_btn.loading {
     -ms-transition: all 0s linear,opacity .1s ease;
     -o-transition: all 0s linear,opacity .1s ease;
 }
-
+button.wpbkash__submit_btn:focus,
+button.wpbkash__submit_btn:hover,
+button.wpbkash__submit_btn:active {
+    outline: none;
+}
 .wpbkash--single-trx {
     border: 1px solid #ccd0d4;
     box-shadow: 0 1px 1px rgb(0 0 0 / 4%);
@@ -188,6 +193,27 @@ button.wpbkash__submit_btn.loading {
     background-color: #ca4a1f;
     color: #FFF;
     text-align: center;
+}
+
+.wpbkash--form-column {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+    align-items: center;
+}
+
+.wpbkash--form-column label {
+    flex: 0 0 27%;
+    margin-right: 3%;
+}
+
+.wpbkash--form-column input,
+.wpbkash--form-column textarea {
+    max-width: 70%;
+    flex: 0 0 calc(70% - 10px);
 }
 
 

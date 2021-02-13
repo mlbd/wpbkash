@@ -26,16 +26,19 @@ class Tools {
 	protected $option_name = 'wpbkash_tools';
 	protected $options;
 
-	/**
-	 * Initialize
+    /**
+	 * Call this method to get the singleton
+	 *
+	 * @return Tools|null
 	 */
-	function __construct() {
+	public static function instance() {
 
-		add_action( 'wp_ajax_wpbkash_search_transaction', array( $this, 'wpbkash_search_transaction' ) );
+		static $instance = null;
+		if ( is_null( $instance ) ) {
+			$instance = new Tools();
+		}
 
-		$this->coming_settings = new Coming();
-		$this->coming_settings->init();
-
+		return $instance;
 	}
 
 	/**
@@ -46,29 +49,40 @@ class Tools {
 	public function init() {
 		add_action( 'admin_init', array( $this, 'init_settings' ) );
 
+        add_action( 'wp_ajax_wpbkash_search_transaction', array( $this, 'wpbkash_search_transaction' ) );
+		add_action( 'wp_ajax_wpbkash_search_paystatus', array( $this, 'wpbkash_search_paystatus' ) );
+		add_action( 'wp_ajax_wpbkash_refund', array( $this, 'wpbkash_refund' ) );
+		add_action( 'wp_ajax_wpbkash_refund_status', array( $this, 'wpbkash_refund_status' ) );
+
+		RefundStatus::instance()->init();
+		Refund::instance()->init();
+		Payment::instance()->init();
 	}
 
 	public function init_settings() {
 
 		add_settings_section(
 			$this->option_name . '_section',
-			__( 'Search bKash Transaction', 'wpbkash' ),
+			esc_html__( 'Search bKash Transaction', 'wpbkash' ),
 			array( $this, 'print_section_info' ),
 			$this->option_name . '_settings'
 		);
 
 	}
 
+	/**
+	 * Search transaction request.
+	 */
 	public function wpbkash_search_transaction() {
 
-		check_ajax_referer( 'wpbkash_nonce', 'nonce' );
+		check_ajax_referer( 'wpbkash_nonce', '_trx_wpnonce' );
 
-		$trx = ! empty( $_POST['trx'] ) ? sanitize_text_field( $_POST['trx'] ) : '';
+		$trx = ! empty( $_POST['wpbkash_trx'] ) ? sanitize_text_field( $_POST['wpbkash_trx'] ) : '';
 
 		if ( empty( $trx ) ) {
 			wp_send_json_error(
 				array(
-					'message' => __( 'Transaction number can\'t be empty.', 'wpbkash' ),
+					'message' => esc_html__( 'Transaction number can\'t be empty.', 'wpbkash' ),
 				)
 			);
 			wp_die();
@@ -85,13 +99,177 @@ class Tools {
 			wp_die();
 		}
 
-		$msg = isset( $transaction->errorMessage ) ? $transaction->errorMessage : __( 'Something wen\'t wrong, please try again', 'wpbkash' );
+		$msg = isset( $transaction->errorMessage ) ? $transaction->errorMessage : esc_html__( 'Something wen\'t wrong, please try again', 'wpbkash' );
 		wp_send_json_error(
 			array(
 				'message' => $msg,
 			)
 		);
 		wp_die();
+	}
+
+	/**
+	 * Check payment status ajax request.
+	 */
+	public function wpbkash_search_paystatus() {
+
+		check_ajax_referer( 'wpbkash_nonce', '_trx_wpnonce' );
+
+		$paymentID = ! empty( $_POST['wpbkash_payment_id'] ) ? sanitize_text_field( $_POST['wpbkash_payment_id'] ) : '';
+
+		if ( empty( $paymentID ) ) {
+			wp_send_json_error(
+				array(
+					'message' => esc_html__( 'payment ID can\'t be empty.', 'wpbkash' ),
+				)
+			);
+			wp_die();
+		}
+
+		$transaction = Query::instance()->queryPayment( $paymentID );
+		$transaction = \json_decode( $transaction );
+		if ( isset( $transaction ) && ! empty( $transaction ) && isset( $transaction->transactionStatus ) ) {
+			wp_send_json_success(
+				array(
+					'transaction' => $transaction,
+				)
+			);
+			wp_die();
+		}
+
+		$msg = isset( $transaction->errorMessage ) ? $transaction->errorMessage : esc_html__( 'Something wen\'t wrong, please try again', 'wpbkash' );
+		wp_send_json_error(
+			array(
+				'message' => $msg,
+			)
+		);
+		wp_die();
+	}
+
+	/**
+	 * Refund ajax request
+	 */
+	public function wpbkash_refund() {
+
+		check_ajax_referer( 'wpbkash_nonce', '_trx_wpnonce' );
+
+		$trxID     = ! empty( $_POST['transactionIdForRefund'] ) ? sanitize_text_field( $_POST['transactionIdForRefund'] ) : '';
+		$paymentID = ! empty( $_POST['paymentIdForRefund'] ) ? sanitize_text_field( $_POST['paymentIdForRefund'] ) : '';
+		$amount    = ! empty( $_POST['amountForRefund'] ) ? sanitize_text_field( $_POST['amountForRefund'] ) : '';
+		$sku       = ! empty( $_POST['skuForRefund'] ) ? sanitize_text_field( $_POST['skuForRefund'] ) : '';
+		$reason    = ! empty( $_POST['reasonForRefund'] ) ? sanitize_text_field( $_POST['reasonForRefund'] ) : '';
+
+		if ( empty( $trxID ) || empty( $paymentID ) || empty( $amount ) ) {
+			wp_send_json_error(
+				array(
+					'message' => esc_html__( 'payment ID, Transaction ID or Amount can\'t be empty.', 'wpbkash' ),
+				)
+			);
+			wp_die();
+		}
+
+		$transaction_data = array(
+			'trxID'     => $trxID,
+			'paymentID' => $paymentID,
+			'amount'    => $amount,
+			'sku'       => $sku,
+			'reason'    => $reason,
+		);
+
+		$transaction = Query::instance()->refundTransaction( $transaction_data );
+		$transaction = \json_decode( $transaction );
+		if ( isset( $transaction ) && ! empty( $transaction ) && isset( $transaction->transactionStatus ) ) {
+			$this->insert_refund( $transaction );
+			wp_send_json_success(
+				array(
+					'transaction' => $transaction,
+				)
+			);
+			wp_die();
+		}
+
+		$msg = isset( $transaction->errorMessage ) ? $transaction->errorMessage : esc_html__( 'Something wen\'t wrong, please try again', 'wpbkash' );
+		wp_send_json_error(
+			array(
+				'message' => $msg,
+			)
+		);
+		wp_die();
+	}
+	
+    public function wpbkash_refund_status() {
+
+		check_ajax_referer( 'wpbkash_nonce', '_trx_wpnonce' );
+
+		$trxID     = ! empty( $_POST['transactionIdForRefund'] ) ? sanitize_text_field( $_POST['transactionIdForRefund'] ) : '';
+		$paymentID = ! empty( $_POST['paymentIdForRefund'] ) ? sanitize_text_field( $_POST['paymentIdForRefund'] ) : '';
+
+		if ( empty( $trxID ) || empty( $paymentID ) ) {
+			wp_send_json_error(
+				array(
+					'message' => esc_html__( 'payment ID and Transaction ID can\'t be empty.', 'wpbkash' ),
+				)
+			);
+			wp_die();
+		}
+
+		$transaction_data = array(
+			'trxID'     => $trxID,
+			'paymentID' => $paymentID
+		);
+
+		$transaction = Query::instance()->refundTransaction( $transaction_data );
+		$transaction = \json_decode( $transaction );
+		if ( isset( $transaction ) && ! empty( $transaction ) && isset( $transaction->transactionStatus ) ) {
+			$this->insert_refund( $transaction );
+			wp_send_json_success(
+				array(
+					'transaction' => $transaction,
+				)
+			);
+			wp_die();
+		}
+
+		$msg = isset( $transaction->errorMessage ) ? $transaction->errorMessage : esc_html__( 'Something wen\'t wrong, please try again', 'wpbkash' );
+		wp_send_json_error(
+			array(
+				'message' => $msg,
+			)
+		);
+		wp_die();
+	}
+
+	/**
+	 * Insert refund transaction
+	 *
+	 * @param object $response
+	 */
+	function insert_refund( $response ) {
+		global $wpdb;
+
+		$wpdb->insert(
+			$wpdb->prefix . 'wpbkash_refund',
+			array(
+				'originaltrxid'     => sanitize_key( $response->originalTrxID ),
+				'refundtrxid'       => sanitize_key( $response->refundTrxID ),
+				'currency'          => sanitize_key( $response->currency ),
+				'transactionstatus' => sanitize_text_field( $response->transactionStatus ),
+				'completedtime'     => sanitize_text_field( $response->completedTime ),
+				'amount'            => absint( $response->amount ),
+				'charge'            => absint( $response->charge ),
+			),
+			array(
+				'%s',
+				'%s',
+				'%s',
+				'%s',
+				'%s',
+				'%d',
+				'%s',
+			)
+		);
+
+		return $wpdb->insert_id;
 	}
 
 	/**
@@ -103,7 +281,7 @@ class Tools {
 		do_settings_sections( $this->option_name . '_settings' );
 		?>
 		<div class="wpbkash--search-wrapper">
-			<form id="wpbkash__search_trx" action="wpbkash_search_transaction">
+			<form id="wpbkash__search_form" action="wpbkash_search_transaction">
 				<input type="text" name="wpbkash_trx" autocomplete="off" placeholder="<?php esc_html_e( 'bKash Transaction Number', 'wpbkash' ); ?>">
 				<button type="submit" class="wpbkash__submit_btn"><?php esc_html_e( 'Submit', 'wpbkash' ); ?></button>
 				<?php wp_nonce_field( 'wpbkash_nonce', '_trx_wpnonce' ); ?>
@@ -134,7 +312,7 @@ class Tools {
 						<a class="<?php echo $class; ?>"
 						href="
 						<?php
-						echo admin_url( 'admin.php?page=wpbkash_settings&tab=tools-settings' ) .
+						echo esc_url( admin_url( 'admin.php?page=wpbkash_settings&tab=tools-settings' ) ) .
 											'&section='
 											. $section_key;
 						?>
@@ -156,12 +334,16 @@ class Tools {
 				$this->add_settings_page();
 			}
 
+			if ( $active_section === 'payment' ) {
+                Payment::instance()->add_settings_page();
+			}
+
 			if ( $active_section === 'refund' ) {
-				$this->coming_settings->add_settings_page();
+                Refund::instance()->add_settings_page();
 			}
 
 			if ( $active_section === 'refund-status' ) {
-				$this->coming_settings->add_settings_page();
+                RefundStatus::instance()->add_settings_page();
 			}
 
 			?>
@@ -171,9 +353,10 @@ class Tools {
 
 	public function get_sections() {
 		$sections = array(
-			'search'        => __( 'Search TrxID', 'content-workflow' ),
-			'refund'        => __( 'Refund', 'content-workflow' ),
-			'refund-status' => __( 'Refund Status', 'content-workflow' ),
+			'search'        => esc_html__( 'Search TrxID', 'content-workflow' ),
+			'payment'       => esc_html__( 'Payment Status', 'content-workflow' ),
+			'refund'        => esc_html__( 'Refund', 'content-workflow' ),
+			'refund-status' => esc_html__( 'Refund Status', 'content-workflow' ),
 		);
 
 		return $sections;

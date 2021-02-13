@@ -14,26 +14,28 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit();
 }
 
+use Themepaw\bKash\Api\Query;
+
 /*
  * Extra Settings Class
  * @since 1.0
  */
 
-class Coming {
+class Payment {
 
-	protected $option_name = 'wpbkash_coming';
+	protected $option_name = 'wpbkash_payment';
 	protected $options;
 
     /**
 	 * Call this method to get the singleton
 	 *
-	 * @return Coming|null
+	 * @return Payment|null
 	 */
 	public static function instance() {
 
 		static $instance = null;
 		if ( is_null( $instance ) ) {
-			$instance = new Coming();
+			$instance = new Payment();
 		}
 
 		return $instance;
@@ -46,25 +48,18 @@ class Coming {
 	 */
 	public function init() {
 		add_action( 'admin_init', array( $this, 'init_settings' ) );
+
 	}
 
 	public function init_settings() {
-		if ( false == get_option( $this->option_name . '_fields' ) ) {
-			update_option( $this->option_name, '' );
-		}
-
-		register_setting(
-			$this->option_name . '_group', // Option group
-			$this->option_name . '_fields', // Option name
-			array( $this, 'validate_and_save' ) // Sanitize
-		);
 
 		add_settings_section(
 			$this->option_name . '_section',
-			__( 'Coming Soon', 'wpbkash' ),
+			esc_html__( 'Payment Status', 'wpbkash' ),
 			array( $this, 'print_section_info' ),
 			$this->option_name . '_settings'
 		);
+
 	}
 
 	/**
@@ -73,15 +68,23 @@ class Coming {
 	 * @since 1.0
 	 */
 	public function add_settings_page() {
-		settings_fields( $this->option_name . '_group' );
 		do_settings_sections( $this->option_name . '_settings' );
+		?>
+		<div class="wpbkash--search-wrapper">
+			<form id="wpbkash__search_form" action="wpbkash_search_paystatus">
+				<input type="text" name="wpbkash_payment_id" autocomplete="off" placeholder="<?php esc_html_e( 'bKash Payment ID', 'wpbkash' ); ?>">
+				<button type="submit" class="wpbkash__submit_btn"><?php esc_html_e( 'Submit', 'wpbkash' ); ?></button>
+				<?php wp_nonce_field( 'wpbkash_nonce', '_trx_wpnonce' ); ?>
+			</form>
+			<div class="wpbkash--search-result"></div>
+		</div>
+		<?php
 	}
 
 	/**
 	 * Print the Section text
 	 */
 	public function print_section_info() {}
-
 
 
 }

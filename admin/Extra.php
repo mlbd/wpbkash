@@ -24,6 +24,21 @@ class Extra {
 	protected $option_name = 'wpbkash_extra';
 	protected $options;
 
+    /**
+	 * Call this method to get the singleton
+	 *
+	 * @return Extra|null
+	 */
+	public static function instance() {
+
+		static $instance = null;
+		if ( is_null( $instance ) ) {
+			$instance = new Extra();
+		}
+
+		return $instance;
+	}
+
 	/**
 	 * Set things up.
 	 *
@@ -31,8 +46,7 @@ class Extra {
 	 */
 	public function init() {
 
-		$this->invoice_settings = new Invoice();
-		$this->invoice_settings->init();
+        Invoice::instance()->init();
 
 		add_action( 'admin_init', array( $this, 'init_settings' ) );
 		$this->options = $this->default_settings();
@@ -199,7 +213,7 @@ class Extra {
 			}
 
 			if ( $active_section === 'invoice' ) {
-				$this->invoice_settings->add_settings_page();
+				Invoice::instance()->add_settings_page();
 				submit_button( __( 'Submit', 'wpbkash' ) );
 			}
 
