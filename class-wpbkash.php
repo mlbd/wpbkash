@@ -3,7 +3,7 @@
  * Plugin Name:       bKash WordPress Payment
  * Plugin URI:        https://wordpress.org/plugins/wpbkash/
  * Description:       bKash payment gateway integration for WordPress
- * Version:           0.1.7
+ * Version:           0.1.8
  * Author:            themepaw
  * Author URI:        https://themepaw.com
  * Text Domain:       wpbkash
@@ -29,7 +29,7 @@ final class WPbKash {
 	 *
 	 * @var string
 	 */
-	const VERSION = '0.1.7';
+	const VERSION = '0.1.8';
 
 	/**
 	 * Plugin Database Table.
