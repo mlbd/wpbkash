@@ -15,7 +15,6 @@ use Themepaw\bKash\Api\Query;
  * Extra Settings Class
  * @since 1.0
  */
-
 class Tools {
 
 	protected $option_name = 'wpbkash_tools';
