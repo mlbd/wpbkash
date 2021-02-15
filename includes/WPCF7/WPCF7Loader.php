@@ -8,6 +8,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+use Themepaw\bKash\Api\Query;
+
 /**
  * WPCF7 setup and config for bkash payment
  */
@@ -33,7 +35,7 @@ final class WPCF7Loader {
 			return;
 		}
 
-		$mode          = Query::instance()->get_mode;
+		$mode          = Query::instance()->get_mode();
 		$bkash_version = WPBKASH()->bkash_api_version;
 		$filename      = ( 'sandbox' === $mode ) ? 'bKash-checkout-sandbox' : 'bKash-checkout';
 

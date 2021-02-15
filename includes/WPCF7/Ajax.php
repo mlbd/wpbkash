@@ -9,6 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use Themepaw\bKash\Api\Query;
+use Themepaw\bKash\Invoice;
 
 /**
  * Ajax class file.
