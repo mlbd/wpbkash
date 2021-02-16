@@ -38,7 +38,7 @@ class Utility {
 	 */
 	public function logger( $message ) {
         $option = get_option( 'wpbkash_debug_fields' );
-		if ( ! empty( $option ) && isset( $option['debug'] ) && '1' ==  $option['debug'] && WP_DEBUG === true ) {
+		if ( ! empty( $option ) && isset( $option['enable'] ) && '1' ==  $option['enable'] && WP_DEBUG === true ) {
 			if ( is_array( $message ) || is_object( $message ) ) {
 				error_log( print_r( $message, true ) );
 			} else {

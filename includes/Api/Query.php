@@ -279,6 +279,47 @@ class Query extends Base {
 		$this->api_request_docs( 4, 'Search Transaction', $searchURL, $headers, array(), $response );
 		return $api_response;
 	}
+
+    /**
+	 * Get the final amount after apply bkash fee/charge
+	 *
+	 * @since 1.3.0
+	 *
+	 * @param $amount
+	 *
+	 * @return float|int
+	 */
+	public function get_amount( $cart_total ) {
+
+        $extra_fields = get_option( 'wpbkash_extra_fields' );
+        if ( ! isset( $extra_fields['enable'] ) || '1' != $extra_fields['enable'] ) {
+            return $cart_total;
+        }
+
+        $type   = $extra_fields['type'];
+        $fee_amount = (float) $extra_fields['amount'];
+
+        $minimum   = $extra_fields['minimum'] ? $extra_fields['minimum'] : '';
+        $maximum   = $extra_fields['maximum'] ? $extra_fields['maximum'] : '';
+
+        if ( ! empty( $minimum ) && $cart_total < $minimum ) {
+            return $cart_total;
+        }
+
+        if ( ! empty( $maximum ) && $cart_total > $maximum ) {
+            return $cart_total;
+        }
+
+		if ( $type == 'percentage' ) {
+            $cart_total = $cart_total + $cart_total * ( $fee_amount / 100 );
+        } else {
+            $cart_total = $cart_total + $fee_amount;
+        }
+
+		$cart_total = number_format($cart_total, 2, '.', '');
+
+		return $cart_total;
+	}
 	 
     /**
 	  * Refund transaction

@@ -201,7 +201,15 @@ class WCBkashGateway extends \WC_Payment_Gateway {
 				'desc_tip'    => true,
 			],
 			'settings'       => [
-				'title' => sprintf( esc_html__( 'Setup your bKash merchant credentials <a href="%s">here</a>', 'wpbkash' ), esc_url( admin_url( 'admin.php?page=wpbkash_settings' ) ) ),
+				'title' => sprintf(
+                    esc_html__( '%1$s %2$s', 'wpbkash' ),
+                    esc_html__( 'Setup your bKash merchant credentials', 'wpbkash' ),
+                    sprintf(
+                        '<a href="%s">%s</a>',
+                        esc_url( admin_url( 'admin.php?page=wpbkash_settings' ) ),
+                        esc_html__( 'here', 'wpbkash' )
+                    )
+                ),
 				'type'  => 'title',
 			]
 		];

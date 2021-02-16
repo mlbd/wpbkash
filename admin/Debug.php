@@ -152,12 +152,12 @@ class Debug {
 	 */
 	public function print_section_info() {
         printf(
-            esc_html__( '%1$s %2$s', 'text-domain' ),
+            esc_html__( '%1$s %2$s', 'wpbkash' ),
             esc_html__( 'Before enable WPBkash debug. Enable', 'wpbkash' ),
             sprintf(
                 '<a href="%s" target="_blank">%s</a>',
                 esc_url( 'https://wordpress.org/support/article/debugging-in-wordpress/' ),
-                esc_html__( 'WordPress Debug', 'text-domain' )
+                esc_html__( 'WordPress Debug', 'wpbkash' )
             )
         );
     }

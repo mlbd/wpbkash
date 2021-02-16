@@ -63,20 +63,11 @@ jQuery(
                 $self.addClass('wpbkash_processing');
 
                 if (!wpbkash.scriptloaded) {
-                    $.when(
-                        $.getScript(wpbkash_params.scriptUrl),
-                        $.Deferred(
-                            function (deferred) {
-                                $(deferred.resolve);
-                            }
-                        )
-                    ).done(
-                        function () {
-                            window.$ = jQuery.noConflict(true);
-                            wpbkash.scriptloaded = true;
-                            wpbkash.wcbkashInit($self);
-                        }
-                    );
+                    window.$ = $.noConflict();
+                    $.getScript( wpbkash_params.scriptUrl, function( data, textStatus, jqxhr ) {
+                        wpbkash.scriptloaded = true;
+                        wpbkash.wcbkashInit($self);
+                    });
                 } else {
                     wpbkash.wcbkashInit($self);
                 }
@@ -84,8 +75,6 @@ jQuery(
                 return false;
             },
             wcbkashInit: function ($self, redirect = '') {
-
-                wpbkash.getAccesToken($self);
 
                 var paymentRequest,
                 paymentID;
@@ -116,6 +105,8 @@ jQuery(
                         }
                     }
                 );
+
+                wpbkash.getTrigger();
 
             },
             getOrderID: function ($param) {
@@ -213,13 +204,8 @@ jQuery(
                     }
                 );
             },
-            getAccesToken: function ($param) {
-                $('#bKash_button').removeAttr('disabled');
-                setTimeout(
-                    function () {
-                        $('#bKash_button').trigger('click');
-                    }, 1000
-                )
+            getTrigger: function () {
+                $('#bKash_button').trigger('click');
             },
             formSubmit: function (e) {
                 if (wpbkash.checkIfbKashSelected()) {

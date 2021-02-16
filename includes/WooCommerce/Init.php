@@ -26,29 +26,28 @@ class Init {
 	 */
 	public function __construct() {
 		new Ajax();
-		add_action( 'admin_notices', [ $this, 'admin_notice' ] );
-		add_action( 'woocommerce_checkout_create_order', [ $this, 'before_order_save' ], 10, 2 );
-		add_action('woocommerce_after_checkout_validation', [ $this, 'add_bkash_valid_error' ], 10, 2 );
-        add_action( 'init', [ $this, 'get_bkash_token' ] );
+		add_action( 'admin_notices', array( $this, 'admin_notice' ) );
+		add_action( 'woocommerce_checkout_create_order', array( $this, 'before_order_save' ), 10, 2 );
+		add_action( 'woocommerce_after_checkout_validation', array( $this, 'add_bkash_valid_error' ), 10, 2 );
+		add_action( 'init', array( $this, 'get_bkash_token' ) );
 	}
 
-    public function get_bkash_token() {
-        $is_ok = Query::instance()->is_settings_ok();
+	public function get_bkash_token() {
+		$is_ok = Query::instance()->is_settings_ok();
 		if ( $is_ok ) {
 			Query::instance()->get_bkash_token();
 		}
-    }
+	}
 
 	public function add_bkash_valid_error( $fields, $errors ) {
-		if ( 
-			!isset( $_POST['woocommerce_pay'] ) &&
+		if ( ! isset( $_POST['woocommerce_pay'] ) &&
 			isset( $_POST['payment_method'] ) &&
 			'wpbkash' === $_POST['payment_method'] &&
-			isset( $_POST['bkash_checkout_valid'] ) && 
-			$_POST['bkash_checkout_valid'] == "1"
+			isset( $_POST['bkash_checkout_valid'] ) &&
+			$_POST['bkash_checkout_valid'] == '1'
 		) {
 			$errors->add( 'bkash_payment_required', '<strong>bKash Payment Required</strong>', array( 'id' => 'bkash-payment-required' ) );
-		} 
+		}
 	}
 
 	/**
@@ -72,7 +71,18 @@ class Init {
 		$paymentData = Query::instance()->get_bkash_token();
 
 		if ( ! $paymentData ) {
-			throw new \Exception( sprintf( esc_html__( "bKash server response is incorrect, please contact with <a href='mailto:%s'>site admin</a> or try later.", 'wpbkash' ), esc_attr( get_option( 'admin_email' ) ) ) );
+			throw new \Exception(
+				sprintf(
+					esc_html__( '%1$s %2$s %3$s', 'wpbkash' ),
+					esc_html__( 'bKash server response is incorrect, please contact with', 'wpbkash' ),
+					sprintf(
+						'<a href="mailto:%s" target="_blank">%s</a>',
+						esc_attr( get_option( 'admin_email' ) ),
+						esc_html__( 'site admin', 'wpbkash' )
+					),
+					esc_html__( 'Or try later', 'wpbkash' )
+				)
+			);
 		}
 	}
 
@@ -82,7 +92,7 @@ class Init {
 	 * @return void
 	 */
 	public function admin_notice() {
-		$wcoption = get_option( 'woocommerce_wpbkash_settings', [] );
+		$wcoption = get_option( 'woocommerce_wpbkash_settings', array() );
 		if ( ! isset( $wcoption ) || ! isset( $wcoption['enabled'] ) || 'yes' !== $wcoption['enabled'] ) {
 			return;
 		}
@@ -94,11 +104,11 @@ class Init {
 			<?php
 		}
 		if ( ! Query::instance()->is_settings_ok() ) {
-		?>
+			?>
 		<div class="notice notice-warning wpbkash--notice is-dismissible">
 			<p><?php esc_html_e( 'WooCommerce bKash Payment is enabled, but Merchant credentials are missing', 'wpbkash' ); ?></p>
 		</div>
-		<?php
+			<?php
 		}
 	}
 }

@@ -325,3 +325,45 @@ function wpbkash_bkash_fees( $cart_object ) {
 	$cart_object->add_fee( $label, $amount, $taxable, $tax_class );
 }
 add_action( 'woocommerce_cart_calculate_fees', 'wpbkash_bkash_fees' );
+
+
+ /**
+	 * Get the final amount after apply bkash fee/charge
+	 *
+	 * @since 1.3.0
+	 *
+	 * @param $amount
+	 *
+	 * @return float|int
+	 */
+	function wpbkash_get_amount( $cart_total ) {
+
+        $extra_fields = get_option( 'wpbkash_extra_fields' );
+        if ( ! isset( $extra_fields['enable'] ) || '1' != $extra_fields['enable'] ) {
+            return $cart_total;
+        }
+
+        $type   = $extra_fields['type'];
+        $fee_amount = (float) $extra_fields['amount'];
+
+        $minimum   = $extra_fields['minimum'] ? $extra_fields['minimum'] : '';
+        $maximum   = $extra_fields['maximum'] ? $extra_fields['maximum'] : '';
+
+        if ( ! empty( $minimum ) && $cart_total < $minimum ) {
+            return $cart_total;
+        }
+
+        if ( ! empty( $maximum ) && $cart_total > $maximum ) {
+            return $cart_total;
+        }
+
+		if ( $type == 'percentage' ) {
+            $cart_total = $cart_total + $cart_total * ( $fee_amount / 100 );
+        } else {
+            $cart_total = $cart_total + $fee_amount;
+        }
+
+		$cart_total = number_format($cart_total, 2, '.', '');
+
+		return $cart_total;
+	}

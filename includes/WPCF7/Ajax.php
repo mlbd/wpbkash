@@ -281,7 +281,7 @@ final class Ajax {
 
 		$subject = sprintf(
 			/* translators: Privacy data request confirmed notification email subject. 1: Site title, 2: Name of the confirmed action. */
-			__( '[%1$s] Payment Confirmed' ),
+			esc_html__( '[%1$s] Payment Confirmed' ),
 			$email_data['sitename']
 		);
 

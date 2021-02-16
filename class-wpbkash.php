@@ -80,7 +80,7 @@ final class WPbKash {
 	 *
 	 * @return void
 	 */
-	private function __clone() {
+	public function __clone() {
 		wc_doing_it_wrong( __FUNCTION__, esc_html__( 'Nope', 'wpbkash' ), '1.0' );
 	}
 	/**
@@ -89,7 +89,7 @@ final class WPbKash {
 	 *
 	 * @return void
 	 */
-	private function __wakeup() {
+	public function __wakeup() {
 		wc_doing_it_wrong( __FUNCTION__, esc_html__( 'Nope', 'wpbkash' ), '1.0' );
 	}
 

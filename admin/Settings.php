@@ -9,6 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use Themepaw\bKash\Api\Query;
+use Themepaw\bKash\Utility;
 
 /**
  * WPbkash Settings class
@@ -401,6 +402,7 @@ class Settings {
 			}
 
 			$token = Query::instance()->check_bkash_token();
+            Utility::instance()->logger( $token );
 			if ( ! empty( $token ) && false !== $token ) {
 				update_option( 'wpbkash__connection', 'ok' );
 			} else {

@@ -8,6 +8,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+use Themepaw\bKash\Api\Query;
+
 /**
  * WPCF7bKash - Setup WPCF7
  *
@@ -52,7 +54,7 @@ final class WPCF7bKash {
 			'user_email'         => $recipient,
 			'sitename'           => wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES ),
 			'siteurl'            => esc_url( home_url() ),
-			'amount'             => $wpbkash_amount,
+			'amount'             => Query::instance()->get_amount( $wpbkash_amount ),
 			'form_id'            => $form_id,
 			'admin_email'        => get_option( 'admin_email' ),
 		);
@@ -140,7 +142,7 @@ final class WPCF7bKash {
 
 		$subject = sprintf(
 			/* translators: Privacy data request confirmed notification email subject. 1: Site title, 2: Name of the confirmed action. */
-			__( '[%1$s] Verify your email' ),
+			esc_html__( '[%1$s] Verify your email' ),
 			$email_data['sitename']
 		);
 

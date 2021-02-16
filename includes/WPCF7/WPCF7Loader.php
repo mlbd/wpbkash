@@ -49,7 +49,15 @@ final class WPCF7Loader {
 				'home_url'  => esc_url( home_url() ),
 				'ajax_url'  => admin_url( 'admin-ajax.php' ),
 				'nonce'     => wp_create_nonce( 'wpbkash_nonce' ),
-				'i18n_error' => sprintf( esc_html__( 'Something wen\'t wrong, please try again or contact with <a href="%s">site admin</a>.', 'wpbkash' ), get_bloginfo('admin_email') ),
+                'i18n_error' => sprintf(
+                    esc_html__( '%1$s %2$s', 'wpbkash' ),
+                    esc_html__( 'Something wen\'t wrong, please try again or contact with', 'wpbkash' ),
+                    sprintf(
+                        '<a href="%s" target="_blank">%s</a>',
+                        esc_attr( get_bloginfo('admin_email') ),
+                        esc_html__( 'site admin', 'wpbkash' )
+                    )
+                ),
 				'scriptUrl' => "https://scripts.{$mode}.bka.sh/versions/{$bkash_version}/checkout/{$filename}.js",
 			]
 		);
@@ -146,10 +154,17 @@ final class WPCF7Loader {
 					<div class="wpbkash--single-message wpbkash--message-<?php echo $key; ?>">
 						<h3>
 						<?php
-						printf( esc_html__('%1$s Please go back to the form and try again. <a href="%2$s">Back to Home</a>', 'wpbkash'),
-							esc_html( $msg ),
-							esc_url( home_url() )
-						);?>
+                        printf(
+                            esc_html__( '%1$s %2$s %3$s', 'wpbkash' ),
+                            esc_html( $msg ),
+                            esc_html__( 'lease go back to the form and try again.', 'wpbkash' ),
+                            sprintf(
+                                '<a href="%s">%s</a>',
+                                esc_url( home_url() ),
+                                esc_html__( 'Back to Home', 'wpbkash' )
+                            )
+                        )
+                        ?>
 						</h3>
 					</div>
 				<?php endforeach; ?>
