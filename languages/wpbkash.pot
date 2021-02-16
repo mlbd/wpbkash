@@ -1,475 +1,587 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
 #, fuzzy
 msgid ""
 msgstr ""
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
-"Project-Id-Version: WPbKash - bKash for WooCommerce\n"
-"POT-Creation-Date: 2020-03-07 12:50+0600\n"
-"PO-Revision-Date: 2020-03-07 12:49+0600\n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-02-16 13:16+0600\n"
+"PO-Revision-Date: 2021-02-16 13:16+0600\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
-"X-Poedit-Basepath: ..\n"
-"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
-"X-Poedit-WPHeader: wpbkash.php\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
-"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
-"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
-"X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SearchPathExcluded-0: *.js\n"
+"Plural-Forms: \n"
+"X-Generator: Eazy Po 0.9.5.3\n"
+
+#: class-wpbkash.php:84 class-wpbkash.php:93
+msgid "Nope"
+msgstr ""
+
+#: class-wpbkash.php:130 admin/Settings.php:164
+msgid "Settings"
+msgstr ""
+
+#: admin/Coming.php:59
+msgid "Coming Soon"
+msgstr ""
+
+#: admin/Debug.php:76
+msgid "Debug Settings"
+msgstr ""
+
+#: admin/Debug.php:83 admin/Extra.php:287 admin/Extra.php:385
+msgid "Enable"
+msgstr ""
+
+#: admin/Debug.php:145
+msgid "Enable WPbkash Debugging"
+msgstr ""
+
+#: admin/Debug.php:155 includes/WooCommerce/WCBkashGateway.php:205
+#: includes/WPCF7/WPCF7Loader.php:53
+#, php-format
+msgid "%1$s %2$s"
+msgstr ""
+
+#: admin/Debug.php:156
+msgid "Before enable WPBkash debug. Enable"
+msgstr ""
+
+#: admin/Debug.php:160
+msgid "WordPress Debug"
+msgstr ""
 
 #: admin/EntryTable.php:42
 msgid "No entry found"
 msgstr ""
 
-#: admin/EntryTable.php:86
+#: admin/EntryTable.php:89 admin/RefundTable.php:89
 msgid "Entry"
 msgstr ""
 
-#: admin/EntryTable.php:87 admin/pages/edit.php:84 admin/pages/view.php:58
+#: admin/EntryTable.php:90 admin/Refund.php:76 admin/Refund.php:77
+#: admin/RefundStatus.php:76 admin/RefundStatus.php:77
+#: admin/RefundTable.php:90 admin/pages/entry/edit.php:61
+#: admin/pages/entry/view.php:57
 msgid "Transaction ID"
 msgstr ""
 
-#: admin/EntryTable.php:88 admin/pages/view.php:90
+#: admin/EntryTable.php:91 admin/RefundTable.php:91
+msgid "Invoice No"
+msgstr ""
+
+#: admin/EntryTable.php:92 admin/RefundTable.php:92
+#: admin/pages/entry/view.php:97
 msgid "Sender"
 msgstr ""
 
-#: admin/EntryTable.php:89
+#: admin/EntryTable.php:93 admin/RefundTable.php:93
 msgid "Status"
 msgstr ""
 
-#: admin/EntryTable.php:90
+#: admin/EntryTable.php:94 admin/RefundTable.php:94
 msgid "Type"
 msgstr ""
 
-#: admin/EntryTable.php:91
+#: admin/EntryTable.php:95 admin/RefundTable.php:95
 msgid "Date"
 msgstr ""
 
-#: admin/EntryTable.php:117 admin/EntryTable.php:129
+#: admin/EntryTable.php:121 admin/EntryTable.php:133 admin/RefundTable.php:121
+#: admin/RefundTable.php:133
 msgid "Edit this item"
 msgstr ""
 
-#: admin/EntryTable.php:118 admin/pages/view.php:51
+#: admin/EntryTable.php:122 admin/RefundTable.php:122
+#: admin/pages/entry/view.php:50
 msgid "Edit"
 msgstr ""
 
-#: admin/EntryTable.php:130 admin/pages/edit.php:77
+#: admin/EntryTable.php:134 admin/RefundTable.php:134
+#: admin/pages/entry/edit.php:54
 msgid "View"
 msgstr ""
 
-#: admin/EntryTable.php:141
+#: admin/EntryTable.php:145 admin/RefundTable.php:145
 msgid "Delete this item"
 msgstr ""
 
-#: admin/EntryTable.php:142 admin/EntryTable.php:232
+#: admin/EntryTable.php:146 admin/EntryTable.php:236 admin/RefundTable.php:146
+#: admin/RefundTable.php:236
 msgid "Delete"
 msgstr ""
 
-#: admin/EntryTable.php:166
+#: admin/EntryTable.php:170 admin/RefundTable.php:170
 msgid "Created at"
 msgstr ""
 
-#. translators: %s: Human-readable time difference.
-#: admin/EntryTable.php:174
+#: admin/EntryTable.php:178 admin/RefundTable.php:178
 #, php-format
 msgid "%s ago"
 msgstr ""
 
-#: admin/EntryTable.php:201
+#: admin/EntryTable.php:205 admin/RefundTable.php:205
 msgid "Username: "
 msgstr ""
 
-#: admin/EntryTable.php:269
+#: admin/EntryTable.php:250
+msgid "Nope! Security check failed!"
+msgstr ""
+
+#: admin/EntryTable.php:273 admin/RefundTable.php:273
 #, php-format
 msgid "%s Entry has been deleted."
 msgstr ""
 
-#: admin/EntryTable.php:287
+#: admin/EntryTable.php:291 admin/RefundTable.php:291
 msgid "All"
 msgstr ""
 
-#: admin/EntryTable.php:288 admin/pages/edit.php:97 admin/pages/edit.php:117
+#: admin/EntryTable.php:292 admin/RefundTable.php:292
+#: admin/pages/entry/edit.php:74 admin/pages/entry/edit.php:94
 msgid "Completed"
 msgstr ""
 
-#: admin/EntryTable.php:289 admin/pages/edit.php:96 admin/pages/edit.php:116
+#: admin/EntryTable.php:293 admin/RefundTable.php:293
+#: admin/pages/entry/edit.php:73 admin/pages/entry/edit.php:93
 msgid "Pending"
 msgstr ""
 
-#: admin/EntryTable.php:290 admin/pages/edit.php:98 admin/pages/edit.php:118
+#: admin/EntryTable.php:294 admin/RefundTable.php:294
+#: admin/pages/entry/edit.php:75 admin/pages/entry/edit.php:95
 msgid "Failed"
 msgstr ""
 
-#: admin/Settings.php:78 admin/Settings.php:79
-msgid "WPbKash"
+#: admin/Extra.php:60 admin/Extra.php:228
+msgid "bKash Fee"
 msgstr ""
 
-#: admin/Settings.php:90 admin/Settings.php:91
-msgid "All Entries"
+#: admin/Extra.php:88
+msgid "Extra Settings"
 msgstr ""
 
-#: admin/Settings.php:98 admin/Settings.php:164
-msgid "WPbKash Settings"
+#: admin/Extra.php:94
+msgid "Charge Enable"
 msgstr ""
 
-#: admin/Settings.php:99
-msgid "Settings"
+#: admin/Extra.php:101
+msgid "Label"
 msgstr ""
 
-#: admin/Settings.php:171
+#: admin/Extra.php:108
+msgid "Charge Type"
+msgstr ""
+
+#: admin/Extra.php:115
+msgid "Charge Amount"
+msgstr ""
+
+#: admin/Extra.php:122
+msgid "Include shipping costs"
+msgstr ""
+
+#: admin/Extra.php:129
+msgid "Minimum cart amount"
+msgstr ""
+
+#: admin/Extra.php:136
+msgid "Maximum cart amount"
+msgstr ""
+
+#: admin/Extra.php:143
+msgid "Apply Tax"
+msgstr ""
+
+#: admin/Extra.php:150
+msgid "Tax Class"
+msgstr ""
+
+#: admin/Extra.php:208 admin/Extra.php:213 admin/Extra.php:218
+#: admin/Payment.php:71 admin/RefundStatus.php:80 admin/Settings.php:528
+#: admin/Settings.php:588 admin/Tools.php:280
+msgid "Submit"
+msgstr ""
+
+#: admin/Extra.php:229
+msgid "Invoice Generator"
+msgstr ""
+
+#: admin/Extra.php:230
+msgid "Debug"
+msgstr ""
+
+#: admin/Extra.php:271
+msgid "bKash Fee settings for bKash Payment."
+msgstr ""
+
+#: admin/Extra.php:303
+msgid "Percentage"
+msgstr ""
+
+#: admin/Extra.php:309
+msgid "Fixed"
+msgstr ""
+
+#: admin/Extra.php:347
+msgid ""
+"Calculate the cart total based on the combined cost of products and shipping"
+msgstr ""
+
+#: admin/Extra.php:401
+msgid "Standard"
+msgstr ""
+
+#: admin/General.php:80
+msgid "General Settings"
+msgstr ""
+
+#: admin/General.php:87
 msgid "Test Mode"
 msgstr ""
 
-#: admin/Settings.php:179
+#: admin/General.php:95
 msgid "App Key"
 msgstr ""
 
-#: admin/Settings.php:186
+#: admin/General.php:102
 msgid "App Secret"
 msgstr ""
 
-#: admin/Settings.php:193
+#: admin/General.php:109
 msgid "Username"
 msgstr ""
 
-#: admin/Settings.php:200
+#: admin/General.php:116
 msgid "Password"
 msgstr ""
 
-#: admin/Settings.php:266
+#: admin/General.php:172
 msgid "Setup your bKash app info and credentials."
 msgstr ""
 
-#: admin/Settings.php:270
+#: admin/General.php:176
 msgid "Testmode is enabled"
 msgstr ""
 
-#: admin/Settings.php:288
+#: admin/General.php:180
+msgid "Connection Ok"
+msgstr ""
+
+#: admin/General.php:182
+msgid "Connection Failed"
+msgstr ""
+
+#: admin/General.php:201
 msgid "Enable Test Mode"
 msgstr ""
 
-#: admin/pages/edit.php:18 admin/pages/view.php:19
+#: admin/Invoice.php:77
+msgid "Invoice Settings"
+msgstr ""
+
+#: admin/Invoice.php:84
+msgid "Invoice Namespace"
+msgstr ""
+
+#: admin/Invoice.php:91
+msgid "Invoice Type"
+msgstr ""
+
+#: admin/Invoice.php:160
+msgid "Random"
+msgstr ""
+
+#: admin/Invoice.php:166
+msgid "Post ID"
+msgstr ""
+
+#: admin/Invoice.php:172
+msgid "Custom ID Number"
+msgstr ""
+
+#: admin/Payment.php:53 admin/Tools.php:351
+msgid "Payment Status"
+msgstr ""
+
+#: admin/Payment.php:70
+msgid "bKash Payment ID"
+msgstr ""
+
+#: admin/Refund.php:53 admin/Refund.php:92 admin/Tools.php:352
+msgid "Refund"
+msgstr ""
+
+#: admin/Refund.php:72 admin/Refund.php:73 admin/RefundStatus.php:72
+#: admin/RefundStatus.php:73 admin/Settings.php:332
+#: admin/pages/entry/view.php:129
+msgid "Payment ID"
+msgstr ""
+
+#: admin/Refund.php:80 admin/Refund.php:81
+msgid "Refund Amount"
+msgstr ""
+
+#: admin/Refund.php:84
+msgid "SKU (Name of items for refund)"
+msgstr ""
+
+#: admin/Refund.php:85
+msgid "Sku"
+msgstr ""
+
+#: admin/Refund.php:88
+msgid "Reason For Refund"
+msgstr ""
+
+#: admin/Refund.php:89
+msgid "Reason"
+msgstr ""
+
+#: admin/RefundStatus.php:53 admin/Tools.php:353
+msgid "Refund Status"
+msgstr ""
+
+#: admin/RefundTable.php:42
+msgid "No refund found"
+msgstr ""
+
+#: admin/Settings.php:69
+msgid "General"
+msgstr ""
+
+#: admin/Settings.php:70
+msgid "Extra"
+msgstr ""
+
+#: admin/Settings.php:71
+msgid "Tools"
+msgstr ""
+
+#: admin/Settings.php:72
+msgid "Docs Generator"
+msgstr ""
+
+#: admin/Settings.php:126 admin/Settings.php:127
+msgid "WPbKash"
+msgstr ""
+
+#: admin/Settings.php:138 admin/Settings.php:139
+msgid "All Entries"
+msgstr ""
+
+#: admin/Settings.php:163 admin/Settings.php:560
+msgid "WPbKash Settings"
+msgstr ""
+
+#: admin/Settings.php:172 admin/Settings.php:173
+msgid "API Reuqest Docs"
+msgstr ""
+
+#: admin/Settings.php:325
+msgid "WPbKash Docs"
+msgstr ""
+
+#: admin/Settings.php:340
+msgid "First error invoice number"
+msgstr ""
+
+#: admin/Settings.php:348
+msgid "First error timestamp"
+msgstr ""
+
+#: admin/Settings.php:356
+msgid "First error screenshot url"
+msgstr ""
+
+#: admin/Settings.php:364
+msgid "Second error invoice number"
+msgstr ""
+
+#: admin/Settings.php:372
+msgid "Second error timestamp"
+msgstr ""
+
+#: admin/Settings.php:380
+msgid "Second error screenshot url"
+msgstr ""
+
+#: admin/Settings.php:451
+msgid "Request empty. Try to use bKash checkout first."
+msgstr ""
+
+#: admin/Settings.php:461
+msgid "API Ttitle"
+msgstr ""
+
+#: admin/Settings.php:465
+msgid "API URL"
+msgstr ""
+
+#: admin/Settings.php:469
+msgid "Request Body"
+msgstr ""
+
+#: admin/Settings.php:471
+msgid "Headers"
+msgstr ""
+
+#: admin/Settings.php:475
+msgid "Body params"
+msgstr ""
+
+#: admin/Settings.php:480
+msgid "API Response"
+msgstr ""
+
+#: admin/Settings.php:489
+msgid "Error Message Implementation"
+msgstr ""
+
+#: admin/Settings.php:492
+msgid "Case#1"
+msgstr ""
+
+#: admin/Settings.php:493 admin/Settings.php:503
+msgid "Invoice number:"
+msgstr ""
+
+#: admin/Settings.php:494 admin/Settings.php:504
+msgid "Time of Transaction:"
+msgstr ""
+
+#: admin/Settings.php:495 admin/Settings.php:505
+msgid "Screenshot:"
+msgstr ""
+
+#: admin/Settings.php:502
+msgid "Case#2"
+msgstr ""
+
+#: admin/Settings.php:536
+msgid "Clear Token Cache"
+msgstr ""
+
+#: admin/Settings.php:630
+msgid ""
+"NOTE: Before doing anything, make sure you clear the token cache first. "
+"after cleared token cache. Create bkash checkout using bkash payment "
+"gateway. Then grab those transaction invoice id and timestamp from wpbkash "
+"payment list."
+msgstr ""
+
+#: admin/Tools.php:60
+msgid "Search bKash Transaction"
+msgstr ""
+
+#: admin/Tools.php:79
+msgid "Transaction number can't be empty."
+msgstr ""
+
+#: admin/Tools.php:96 admin/Tools.php:134 admin/Tools.php:185
+#: admin/Tools.php:227 includes/WooCommerce/Ajax.php:137
+#: includes/WooCommerce/Ajax.php:163
+msgid "Something wen't wrong, please try again"
+msgstr ""
+
+#: admin/Tools.php:117
+msgid "payment ID can't be empty."
+msgstr ""
+
+#: admin/Tools.php:159
+msgid "payment ID, Transaction ID or Amount can't be empty."
+msgstr ""
+
+#: admin/Tools.php:204
+msgid "payment ID and Transaction ID can't be empty."
+msgstr ""
+
+#: admin/Tools.php:279
+msgid "bKash Transaction Number"
+msgstr ""
+
+#: admin/Tools.php:350
+msgid "Search TrxID"
+msgstr ""
+
+#: admin/pages/entry/edit.php:16 admin/pages/entry/view.php:17
 msgid "Not Entry Found"
 msgstr ""
 
-#: admin/pages/edit.php:53
+#: admin/pages/entry/edit.php:26
 msgid "Entry updated."
 msgstr ""
 
-#: admin/pages/edit.php:54 admin/pages/edit.php:59
+#: admin/pages/entry/edit.php:27 admin/pages/entry/edit.php:32
 msgid "Dismiss this notice."
 msgstr ""
 
-#: admin/pages/edit.php:58
+#: admin/pages/entry/edit.php:31
 msgid "ERROR: Something went wrong try again later."
 msgstr ""
 
-#: admin/pages/edit.php:66
+#: admin/pages/entry/edit.php:41
 msgid " Entry Edit Details"
 msgstr ""
 
-#: admin/pages/edit.php:92 admin/pages/view.php:74
+#: admin/pages/entry/edit.php:69 admin/pages/entry/view.php:81
 msgid "Transaction Status"
 msgstr ""
 
-#: admin/pages/edit.php:104 admin/pages/view.php:66
+#: admin/pages/entry/edit.php:81 admin/pages/entry/view.php:73
 msgid "Amount"
 msgstr ""
 
-#: admin/pages/edit.php:112 admin/pages/view.php:82
+#: admin/pages/entry/edit.php:89 admin/pages/entry/view.php:89
 msgid "Entry Status"
 msgstr ""
 
-#: admin/pages/edit.php:127
+#: admin/pages/entry/edit.php:106
 msgid "Update Entry"
 msgstr ""
 
-#: admin/pages/list.php:15
+#: admin/pages/entry/list.php:15
 msgid "Entries List"
 msgstr ""
 
-#: admin/pages/view.php:40
+#: admin/pages/entry/view.php:39
 msgid "View Entry Details"
 msgstr ""
 
-#: admin/pages/view.php:98
+#: admin/pages/entry/view.php:65
+msgid "Merchant Invoice Number"
+msgstr ""
+
+#: admin/pages/entry/view.php:105
 msgid "Sender User ID"
 msgstr ""
 
-#: admin/pages/view.php:106
+#: admin/pages/entry/view.php:113
 msgid "Reference/Type"
 msgstr ""
 
-#: admin/pages/view.php:114
+#: admin/pages/entry/view.php:121
 msgid "Reference ID"
 msgstr ""
 
-#: admin/pages/view.php:122
+#: admin/pages/entry/view.php:137
 msgid "Created Date"
 msgstr ""
 
-#: admin/pages/view.php:130
+#: admin/pages/entry/view.php:145
+msgid "Created Timestamp"
+msgstr ""
+
+#: admin/pages/entry/view.php:153
 msgid "Updated Date"
 msgstr ""
 
-#: includes/WPCF7/Ajax.php:59 includes/WPCF7/Ajax.php:87
-msgid "Wrong or invalid entry ID"
-msgstr ""
-
-#: includes/WPCF7/Ajax.php:80 includes/WooCommerce/Ajax.php:80
-msgid "Invalid token or expired"
-msgstr ""
-
-#: includes/WPCF7/Ajax.php:98 includes/WooCommerce/Ajax.php:111
-msgid "Something wen't wrong please try again."
-msgstr ""
-
-#: includes/WPCF7/Ajax.php:113 includes/WooCommerce/Ajax.php:126
-msgid ""
-"We are currently experiencing problems trying to connect to this payment "
-"gateway. Sorry for the inconvenience."
-msgstr ""
-
-#. translators: Privacy data request confirmed notification email subject. 1: Site title, 2: Name of the confirmed action.
-#: includes/WPCF7/Ajax.php:274
-#, php-format
-msgid "[%1$s] Payment Confirmed"
-msgstr ""
-
-#: includes/WPCF7/WPCF7Loader.php:54
-#, php-format
-msgid ""
-"Something wen't wrong, please try again or contact with <a href=\"%s\">site "
-"admin</a>."
-msgstr ""
-
-#: includes/WPCF7/WPCF7Loader.php:85 includes/WPCF7/WPCF7Loader.php:91
-#: includes/WPCF7/WPCF7Loader.php:101
-msgid "Key is invalid or expired"
-msgstr ""
-
-#: includes/WPCF7/WPCF7Loader.php:96
-msgid "Key is already used"
-msgstr ""
-
-#: includes/WPCF7/WPCF7Loader.php:168 includes/WooCommerce/Process.php:26
-msgid "Pay With"
-msgstr ""
-
-#: includes/WPCF7/WPCF7Loader.php:169 includes/WooCommerce/Process.php:27
-#: includes/WooCommerce/WCBkashGateway.php:216
-msgid "Pay With bKash"
-msgstr ""
-
-#: includes/WPCF7/WPCF7Loader.php:182
-msgid "Your payment has been received successfully."
-msgstr ""
-
-#: includes/WPCF7/WPCF7Loader.php:196
-msgid "something went wrong please try again later."
-msgstr ""
-
-#: includes/WPCF7/WPCF7Loader.php:200
-msgid "Go back to home"
-msgstr ""
-
-#. translators: Privacy data request confirmed notification email subject. 1: Site title, 2: Name of the confirmed action.
-#: includes/WPCF7/WPCF7bKash.php:142
-#, php-format
-msgid "[%1$s] Verify your email"
-msgstr ""
-
-#: includes/WPCF7/WPCF7bKash.php:279
-msgid "Amount can't be empty."
-msgstr ""
-
-#: includes/WPCF7/WPCF7bKash.php:280
-msgid "Email tag field can't be empty."
-msgstr ""
-
-#: includes/WPCF7/WPCF7bKash.php:281
-msgid "Message box can't be empty."
-msgstr ""
-
-#: includes/WPCF7/WPCF7bKash.php:282
-msgid "Please input a valid tag."
-msgstr ""
-
-#: includes/WPCF7/WPCF7bKash.php:283
-msgid "You need to input [wpbkash-paymenturl] tag in mail box."
-msgstr ""
-
-#: includes/WPCF7/WPCF7bKash.php:297 includes/WooCommerce/WCBkashGateway.php:28
-#: includes/WooCommerce/WCBkashGateway.php:33
-msgid "bKash"
-msgstr ""
-
-#: includes/WPCF7/WPCF7bKash.php:314
-msgid "https://contactform7.com/additional-settings/"
-msgstr ""
-
-#: includes/WPCF7/WPCF7bKash.php:315
-msgid "WPbKash bKash Settings"
-msgstr ""
-
-#: includes/WPCF7/WPCF7bKash.php:317
-#, php-format
-msgid "Use listed shortcode for proper email body. For details, see %s."
-msgstr ""
-
-#: includes/WPCF7/WPCF7bKash.php:332
-msgid "Additional Settings"
-msgstr ""
-
-#: includes/WPCF7/WPCF7bKash.php:341
-msgid "WPbKash Mail Tags"
-msgstr ""
-
-#: includes/WPCF7/WPCF7bKash.php:360
-msgid "Enable bKash"
-msgstr ""
-
-#: includes/WPCF7/WPCF7bKash.php:368
-msgid "Payment Amount"
-msgstr ""
-
-#: includes/WPCF7/WPCF7bKash.php:372
-msgid "bKash Payment Amount (BDT) in number. eg: 150"
-msgstr ""
-
-#: includes/WPCF7/WPCF7bKash.php:377
-msgid "Customer Email Tag"
-msgstr ""
-
-#: includes/WPCF7/WPCF7bKash.php:381
-msgid ""
-"Add contact form 7 user email input tag. eg: [your-email]. NOTE: WPbKash "
-"will be send mail to this tag value as recipient."
-msgstr ""
-
-#: includes/WPCF7/WPCF7bKash.php:386
-msgid "Payment Email Body"
-msgstr ""
-
-#: includes/WPCF7/WPCF7bKash.php:395 includes/WPCF7/WPCF7bKash.php:409
-msgid "Use HTML content type"
-msgstr ""
-
-#: includes/WPCF7/WPCF7bKash.php:400
-msgid "Payment Confirmation Body"
-msgstr ""
-
-#: includes/WPCF7/WPCF7bKash.php:410
-msgid "Turn off confirmation mail"
-msgstr ""
-
-#: includes/WooCommerce/Ajax.php:57 includes/WooCommerce/Ajax.php:87
-msgid "Wrong or invalid order ID"
-msgstr ""
-
-#: includes/WooCommerce/Ajax.php:96
-msgid "you don't have permission to continue"
-msgstr ""
-
-#: includes/WooCommerce/Ajax.php:142
-#, php-format
-msgid "bKash payment completed with TrxID#%1$s! bKash amount: %2$s"
-msgstr ""
-
-#: includes/WooCommerce/Init.php:50 includes/WooCommerce/WCBkashGateway.php:108
-msgid ""
-"WooCommerce bKash credentials are incorrect or missing any required field."
-msgstr ""
-
-#: includes/WooCommerce/Init.php:58
-#, php-format
-msgid ""
-"bKash server response is incorrect, please contact with <a href='mailto:"
-"%s'>site admin</a> or try later."
-msgstr ""
-
-#: includes/WooCommerce/Init.php:75
-msgid ""
-"bKash payment supports Bangladeshi taka (&#2547;) currency only. Please "
-"select Bangladeshi taka (BDT) from WooCommerce Currency options"
-msgstr ""
-
-#: includes/WooCommerce/Init.php:83
-msgid ""
-"WooCommerce bKash Payment is enabled, but Merchant credentials are missing"
-msgstr ""
-
-#: includes/WooCommerce/WCBkashGateway.php:29
-msgid "Pay via bKash payment"
-msgstr ""
-
-#: includes/WooCommerce/WCBkashGateway.php:126
-msgid "Enable/Disable"
-msgstr ""
-
-#: includes/WooCommerce/WCBkashGateway.php:128
-msgid "Enable bKash Payment"
-msgstr ""
-
-#: includes/WooCommerce/WCBkashGateway.php:131
-msgid "Title"
-msgstr ""
-
-#: includes/WooCommerce/WCBkashGateway.php:133
-msgid "bKash Payment"
-msgstr ""
-
-#: includes/WooCommerce/WCBkashGateway.php:136
-msgid "Description"
-msgstr ""
-
-#: includes/WooCommerce/WCBkashGateway.php:138
-msgid "Payment method description that the customer will see on your checkout."
-msgstr ""
-
-#: includes/WooCommerce/WCBkashGateway.php:139
-msgid "Pay via bKash: you can pay with your personal bKash account. "
-msgstr ""
-
-#: includes/WooCommerce/WCBkashGateway.php:143
-msgid "Instructions"
-msgstr ""
-
-#: includes/WooCommerce/WCBkashGateway.php:145
-msgid ""
-"Instruction that will be added to the order email sent to customer if the "
-"payment was not completed."
-msgstr ""
-
-#: includes/WooCommerce/WCBkashGateway.php:149
-msgid "Payment status notice"
-msgstr ""
-
-#: includes/WooCommerce/WCBkashGateway.php:151
-msgid "Thankyou page order payment notice if customer not yet paid."
-msgstr ""
-
-#: includes/WooCommerce/WCBkashGateway.php:152
-msgid ""
-"Payment was not completed. You can still complete your order by paying from "
-"here: "
-msgstr ""
-
-#: includes/WooCommerce/WCBkashGateway.php:156
-#, php-format
-msgid "Setup your bKash merchant credentials <a href=\"%s\">here</a>"
-msgstr ""
-
-#: includes/WooCommerce/WCBkashGateway.php:237
-msgid "Awaiting bKash payment"
-msgstr ""
-
-#. translators: Do not translate Shortcode like [wpbkash-sitename], [wpbkash-paymenturl], [wpbkash-siteurl]; those are placeholders.
-#: includes/functions.php:194
+#: includes/functions.php:223
 msgid ""
 "Dear [your-name],\n"
 "\n"
@@ -492,8 +604,7 @@ msgid ""
 "[wpbkash-siteurl]"
 msgstr ""
 
-#. translators: Do not translate Shortcode like [wpbkash-sitename], [wpbkash-paymenturl], [wpbkash-siteurl]; those are placeholders.
-#: includes/functions.php:222
+#: includes/functions.php:252
 msgid ""
 "Dear [your-name],\n"
 "\n"
@@ -505,10 +616,9 @@ msgid ""
 "\n"
 "Registration Details:\n"
 "\n"
-"First Name: \t\n"
-"Last Name: \t\n"
-"Email: \t\t\n"
-"Transaction ID: \t\n"
+"Full Name: [your-name]\n"
+"Email: [your-email]\n"
+"Transaction ID: [wpbkash-amount]\n"
 "Registration ID:\n"
 "Blah blah .....\n"
 "\n"
@@ -523,26 +633,322 @@ msgid ""
 "you have any question, please write to contact@example.com"
 msgstr ""
 
-#: wpbkash.php:84 wpbkash.php:93
-msgid "Nope"
+#: includes/functions.php:307
+msgid "bKash fee"
 msgstr ""
 
-#. Plugin Name of the plugin/theme
-msgid "WPbKash - bKash for WooCommerce"
+#: includes/WooCommerce/Ajax.php:103 includes/WPCF7/Ajax.php:70
+msgid "Invalid token or expired"
 msgstr ""
 
-#. Plugin URI of the plugin/theme
-msgid "https://wordpress.org/plugins/wpbkash/"
+#: includes/WooCommerce/Ajax.php:113
+msgid ""
+"Looks like the server is taking to long to respond, this can be caused by "
+"either poor connectivity or an error with our servers. Please try again in a "
+"while"
 msgstr ""
 
-#. Description of the plugin/theme
-msgid "bKash payment gateway integration for WooCommerce"
+#: includes/WooCommerce/Ajax.php:128
+msgid "Wrong or invalid order ID"
 msgstr ""
 
-#. Author of the plugin/theme
-msgid "themepaw"
+#: includes/WooCommerce/Init.php:68
+#: includes/WooCommerce/WCBkashGateway.php:133
+msgid ""
+"WooCommerce bKash credentials are incorrect or missing any required field."
 msgstr ""
 
-#. Author URI of the plugin/theme
-msgid "https://themepaw.com"
+#: includes/WooCommerce/Init.php:76 includes/WPCF7/WPCF7Loader.php:158
+#, php-format
+msgid "%1$s %2$s %3$s"
+msgstr ""
+
+#: includes/WooCommerce/Init.php:77
+msgid "bKash server response is incorrect, please contact with"
+msgstr ""
+
+#: includes/WooCommerce/Init.php:81 includes/WPCF7/WPCF7Loader.php:58
+msgid "site admin"
+msgstr ""
+
+#: includes/WooCommerce/Init.php:83
+msgid "Or try later"
+msgstr ""
+
+#: includes/WooCommerce/Init.php:102
+msgid ""
+"bKash payment supports Bangladeshi taka (&#2547;) currency only. Please "
+"select Bangladeshi taka (BDT) from WooCommerce Currency options"
+msgstr ""
+
+#: includes/WooCommerce/Init.php:109
+msgid ""
+"WooCommerce bKash Payment is enabled, but Merchant credentials are missing"
+msgstr ""
+
+#: includes/WooCommerce/Process.php:26 includes/WPCF7/WPCF7Loader.php:188
+msgid "Pay With"
+msgstr ""
+
+#: includes/WooCommerce/Process.php:27
+#: includes/WooCommerce/WCBkashGateway.php:274
+#: includes/WPCF7/WPCF7Loader.php:189
+msgid "Pay With bKash"
+msgstr ""
+
+#: includes/WooCommerce/WCBkashGateway.php:26
+#: includes/WooCommerce/WCBkashGateway.php:31
+#: includes/WPCF7/WPCF7bKash.php:300
+msgid "bKash"
+msgstr ""
+
+#: includes/WooCommerce/WCBkashGateway.php:27
+msgid "Pay via bKash payment"
+msgstr ""
+
+#: includes/WooCommerce/WCBkashGateway.php:124
+msgid "Ok"
+msgstr ""
+
+#: includes/WooCommerce/WCBkashGateway.php:126
+msgid "Payment Failed!"
+msgstr ""
+
+#: includes/WooCommerce/WCBkashGateway.php:127
+msgid "Payment Successful!"
+msgstr ""
+
+#: includes/WooCommerce/WCBkashGateway.php:129
+msgid "Payment failed due to technical reasons"
+msgstr ""
+
+#: includes/WooCommerce/WCBkashGateway.php:130
+msgid "Successfully payment completed. Wait your order is being processing.."
+msgstr ""
+
+#: includes/WooCommerce/WCBkashGateway.php:131
+msgid "bKash Payment processing..."
+msgstr ""
+
+#: includes/WooCommerce/WCBkashGateway.php:159
+msgid "Gateway disabled"
+msgstr ""
+
+#: includes/WooCommerce/WCBkashGateway.php:159
+msgid "bKash Payment Gateway not support your store currency."
+msgstr ""
+
+#: includes/WooCommerce/WCBkashGateway.php:174
+msgid "Enable/Disable"
+msgstr ""
+
+#: includes/WooCommerce/WCBkashGateway.php:176
+msgid "Enable bKash Payment"
+msgstr ""
+
+#: includes/WooCommerce/WCBkashGateway.php:179
+msgid "Title"
+msgstr ""
+
+#: includes/WooCommerce/WCBkashGateway.php:181
+msgid "bKash Payment"
+msgstr ""
+
+#: includes/WooCommerce/WCBkashGateway.php:184
+msgid "Description"
+msgstr ""
+
+#: includes/WooCommerce/WCBkashGateway.php:186
+msgid "Payment method description that the customer will see on your checkout."
+msgstr ""
+
+#: includes/WooCommerce/WCBkashGateway.php:187
+msgid "Pay via bKash: you can pay with your personal bKash account. "
+msgstr ""
+
+#: includes/WooCommerce/WCBkashGateway.php:191
+msgid "Instructions"
+msgstr ""
+
+#: includes/WooCommerce/WCBkashGateway.php:193
+msgid ""
+"Instruction that will be added to the order email sent to customer if the "
+"payment was not completed."
+msgstr ""
+
+#: includes/WooCommerce/WCBkashGateway.php:197
+msgid "Payment status notice"
+msgstr ""
+
+#: includes/WooCommerce/WCBkashGateway.php:199
+msgid "Thankyou page order payment notice if customer not yet paid."
+msgstr ""
+
+#: includes/WooCommerce/WCBkashGateway.php:200
+msgid ""
+"Payment was not completed. You can still complete your order by paying from "
+"here: "
+msgstr ""
+
+#: includes/WooCommerce/WCBkashGateway.php:206
+msgid "Setup your bKash merchant credentials"
+msgstr ""
+
+#: includes/WooCommerce/WCBkashGateway.php:210
+msgid "here"
+msgstr ""
+
+#: includes/WooCommerce/WCBkashGateway.php:326
+msgid "Hey, your order is paid via bKash!"
+msgstr ""
+
+#: includes/WooCommerce/WCBkashGateway.php:328
+#, php-format
+msgid ""
+"bKash payment completed with TrxID#%1$s, amount: %2$s, merchant invoiceID:"
+"%2$s"
+msgstr ""
+
+#: includes/WooCommerce/WCBkashGateway.php:340
+msgid "Something wen't wrong, Please try again."
+msgstr ""
+
+#: includes/WPCF7/Ajax.php:49 includes/WPCF7/Ajax.php:77
+msgid "Wrong or invalid entry ID"
+msgstr ""
+
+#: includes/WPCF7/Ajax.php:90
+msgid "Something wen't wrong please try again."
+msgstr ""
+
+#: includes/WPCF7/Ajax.php:105
+msgid ""
+"We are currently experiencing problems trying to connect to this payment "
+"gateway. Sorry for the inconvenience."
+msgstr ""
+
+#: includes/WPCF7/Ajax.php:284
+#, php-format
+msgid "[%1$s] Payment Confirmed"
+msgstr ""
+
+#: includes/WPCF7/WPCF7bKash.php:145
+#, php-format
+msgid "[%1$s] Verify your email"
+msgstr ""
+
+#: includes/WPCF7/WPCF7bKash.php:282
+msgid "Amount can't be empty."
+msgstr ""
+
+#: includes/WPCF7/WPCF7bKash.php:283
+msgid "Email tag field can't be empty."
+msgstr ""
+
+#: includes/WPCF7/WPCF7bKash.php:284
+msgid "Message box can't be empty."
+msgstr ""
+
+#: includes/WPCF7/WPCF7bKash.php:285
+msgid "Please input a valid tag."
+msgstr ""
+
+#: includes/WPCF7/WPCF7bKash.php:286
+msgid "You need to input [wpbkash-paymenturl] tag in mail box."
+msgstr ""
+
+#: includes/WPCF7/WPCF7bKash.php:317
+msgid "https://github.com/mlbd/wpbkash/"
+msgstr ""
+
+#: includes/WPCF7/WPCF7bKash.php:318
+msgid "WPbKash bKash Settings"
+msgstr ""
+
+#: includes/WPCF7/WPCF7bKash.php:320
+#, php-format
+msgid "Use listed shortcode for proper email body. For details, see %s."
+msgstr ""
+
+#: includes/WPCF7/WPCF7bKash.php:336
+msgid "Additional Settings"
+msgstr ""
+
+#: includes/WPCF7/WPCF7bKash.php:343
+msgid "WPbKash Mail Tags"
+msgstr ""
+
+#: includes/WPCF7/WPCF7bKash.php:364
+msgid "Enable bKash"
+msgstr ""
+
+#: includes/WPCF7/WPCF7bKash.php:372
+msgid "Payment Amount"
+msgstr ""
+
+#: includes/WPCF7/WPCF7bKash.php:376
+msgid "bKash Payment Amount (BDT) in number. eg: 150"
+msgstr ""
+
+#: includes/WPCF7/WPCF7bKash.php:381
+msgid "Customer Email Tag"
+msgstr ""
+
+#: includes/WPCF7/WPCF7bKash.php:385
+msgid ""
+"Add contact form 7 user email input tag. eg: [your-email]. NOTE: WPbKash "
+"will be send mail to this tag value as recipient."
+msgstr ""
+
+#: includes/WPCF7/WPCF7bKash.php:390
+msgid "Payment Email Body"
+msgstr ""
+
+#: includes/WPCF7/WPCF7bKash.php:400 includes/WPCF7/WPCF7bKash.php:415
+msgid "Use HTML content type"
+msgstr ""
+
+#: includes/WPCF7/WPCF7bKash.php:405
+msgid "Payment Confirmation Body"
+msgstr ""
+
+#: includes/WPCF7/WPCF7bKash.php:416
+msgid "Turn off confirmation mail"
+msgstr ""
+
+#: includes/WPCF7/WPCF7Loader.php:54
+msgid "Something wen't wrong, please try again or contact with"
+msgstr ""
+
+#: includes/WPCF7/WPCF7Loader.php:91 includes/WPCF7/WPCF7Loader.php:97
+#: includes/WPCF7/WPCF7Loader.php:107
+msgid "Key is invalid or expired"
+msgstr ""
+
+#: includes/WPCF7/WPCF7Loader.php:102
+msgid "Key is already used"
+msgstr ""
+
+#: includes/WPCF7/WPCF7Loader.php:160
+msgid "lease go back to the form and try again."
+msgstr ""
+
+#: includes/WPCF7/WPCF7Loader.php:164
+msgid "Back to Home"
+msgstr ""
+
+#: includes/WPCF7/WPCF7Loader.php:180
+msgid "hi"
+msgstr ""
+
+#: includes/WPCF7/WPCF7Loader.php:202
+msgid "Your payment has been received successfully."
+msgstr ""
+
+#: includes/WPCF7/WPCF7Loader.php:216
+msgid "something went wrong please try again later."
+msgstr ""
+
+#: includes/WPCF7/WPCF7Loader.php:220
+msgid "Go back to home"
 msgstr ""
