@@ -29,7 +29,7 @@ final class WPbKash {
 	 *
 	 * @var string
 	 */
-	const VERSION = '0.1.8';
+	const VERSION = '0.1.9';
 
 	/**
 	 * Plugin Database Table.
