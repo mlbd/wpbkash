@@ -216,6 +216,10 @@ button.wpbkash__submit_btn:active {
     flex: 0 0 calc(70% - 10px);
 }
 
+.wpbkash--mode > div:first-child {
+    margin-left: 0;
+}
+
 
 @-webkit-keyframes button-spin {
 	from {

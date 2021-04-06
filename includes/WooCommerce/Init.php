@@ -12,6 +12,7 @@ if ( ! class_exists( 'WooCommerce' ) ) {
 	return;
 }
 
+use Themepaw\bKash\Api\Base;
 use Themepaw\bKash\Api\Query;
 
 /**
@@ -33,7 +34,7 @@ class Init {
 	}
 
 	public function get_bkash_token() {
-		$is_ok = Query::instance()->is_settings_ok();
+		$is_ok = Base::instance()->is_settings_ok();
 		if ( $is_ok ) {
 			Query::instance()->get_bkash_token();
 		}
@@ -64,7 +65,7 @@ class Init {
 			return;
 		}
 
-		if ( ! Query::instance()->is_settings_ok() ) {
+		if ( ! Base::instance()->is_settings_ok() ) {
 			throw new \Exception( esc_html__( 'WooCommerce bKash credentials are incorrect or missing any required field.', 'wpbkash' ) );
 		}
 
@@ -103,7 +104,7 @@ class Init {
 		</div>
 			<?php
 		}
-		if ( ! Query::instance()->is_settings_ok() ) {
+		if ( ! Base::instance()->is_settings_ok() ) {
 			?>
 		<div class="notice notice-warning wpbkash--notice is-dismissible">
 			<p><?php esc_html_e( 'WooCommerce bKash Payment is enabled, but Merchant credentials are missing', 'wpbkash' ); ?></p>

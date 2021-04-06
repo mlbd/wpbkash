@@ -63,8 +63,7 @@ class Query extends Base {
 		$response = json_decode( $api_response, true );
 
 		if ( isset( $response['id_token'] ) && isset( $response['token_type'] ) ) {
-			$token = $response['id_token'];
-			return $token;
+			return true;
 		}
 
 		return false;
@@ -94,6 +93,8 @@ class Query extends Base {
 			'Content-Type' => 'application/json',
 		);
 
+        Utility::instance()->logger( $headers );
+
         $token_url = $this->get_api_url();
 
         $old_token = get_option( '_wpbkash_refresh_token' );
@@ -101,8 +102,6 @@ class Query extends Base {
             $data['refresh_token'] = $old_token;
             $token_url = $this->get_api_url('refresh');
         }
-
-        Utility::instance()->logger( $data );
 
 		$api_response = $this->create_requrest( $token_url, $data, $headers );
 		if ( empty( $api_response ) ) {

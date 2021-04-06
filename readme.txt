@@ -2,7 +2,7 @@
 Contributors: mlimon, themepaw
 Tags: bkash, gateway, woocommerce, wpcf7, BDT, bangladesh
 Requires at least: 5.0
-Tested up to: 5.3
+Tested up to: 5.6.1
 Requires PHP: 5.4
 Stable tag: trunk
 License: GPLv2 Or Later
@@ -103,6 +103,9 @@ If you get stuck, you can ask for help in the Plugin Forum.
 
 = 0.1.1 =
 * Displaying error message for unsuccessful payment.
+
+= 0.1.9
+* Fixed live api issue.
 
 == Upgrade Notice ==
 

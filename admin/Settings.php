@@ -402,13 +402,14 @@ class Settings {
 			}
 
 			$token = Query::instance()->check_bkash_token();
-            Utility::instance()->logger( $token );
 			if ( ! empty( $token ) && false !== $token ) {
 				update_option( 'wpbkash__connection', 'ok' );
 			} else {
 				update_option( 'wpbkash__connection', 'wrong' );
 			}
 		}
+        update_option( '_wpbkash_refresh_token', '' );
+        delete_transient( 'wpbkash_token_key' );
 	}
 
 	public function pretty_print( $data ) {

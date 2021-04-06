@@ -68,8 +68,6 @@ jQuery(
              */
             wcbkashInit: async function (order_id = '', redirect = '') {
                 
-                
-
                 var paymentRequest,
                     paymentID;
 
