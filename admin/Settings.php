@@ -319,6 +319,7 @@ class Settings {
 		) {
 			delete_transient( 'wpbkash_token_key' );
             update_option( '_wpbkash_refresh_token', '' );
+            update_option( 'wpbkash__connection', '' );
             update_option( 'bkash_api_request', array() );
 		}
 

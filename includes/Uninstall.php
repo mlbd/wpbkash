@@ -26,12 +26,17 @@ class Uninstall {
 	 *
 	 * @return void
 	 */
-	public function deactivate() {
+	public function uninstall() {
+
+        // Delete Transient
 		delete_transient( 'wpbkash_flush' );
         delete_transient( 'wpbkash_token_key' );
-        update_option( '_wpbkash_refresh_token', '' );
-        update_option( 'bkash_api_request', array() );
-		flush_rewrite_rules();
+
+        // Delete Option
+        delete_option( '_wpbkash_refresh_token' );
+        delete_option( 'wpbkash__connection' );
+        delete_option( 'wpbkash_general_fields' );
+        delete_option( 'bkash_api_request' );
 	}
 
 }

@@ -3,7 +3,7 @@
  * Plugin Name:       bKash WordPress Payment
  * Plugin URI:        https://wordpress.org/plugins/wpbkash/
  * Description:       bKash payment gateway integration for WordPress
- * Version:           0.1.9.3
+ * Version:           0.1.9.4
  * Author:            themepaw
  * Author URI:        https://themepaw.com
  * Text Domain:       wpbkash
@@ -17,6 +17,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 use Themepaw\bKash\Activate;
 use Themepaw\bKash\Deactivate;
+use Themepaw\bKash\Uninstall;
 use Themepaw\bKash\Admin\Settings;
 
 /**
@@ -29,7 +30,7 @@ final class WPbKash {
 	 *
 	 * @var string
 	 */
-	const VERSION = '0.1.9.3';
+	const VERSION = '0.1.9.4';
 
 	/**
 	 * Plugin Database Table.
@@ -69,6 +70,7 @@ final class WPbKash {
 
 		register_activation_hook( __FILE__, array( $this, 'activate' ) );
 		register_deactivation_hook( __FILE__, array( $this, 'deactivate' ) );
+		register_uninstall_hook( __FILE__, array( 'WPbKash', 'uninstall' ) );
 
 		add_action( 'plugins_loaded', array( $this, 'setup' ) );
 		add_filter( 'woocommerce_payment_gateways', array( $this, 'register_gateway' ) );
@@ -196,7 +198,7 @@ final class WPbKash {
 	}
 
 	/**
-	 * Create the transaction table
+	 * Activation hook
 	 *
 	 * @return void
 	 */
@@ -205,12 +207,21 @@ final class WPbKash {
 	}
 
 	/**
-	 * WooCommerce fallback notice.
+	 * Deactivation Hook
 	 *
 	 * @return string
 	 */
 	public function deactivate() {
 		Deactivate::instance()->deactivate();
+	}
+	
+    /**
+	 * Uninstall Hook
+	 *
+	 * @return string
+	 */
+	public static function uninstall() {
+        Uninstall::instance()->uninstall();
 	}
 
 

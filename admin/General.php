@@ -9,6 +9,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit();
 }
 
+use Themepaw\bKash\Api\Query;
+
 /*
  * General Class
  * @since 1.0
@@ -176,7 +178,8 @@ class General {
 			echo '<h4>' . esc_html__( 'Testmode is enabled', 'wpbkash' ) . '</h4>';
 		}
 		if ( isset( $this->options['app_key'] ) && isset( $this->options['app_secret'] ) ) {
-			if ( isset( $connection ) && ! empty( $connection ) && 'ok' === $connection ) {
+            $token = Query::instance()->check_bkash_token();
+			if (  ! empty( $token ) && false !== $token ) {
 				echo '<div class="wpbkash--connection-signal">' . esc_html__( 'Connection Ok', 'wpbkash' ) . ' <span class="dashicons dashicons-yes-alt"></span></div>';
 			} else {
 				echo '<div class="wpbkash--connection-signal connection-failed">' . esc_html__( 'Connection Failed', 'wpbkash' ) . ' <span class="dashicons dashicons-dismiss"></span></div>';
