@@ -40,7 +40,7 @@ class Base {
 	 *
 	 * @return string
 	 */
-	protected function get_api_url( $end_point = '' ) {
+	public function get_api_url( $end_point = '' ) {
 		switch ( $end_point ) {
 			case 'create':
 				$this->api_url = 'https://checkout.' . $this->get_mode() . '.bka.sh/v' . WPBKASH()->bkash_api_version . '/checkout/payment/create';

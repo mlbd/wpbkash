@@ -318,6 +318,8 @@ class Settings {
 			wp_verify_nonce( $_POST['wpbkash_grant'], 'wpbkash_clear_token' )
 		) {
 			delete_transient( 'wpbkash_token_key' );
+            update_option( '_wpbkash_refresh_token', '' );
+            update_option( 'bkash_api_request', array() );
 		}
 
 		add_settings_section(

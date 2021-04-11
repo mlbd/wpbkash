@@ -103,6 +103,8 @@ class Query extends Base {
             $token_url = $this->get_api_url('refresh');
         }
 
+        Utility::instance()->logger( $token_url );
+
 		$api_response = $this->create_requrest( $token_url, $data, $headers );
 		if ( empty( $api_response ) ) {
 			return false;

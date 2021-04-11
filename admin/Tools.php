@@ -10,6 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use Themepaw\bKash\Api\Query;
+use Themepaw\bKash\Api\Base;
 
 /*
  * Extra Settings Class
@@ -171,7 +172,18 @@ class Tools {
 		);
 
 		$transaction = Query::instance()->refundTransaction( $transaction_data );
+
+        $token     = Query::instance()->get_bkash_token();
+		$app_key   = Query::instance()->get_option( 'app_key' );
+
+		$headers = array(
+			'Content-Type'  => 'application/json',
+			'authorization' => $token,
+			'x-app-key'     => $app_key,
+		);
+
 		$transaction = \json_decode( $transaction );
+        Query::instance()->api_request_docs( 5, 'Refund Transaction', Base::instance()->get_api_url('refund'), $headers, $transaction_data, $response );
 		if ( isset( $transaction ) && ! empty( $transaction ) && isset( $transaction->transactionStatus ) ) {
 			$this->insert_refund( $transaction );
 			wp_send_json_success(
@@ -212,8 +224,19 @@ class Tools {
 			'paymentID' => $paymentID
 		);
 
+        $token     = Query::instance()->get_bkash_token();
+		$app_key   = Query::instance()->get_option( 'app_key' );
+
+		$headers = array(
+			'Content-Type'  => 'application/json',
+			'authorization' => $token,
+			'x-app-key'     => $app_key,
+		);
+
 		$transaction = Query::instance()->refundTransaction( $transaction_data );
-		$transaction = \json_decode( $transaction );
+        $transaction = \json_decode( $transaction );
+        Query::instance()->api_request_docs( 6, 'Refund Status', Base::instance()->get_api_url('refund'), $headers, $transaction_data, $transaction );
+	
 		if ( isset( $transaction ) && ! empty( $transaction ) && isset( $transaction->transactionStatus ) ) {
 			$this->insert_refund( $transaction );
 			wp_send_json_success(

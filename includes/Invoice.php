@@ -135,7 +135,7 @@ class Invoice {
 	 */
 	public function get_invoice() {
 		$option    = get_option( 'wpbkash_invoice_fields' );
-		$namespace = ( isset( $option['namespace'] ) && ! empty( $option['namespace'] ) ) ? sanitize_text_field( $option['namespace'] ) : '';
+		$namespace = ( isset( $option['namespace'] ) && ! empty( $option['namespace'] ) ) ? sanitize_text_field( $option['namespace'] ) : 'wc_';
 		$type      = ( isset( $option['type'] ) && ! empty( $option['type'] ) ) ? sanitize_text_field( $option['type'] ) : 'random';
 
 		if ( 'post_id' === $type ) {
