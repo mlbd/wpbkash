@@ -107,7 +107,7 @@ class Init {
 		if ( ! Base::instance()->is_settings_ok() ) {
 			?>
 		<div class="notice notice-warning wpbkash--notice is-dismissible">
-			<p><?php esc_html_e( 'WooCommerce bKash Payment is enabled, but Merchant credentials are missing', 'wpbkash' ); ?></p>
+			<p><?php esc_html_e( 'WooCommerce bKash Payment is enabled, but bKash credentials are missing', 'wpbkash' ); ?></p>
 		</div>
 			<?php
 		}
