@@ -35,7 +35,11 @@ class Uninstall {
         // Delete Option
         delete_option( '_wpbkash_refresh_token' );
         delete_option( 'wpbkash__connection' );
+        delete_option( 'wpbkash_extra_fields' );
+        delete_option( 'wpbkash_invoice_fields' );
+        delete_option( 'wpbkash_debug_fields' );
         delete_option( 'wpbkash_general_fields' );
+        delete_option( 'woocommerce_wpbkash_settings' );
         delete_option( 'bkash_api_request' );
 	}
 

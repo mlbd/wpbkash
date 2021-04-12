@@ -4,25 +4,25 @@
  */
 namespace Themepaw\bKash;
 
-class Uninstall {
+class Deactivate {
 
     /**
 	 * Call this method to get the singleton
 	 *
-	 * @return Uninstall|null
+	 * @return Deactivate|null
 	 */
 	public static function instance() {
 
 		static $instance = null;
 		if ( is_null( $instance ) ) {
-			$instance = new Uninstall();
+			$instance = new Deactivate();
 		}
 
 		return $instance;
 	}
 
 	/**
-	 * Uninstall initialize
+	 * Deactivate initialize
 	 *
 	 * @return void
 	 */

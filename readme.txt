@@ -40,6 +40,22 @@ or
 3. Enjoy using it :)
 
 
+= PGA API Response PDF  =
+
+As you already know if you want to get bKash merchant account you need to follow some sort of requirement that provided by bKash. PGA Api response is one of them. It's mean they want all the bKash api request and response result that you getting in your site. So, to create PGA api response/request file follow bellow instructions step by step.
+
+NOTE: You will need to test/create two error intentionally in order to check that you site are ready to return proper error or response. here is those two
+
+a. You have to perform two transactions within 2min duration, with the same amount. In 2nd transaction you will get an error message.
+b. You need to initiate a transaction and put wrong/invalid OTP three times deliberately. In response you will get an error message.
+
+To create the file follow the video.
+
+NOTE: You need to clear token cache from wpbkash settings, Otherwise reulst might not be accurate.
+
+[youtube https://www.youtube.com/watch?v=5M2BIxccilE]
+
+
 = Contribute =
 
 [Fork in Github](https://github.com/mlbd/wpbkash)
